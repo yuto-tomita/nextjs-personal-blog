@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Menu } from 'antd'
 
@@ -7,20 +7,43 @@ const Header: FC = () => {
 	const [menuState, setSelectMenu] = useState('')
 	const router = useRouter()
 
+	/** 表示されているパスを取得して、Menuを選択されている状態にする */
+	useEffect(() => {
+		const currentMenuName = conversionFromPathNameToMenuName(router.pathname)
+
+		if (currentMenuName === '') {
+			setSelectMenu('home')
+		} else {
+			setSelectMenu(currentMenuName)
+		}
+	}, [router])
+
+	/** 現在表示されているパスを取得し、'/'を抜いた文字列を返す */
+	const conversionFromPathNameToMenuName = (path: string) => {
+		return path.substr(path.indexOf('/') + 1);
+	}
+
+	/** 選択されているMenuを小文字に変換して、選択されているMenuを更新する */
 	const handleClick = (event: any) => {
 		const menuName = event.key.toLowerCase()
 		setSelectMenu(menuName)
+		navigateToMenu(menuName)
 	}
 
-	const navigateToLink = (menuName: string) => {
-		router.push(menuName)
+	/** Menuをクリックしたら該当のパスにルーティングするする */
+	const navigateToMenu = (routingPathName: string) => {
+		if (routingPathName === 'home') {
+			router.push('/')
+		} else {
+			router.push(routingPathName)
+		}
 	}
 
 	return (
 		<header>
 			<Menu mode="horizontal" selectedKeys={[menuState]} onClick={handleClick}>
 				{['Home', 'Blog', 'Contact'].map((menuName, index) => (
-					<Menu.Item key={menuName.toLowerCase()} onClick={() => navigateToLink(menuName)}>{menuName}</Menu.Item>
+					<Menu.Item key={menuName.toLowerCase()}>{menuName}</Menu.Item>
 				))}
 			</Menu>
 		</header>
