@@ -1,4 +1,8 @@
 ---
 title: hello
-text: hogehoge
+text: hoge
 ---
+
+hogehogehoge
+
+hogehoge
