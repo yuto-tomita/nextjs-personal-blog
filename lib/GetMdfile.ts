@@ -1,10 +1,14 @@
 import fs from 'fs'
+import matter from 'gray-matter'
 
-export function getMdFileFromDir (): string[] {
+export function getMdFileFromDir () {
 	return fs.readdirSync('./Articles')
 }
 
-export function parseMdFile (mdFileName: string[]) {
-	console.log(mdFileName)
-	console.log(fs.readFileSync(`./Articles/${mdFileName[0]}`, 'utf8'))
+export function readFileFromFileName (fileName: string) {
+	return fs.readFileSync(`./Articles/${fileName}`, 'utf8')
+}
+
+export function parseMdFile (mdFile: string) {
+	return matter(mdFile)
 }
