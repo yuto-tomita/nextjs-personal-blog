@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+import type { InferGetStaticPropsType } from 'next'
 import { getMdFileFromDir, parseMdFile } from '@lib/GetMdfile'
 
 export async function getStaticProps () {
@@ -10,6 +10,18 @@ export async function getStaticProps () {
 		}
 	}
 }
-const Blog: NextPage = () => <div>test</div>
+const Blog = ({
+	mdFiles,
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
+	return (
+		<div>
+			{
+				mdFiles.map(fileName => {
+					return 
+				})
+			}
+		</div>
+	)
+}
 
 export default Blog
