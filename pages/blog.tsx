@@ -1,28 +1,26 @@
 import type { InferGetStaticPropsType } from 'next'
-import { getMdFileFromDir, readFileFromFileName, parseMdFile } from '@lib/GetMdfile'
+import { getMdFileFromDir, readFileFromFileName, parseMdFile, getSlug } from '@lib/MdFileOperation'
 
 export async function getStaticProps () {
 	const mdFileNames = getMdFileFromDir()
 	const mdFile = mdFileNames.map(fileName => readFileFromFileName(fileName))
 	const parseMarkdownContent = mdFile.map(markdown => {
 		const parseMdContent = parseMdFile(markdown)
+		console.log(parseMdContent)
 		return {
 			title: parseMdContent.data.title,
-			content: parseMdContent.content
+			content: parseMdContent.content,
+			slug: parseMdContent.data.slug
 		}
 	})
 
 	return {
 		props: {
-			mdFileNames,
-			mdFile,
 			parseMarkdownContent
 		}
 	}
 }
 const Blog = ({
-	mdFileNames,
-	mdFile,
 	parseMarkdownContent
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
 	return (
