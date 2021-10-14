@@ -1,6 +1,7 @@
 ---
 title: hello
-text: hoge
+slug: /hello
+tag: ['test', 'hoge']
 ---
 
 hogehogehoge
