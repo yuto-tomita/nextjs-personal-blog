@@ -12,3 +12,7 @@ export function readFileFromFileName (fileName: string) {
 export function parseMdFile (mdFile: string) {
 	return matter(mdFile)
 }
+
+export function getSlug (mdFileNames: string[]) {
+	
+}
