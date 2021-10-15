@@ -1,12 +1,13 @@
 import type { InferGetStaticPropsType } from 'next'
-import { getMdFileFromDir, readFileFromFileName, parseMdFile, getSlug } from '@lib/MdFileOperation'
+import { getMdFileFromDir, readFileFromFileName, parseMdFile } from '@lib/MdFileOperation'
+import Link from 'next/link'
 
 export async function getStaticProps () {
 	const mdFileNames = getMdFileFromDir()
 	const mdFile = mdFileNames.map(fileName => readFileFromFileName(fileName))
 	const parseMarkdownContent = mdFile.map(markdown => {
 		const parseMdContent = parseMdFile(markdown)
-		console.log(parseMdContent)
+
 		return {
 			title: parseMdContent.data.title,
 			content: parseMdContent.content,
@@ -27,7 +28,9 @@ const Blog = ({
 		<div>
 			{
 				parseMarkdownContent.map((mdContents, index) => (
-					<div key={index}>{mdContents.title}</div>
+					<div key={index}>
+						<Link href={`/blog/${mdContents.slug}`} key={index}>{mdContents.title}</Link>
+					</div>
 				))
 			}
 		</div>
