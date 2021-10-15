@@ -9,9 +9,9 @@ const Header: FC = () => {
 
 	/** 表示されているパスを取得して、Menuを選択されている状態にする */
 	useEffect(() => {
-		const currentMenuName = conversionFromPathNameToMenuName(router.pathname)
-
-		if (currentMenuName === '') {
+		const currentMenuName = findCurrentPathFromMenu(router.pathname)
+		console.log(currentMenuName)
+		if (currentMenuName === '' || !currentMenuName) {
 			setSelectMenu('home')
 		} else {
 			setSelectMenu(currentMenuName)
@@ -19,8 +19,8 @@ const Header: FC = () => {
 	}, [router])
 
 	/** 現在表示されているパスを取得し、'/'を抜いた文字列を返す */
-	const conversionFromPathNameToMenuName = (path: string) => {
-		return path.substr(path.indexOf('/') + 1);
+	const findCurrentPathFromMenu = (path: string) => {
+		return ['home', 'blog', 'contact'].find(val => path.includes(val))
 	}
 
 	/** 選択されているMenuを小文字に変換して、選択されているMenuを更新する */
@@ -35,7 +35,7 @@ const Header: FC = () => {
 		if (routingPathName === 'home') {
 			router.push('/')
 		} else {
-			router.push(routingPathName)
+			router.push(`/${routingPathName}`)
 		}
 	}
 
