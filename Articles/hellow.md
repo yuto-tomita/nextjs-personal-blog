@@ -1,6 +1,6 @@
 ---
-title: hello
-slug: /hello
+title: hellow
+slug: hellow
 tag: ['test', 'hoge']
 ---
 
