@@ -1,7 +1,8 @@
 ---
-title: hellow
-slug: hellow
+title: hello
+slug: hello
 tag: ['test', 'hoge']
+image: next.jpeg
 ---
 
 hogehogehoge
