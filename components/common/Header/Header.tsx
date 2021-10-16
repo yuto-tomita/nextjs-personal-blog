@@ -10,7 +10,7 @@ const Header: FC = () => {
 	/** 表示されているパスを取得して、Menuを選択されている状態にする */
 	useEffect(() => {
 		const currentMenuName = findCurrentPathFromMenu(router.pathname)
-		console.log(currentMenuName)
+
 		if (currentMenuName === '' || !currentMenuName) {
 			setSelectMenu('home')
 		} else {
@@ -18,7 +18,7 @@ const Header: FC = () => {
 		}
 	}, [router])
 
-	/** 現在表示されているパスを取得し、'/'を抜いた文字列を返す */
+	/** 現在表示されているパスから選択されているmenu名を返す */
 	const findCurrentPathFromMenu = (path: string) => {
 		return ['home', 'blog', 'contact'].find(val => path.includes(val))
 	}
