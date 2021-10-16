@@ -1,7 +1,8 @@
 import type { InferGetStaticPropsType } from 'next'
 import { getMdFileFromDir, readFileFromFileName, parseMdFile } from '@lib/MdFileOperation'
 import Link from 'next/link'
-import { Row, Col } from 'antd'
+import { Row, Col, Card } from 'antd'
+import Image from 'next/image'
 
 export async function getStaticProps () {
 	const mdFileNames = getMdFileFromDir()
@@ -31,7 +32,10 @@ const Blog = ({
 			<Row gutter={[48, 48]}>
 				{parseMarkdownContent.map((mdContents, index) => (
 					<Col key={index} span={8}>
-						<Link href={`/blog/${mdContents.slug}`} key={index}>{mdContents.title}</Link>
+						<Card hoverable>
+							<Image src={`/${mdContents.image}`} alt="blog rogo" width={500} height={300} />
+							<Link href={`/blog/${mdContents.slug}`} key={index}>{mdContents.title}</Link>
+						</Card>
 					</Col>
 				))}
 			</Row>
