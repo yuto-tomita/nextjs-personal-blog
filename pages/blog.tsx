@@ -28,7 +28,7 @@ const Blog = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
 	return (
 		<div>
-			<Row gutter={[16, 16]}>
+			<Row gutter={[48, 48]}>
 				{parseMarkdownContent.map((mdContents, index) => (
 					<Col key={index} span={8}>
 						<Link href={`/blog/${mdContents.slug}`} key={index}>{mdContents.title}</Link>
