@@ -11,7 +11,8 @@ export async function getStaticProps () {
 		return {
 			title: parseMdContent.data.title,
 			content: parseMdContent.content,
-			slug: parseMdContent.data.slug
+			slug: parseMdContent.data.slug,
+			image: parseMdContent.data.image
 		}
 	})
 
