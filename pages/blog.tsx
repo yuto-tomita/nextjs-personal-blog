@@ -3,6 +3,7 @@ import { getMdFileFromDir, readFileFromFileName, parseMdFile } from '@lib/MdFile
 import Link from 'next/link'
 import { Row, Col, Card } from 'antd'
 import Image from 'next/image'
+import { Container } from '@components/ui'
 
 export async function getStaticProps () {
 	const mdFileNames = getMdFileFromDir()
@@ -28,7 +29,7 @@ const Blog = ({
 	parseMarkdownContent
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
 	return (
-		<div>
+		<Container>
 			<Row gutter={[48, 48]}>
 				{parseMarkdownContent.map((mdContents, index) => (
 					<Col key={index} span={8}>
@@ -39,7 +40,7 @@ const Blog = ({
 					</Col>
 				))}
 			</Row>
-		</div>
+		</Container>
 	)
 }
 
