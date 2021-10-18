@@ -34,8 +34,12 @@ const Blog = ({
 				{parseMarkdownContent.map((mdContents, index) => (
 					<Col key={index} span={8}>
 						<Card hoverable>
-							<Image src={`/${mdContents.image}`} alt="blog rogo" width={500} height={300} />
-							<Link href={`/blog/${mdContents.slug}`} key={index}>{mdContents.title}</Link>
+							<Link href={`/blog/${mdContents.slug}`} key={index} passHref>
+								<div>
+									<Image src={`/${mdContents.image}`} alt="blog rogo" width={500} height={300} />
+									{mdContents.title}
+								</div>
+							</Link>
 						</Card>
 					</Col>
 				))}
