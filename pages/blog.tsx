@@ -15,7 +15,8 @@ export async function getStaticProps () {
 			title: parseMdContent.data.title,
 			content: parseMdContent.content,
 			slug: parseMdContent.data.slug,
-			image: parseMdContent.data.image
+			image: parseMdContent.data.image,
+			description: parseMdContent.data.description
 		}
 	})
 
@@ -28,6 +29,7 @@ export async function getStaticProps () {
 const Blog = ({
 	parseMarkdownContent
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+	const { Meta } = Card
 	return (
 		<Container>
 			<Row gutter={[48, 48]}>
@@ -37,7 +39,7 @@ const Blog = ({
 							<Link href={`/blog/${mdContents.slug}`} key={index} passHref>
 								<div>
 									<Image src={`/${mdContents.image}`} alt="blog rogo" width={500} height={300} />
-									{mdContents.title}
+									<Meta title={mdContents.title} description={mdContents.description} />
 								</div>
 							</Link>
 						</Card>
