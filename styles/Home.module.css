@@ -119,3 +119,12 @@
     flex-direction: column;
   }
 }
+
+.image {
+  border-radius: 50%;
+  overflow: hidden;
+  width: 50vh;
+  height: 50vh;
+  position: relative;
+  margin-left: auto;
+}
