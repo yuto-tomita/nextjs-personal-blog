@@ -2,11 +2,11 @@ import fs from 'fs'
 import matter from 'gray-matter'
 
 export function getMdFileFromDir () {
-	return fs.readdirSync('./Articles')
+	return fs.readdirSync('./articles')
 }
 
 export function readFileFromFileName (fileName: string) {
-	return fs.readFileSync(`./Articles/${fileName}`, 'utf8')
+	return fs.readFileSync(`./articles/${fileName}`, 'utf8')
 }
 
 export function parseMdFile (mdFile: string) {
