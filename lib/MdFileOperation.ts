@@ -10,7 +10,7 @@ export function getMdFileFromDir (dirName: DirName) {
 
 /** 引数のファイル名から、引数のディレクトリ名配下のファイルを読み込む */
 export function readFileFromFileName (fileName: string, dirName: DirName) {
-	return fs.readFileSync(`./${dirName}/${fileName}`, 'utf8')
+	return fs.readFileSync(`/${dirName}/${fileName}`, 'utf8')
 }
 
 /** 読み込んだファイル名を扱いやすいデータ形式に変換する */
