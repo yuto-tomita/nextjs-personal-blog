@@ -52,7 +52,7 @@ const Home: NextPage = () => {
       </div>
 
       <h1>resume</h1>
-
+      <p>testtest</p>
       {/* // ../resumeからファイルを読み込んで、その内容を表示する */}
     </Container>
   )
