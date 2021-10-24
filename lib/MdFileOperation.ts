@@ -1,10 +1,10 @@
 import fs from 'fs'
 import matter from 'gray-matter'
 
-type DirName = 'resume' | 'article'
+type DirName = 'resume' | 'articles'
 
 /** 引数のディレクトリ名からディレクトリ配下のファイル名を取得する */
-export function getMdFileFromDir (dirName: string) {
+export function getMdFileFromDir (dirName: DirName) {
 	return fs.readdirSync(`./${dirName}`)
 }
 

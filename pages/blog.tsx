@@ -6,8 +6,8 @@ import Image from 'next/image'
 import { Container } from '@components/ui'
 
 export async function getStaticProps () {
-	const mdFileNames = getMdFileFromDir()
-	const mdFile = mdFileNames.map(fileName => readFileFromFileName(fileName))
+	const mdFileNames = getMdFileFromDir('articles')
+	const mdFile = mdFileNames.map(fileName => readFileFromFileName(fileName, 'articles'))
 	const parseMarkdownContent = mdFile.map(markdown => {
 		const parseMdContent = parseMdFile(markdown)
 
