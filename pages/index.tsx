@@ -1,32 +1,38 @@
-import type { NextPage } from 'next'
-// import { getMdFileFromDir, readFileFromFileName, parseMdFile } from '@lib/MdFileOperation'
+import type { InferGetStaticPropsType } from 'next'
+import { getMdFileFromDir, readFileFromFileName, parseMdFile } from '@lib/MdFileOperation'
+import Link from 'next/link'
 import { Container } from '@components/ui'
+import { Row, Col, Card } from 'antd'
 import Image from 'next/image'
 import style from '../styles/Home.module.css'
 
-// export async function getStaticProps () {
-//   const mdFileNames = getMdFileFromDir('resume')
-// 	const mdFile = mdFileNames.map(fileName => readFileFromFileName(fileName, 'resume'))
-// 	const parseMarkdownContent = mdFile.map(markdown => {
-// 		const parseMdContent = parseMdFile(markdown)
+export async function getStaticProps () {
+  const mdFileNames = getMdFileFromDir('resume')
+	const mdFile = mdFileNames.map(fileName => readFileFromFileName(fileName, 'resume'))
+	const parseMarkdownContent = mdFile.map(markdown => {
+		const parseMdContent = parseMdFile(markdown)
 
-// 		return {
-// 			title: parseMdContent.data.title,
-// 			content: parseMdContent.content,
-// 			slug: parseMdContent.data.slug,
-// 			image: parseMdContent.data.image,
-// 			description: parseMdContent.data.description
-// 		}
-//   })
+		return {
+			title: parseMdContent.data.title,
+			content: parseMdContent.content,
+			slug: parseMdContent.data.slug,
+			image: parseMdContent.data.image,
+			description: parseMdContent.data.description
+		}
+  })
 
-//   return {
-// 		props: {
-// 			parseMarkdownContent
-// 		}
-// 	}
-// }
+  return {
+		props: {
+			parseMarkdownContent
+		}
+	}
+}
 
-const Home: NextPage = () => {
+const Home = ({
+  parseMarkdownContent
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const { Meta } = Card
+
   return (
     <Container>
       <div className={style.selfIntroduction}>
@@ -52,8 +58,23 @@ const Home: NextPage = () => {
       </div>
 
       <h1>resume</h1>
-      <p>testtest</p>
-      {/* // ../resumeからファイルを読み込んで、その内容を表示する */}
+      
+      {/* カードタイトルが長文の場合もすべて表示するようにする */}
+      {/* カードタイトルの文字の大きさをもう少し大きくする */}
+      <Row gutter={[48, 48]}>
+        {parseMarkdownContent.map((mdContents, index) => (
+					<Col key={index} span={8}>
+						<Card hoverable>
+							<Link href={`/blog/${mdContents.slug}`} key={index} passHref>
+								<div>
+									<Image src={mdContents.image ? `/${mdContents.image}` : '/next.jpeg'} alt="blog rogo" width={500} height={300} />
+									<Meta title={mdContents.title} description={mdContents.description} />
+								</div>
+							</Link>
+						</Card>
+					</Col>
+				))}
+      </Row>
     </Container>
   )
 }
