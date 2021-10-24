@@ -1,9 +1,9 @@
-import { getMdFileFromArticleDir, readFileFromFileName, parseMdFile } from '@lib/MdFileOperation'
+import { getMdFileFromDir, readFileFromFileName, parseMdFile } from '@lib/MdFileOperation'
 import type { InferGetStaticPropsType } from 'next'
 
 export async function getStaticPaths () {
-	const mdFileNames = getMdFileFromArticleDir()
-	const mdFile = mdFileNames.map(fileName => readFileFromFileName(fileName, '_posts'))
+	const mdFileNames = getMdFileFromDir('teck-blog')
+	const mdFile = mdFileNames.map(fileName => readFileFromFileName(fileName, 'teck-blog'))
 	const paths = mdFile.map(markdown => {
 		const parseMdContent = parseMdFile(markdown)
 
@@ -18,7 +18,7 @@ export async function getStaticPaths () {
 
 export async function getStaticProps (context: any) {
 	const { slug } = context.params
-	const mdFileContent = readFileFromFileName(`${slug}.md`, '_posts')
+	const mdFileContent = readFileFromFileName(`${slug}.md`, 'teck-blog')
 	const parseMdContent = parseMdFile(mdFileContent)
 
 	return {
