@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import { getMdFileFromDir, readFileFromFileName, parseMdFile } from '@lib/MdFileOperation'
+// import { getMdFileFromDir, readFileFromFileName, parseMdFile } from '@lib/MdFileOperation'
 import { Container } from '@components/ui'
 import Image from 'next/image'
 import style from '../styles/Home.module.css'
