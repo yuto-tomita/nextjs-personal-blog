@@ -4,27 +4,27 @@ import { Container } from '@components/ui'
 import Image from 'next/image'
 import style from '../styles/Home.module.css'
 
-export async function getStaticProps () {
-  const mdFileNames = getMdFileFromDir('resume')
-	const mdFile = mdFileNames.map(fileName => readFileFromFileName(fileName, 'resume'))
-	const parseMarkdownContent = mdFile.map(markdown => {
-		const parseMdContent = parseMdFile(markdown)
+// export async function getStaticProps () {
+//   const mdFileNames = getMdFileFromDir('resume')
+// 	const mdFile = mdFileNames.map(fileName => readFileFromFileName(fileName, 'resume'))
+// 	const parseMarkdownContent = mdFile.map(markdown => {
+// 		const parseMdContent = parseMdFile(markdown)
 
-		return {
-			title: parseMdContent.data.title,
-			content: parseMdContent.content,
-			slug: parseMdContent.data.slug,
-			image: parseMdContent.data.image,
-			description: parseMdContent.data.description
-		}
-  })
+// 		return {
+// 			title: parseMdContent.data.title,
+// 			content: parseMdContent.content,
+// 			slug: parseMdContent.data.slug,
+// 			image: parseMdContent.data.image,
+// 			description: parseMdContent.data.description
+// 		}
+//   })
 
-  return {
-		props: {
-			parseMarkdownContent
-		}
-	}
-}
+//   return {
+// 		props: {
+// 			parseMarkdownContent
+// 		}
+// 	}
+// }
 
 const Home: NextPage = () => {
   return (
