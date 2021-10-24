@@ -22,3 +22,11 @@
     margin-right: 100%;
   }
 }
+
+.cardStyle {
+  font-size: 0.7rem;
+}
+
+.titleWrap {
+  white-space: pre-wrap;
+}

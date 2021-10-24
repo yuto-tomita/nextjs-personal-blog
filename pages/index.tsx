@@ -2,7 +2,7 @@ import type { InferGetStaticPropsType } from 'next'
 import { getMdFileFromDir, readFileFromFileName, parseMdFile } from '@lib/MdFileOperation'
 import Link from 'next/link'
 import { Container } from '@components/ui'
-import { Row, Col, Card } from 'antd'
+import { Row, Col, Card, Typography } from 'antd'
 import Image from 'next/image'
 import style from '../styles/Home.module.css'
 
@@ -23,15 +23,19 @@ export async function getStaticProps () {
 
   return {
 		props: {
+      mdFileNames,
 			parseMarkdownContent
 		}
 	}
 }
 
 const Home = ({
+  mdFileNames,
   parseMarkdownContent
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { Meta } = Card
+  const articleTitle = mdFileNames.map(val => val.replace(/.md/g, ''))
+  const { Title } = Typography
 
   return (
     <Container>
@@ -58,17 +62,30 @@ const Home = ({
       </div>
 
       <h1>resume</h1>
-      
       {/* カードタイトルが長文の場合もすべて表示するようにする */}
       {/* カードタイトルの文字の大きさをもう少し大きくする */}
       <Row gutter={[48, 48]}>
         {parseMarkdownContent.map((mdContents, index) => (
 					<Col key={index} span={8}>
-						<Card hoverable>
+            {mdFileNames[index]}
+						<Card hoverable title={articleTitle[index]}>
 							<Link href={`/blog/${mdContents.slug}`} key={index} passHref>
 								<div>
-									<Image src={mdContents.image ? `/${mdContents.image}` : '/next.jpeg'} alt="blog rogo" width={500} height={300} />
-									<Meta title={mdContents.title} description={mdContents.description} />
+									<Image
+                    src={mdContents.image ? `/${mdContents.image}` : '/next.jpeg'}
+                    alt="blog rogo"
+                    width={500}
+                    height={300}
+                  />
+									<Meta
+                    title={
+                      <Title level={5} ellipsis={false} className={style.titleWrap} >
+                        {mdContents.title}
+                      </Title>
+                    }
+                    className={style.cardStyle}
+                    description={mdContents.description}
+                  />
 								</div>
 							</Link>
 						</Card>
