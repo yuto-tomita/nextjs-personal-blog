@@ -1,7 +1,10 @@
 import fs from 'fs'
+import { join } from 'path'
 import matter from 'gray-matter'
 
-type DirName = 'resume' | 'articles'
+type DirName = 'resume' | 'articles' | '_posts'
+
+const PATH_NAME = join(process.cwd(), '_posts')
 
 /** 引数のディレクトリ名からディレクトリ配下のファイル名を取得する */
 export function getMdFileFromDir (dirName: DirName) {
@@ -9,7 +12,7 @@ export function getMdFileFromDir (dirName: DirName) {
 }
 
 export function getMdFileFromArticleDir () {
-	return fs.readdirSync(`${__dirname}/articles`)
+	return fs.readdirSync(PATH_NAME)
 }
 
 /** 引数のファイル名から、引数のディレクトリ名配下のファイルを読み込む */

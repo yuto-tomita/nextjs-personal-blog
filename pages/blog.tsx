@@ -1,13 +1,13 @@
 import type { InferGetStaticPropsType } from 'next'
-import { getMdFileFromDir, readFileFromFileName, parseMdFile } from '@lib/MdFileOperation'
+import { getMdFileFromArticleDir, readFileFromFileName, parseMdFile } from '@lib/MdFileOperation'
 import Link from 'next/link'
 import { Row, Col, Card } from 'antd'
 import Image from 'next/image'
 import { Container } from '@components/ui'
 
 export async function getStaticProps () {
-	const mdFileNames = getMdFileFromDir('articles')
-	const mdFile = mdFileNames.map(fileName => readFileFromFileName(fileName, 'articles'))
+	const mdFileNames = getMdFileFromArticleDir()
+	const mdFile = mdFileNames.map(fileName => readFileFromFileName(fileName, '_posts'))
 	const parseMarkdownContent = mdFile.map(markdown => {
 		const parseMdContent = parseMdFile(markdown)
 
