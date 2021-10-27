@@ -89,8 +89,16 @@ const Home = ({
       <Row gutter={[48, 48]}>
         {parseMarkdownContent.map((mdContents, index) => (
 					<Col key={index} span={getSpanValue()}>
-						<Card hoverable title={articleTitle[index]}>
-							<Link href={`/blog/${mdContents.slug}`} key={index} passHref>
+						<Card
+              hoverable
+              title={articleTitle[index]}
+              style={{width: 400}}
+            >
+							<Link
+                href={`/blog/${mdContents.slug}`}
+                key={index}
+                passHref
+              >
 								<div>
 									<Image
                     src={mdContents.image ? `/${mdContents.image}` : '/next.jpeg'}
