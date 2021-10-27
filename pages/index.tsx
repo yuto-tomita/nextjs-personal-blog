@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Container } from '@components/ui'
 import { Row, Col, Card, Typography } from 'antd'
 import Image from 'next/image'
+import { useWindowDimensions } from '@lib/hooks/DetectScreenSize'
 import style from '../styles/Home.module.css'
 
 export async function getStaticProps () {
@@ -34,6 +35,27 @@ const Home = ({
   parseMarkdownContent
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { Meta } = Card
+  const { width } = useWindowDimensions()
+
+  const getSpanValue = () => {
+    console.log(width)
+    // if (width < 950) {
+    //   return 12
+    // } else if (width < 1200) {
+    //   return 24
+    // } else {
+    //   return 8
+    // }
+
+    if (width > 1200) {
+      return 8
+    } else if (width > 950) {
+      return 12
+    } else {
+      return 24
+    }
+    // return width < 950 ? 24 : 8
+  }
   const articleTitle = mdFileNames.map(val => val.replace(/.md/g, ''))
   const { Title } = Typography
 
@@ -66,8 +88,7 @@ const Home = ({
       {/* カードタイトルの文字の大きさをもう少し大きくする */}
       <Row gutter={[48, 48]}>
         {parseMarkdownContent.map((mdContents, index) => (
-					<Col key={index} span={8}>
-            {mdFileNames[index]}
+					<Col key={index} span={getSpanValue()}>
 						<Card hoverable title={articleTitle[index]}>
 							<Link href={`/blog/${mdContents.slug}`} key={index} passHref>
 								<div>
