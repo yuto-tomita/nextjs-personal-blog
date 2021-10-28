@@ -6,6 +6,7 @@ import { Row, Col, Card, Typography } from 'antd'
 import Image from 'next/image'
 import { useWindowDimensions } from '@lib/hooks/DetectScreenSize'
 import style from '../styles/Home.module.css'
+import { getSpanValue } from '@lib/GetArticleSpan'
 
 export async function getStaticProps () {
   const mdFileNames = getMdFileFromDir('resume')
@@ -37,25 +38,6 @@ const Home = ({
   const { Meta } = Card
   const { width } = useWindowDimensions()
 
-  const getSpanValue = () => {
-    console.log(width)
-    // if (width < 950) {
-    //   return 12
-    // } else if (width < 1200) {
-    //   return 24
-    // } else {
-    //   return 8
-    // }
-
-    if (width > 1200) {
-      return 8
-    } else if (width > 950) {
-      return 12
-    } else {
-      return 24
-    }
-    // return width < 950 ? 24 : 8
-  }
   const articleTitle = mdFileNames.map(val => val.replace(/.md/g, ''))
   const { Title } = Typography
 
@@ -88,7 +70,7 @@ const Home = ({
       {/* カードタイトルの文字の大きさをもう少し大きくする */}
       <Row gutter={[48, 48]}>
         {parseMarkdownContent.map((mdContents, index) => (
-					<Col key={index} span={getSpanValue()}>
+					<Col key={index} span={getSpanValue(width)}>
 						<Card
               hoverable
               title={articleTitle[index]}
