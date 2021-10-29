@@ -5,7 +5,7 @@ const Head: FC = () => {
 	return (
 		<>
 			<NextHead>
-				<title>PersonalBlog</title>
+				<title>とみーの個人ブログ</title>
 				<meta name="viewport" content="width=device-width, initial-scale=1"/>
 			</NextHead>
 		</>
