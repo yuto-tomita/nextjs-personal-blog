@@ -103,6 +103,12 @@ const Home = ({
 					</Col>
 				))}
       </Row>
+
+      <div>
+        <h1>個人開発物</h1>
+
+        <p>coming soon...</p>
+      </div>
     </Container>
   )
 }
