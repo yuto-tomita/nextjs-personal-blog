@@ -45,12 +45,13 @@ const Home = ({
     <Container>
       <div className={style.selfIntroduction}>
         <div>
-          <h1>初めまして!</h1>
-          <p>
+          <h1 className={style.title}>初めまして!</h1>
+          <p className={style.selfContents}>
             冨田 優斗っていいます。<br />
             とある受託とSESをやっている会社でフロントエンドエンジニアとして働いています。<br />
-            20歳の頃に新卒でIT業界に入り、現在業界3年目になります。<br />
+            20歳の頃に新卒でIT業界に入り、現在業界3年目になります。
             JavaScript周りの開発が好きで、主にVue.jsを使って開発をしています。<br />
+            趣味は、Githubでフロント周りの便利なライブラリを調べたり、teck系のブログを巡回していくのが好きです！<br />
             私の詳しい経歴が気になっていただけた方はresumeの方をご覧いただければと思います！
           </p>
         </div>

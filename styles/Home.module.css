@@ -27,6 +27,15 @@
   font-size: 0.7rem;
 }
 
+.title {
+  font-size: 2rem;
+}
+
 .titleWrap {
   white-space: pre-wrap;
+}
+
+.selfContents {
+  margin-top: -0.5rem;
+  font-size: 0.8rem;
 }
