@@ -24,6 +24,9 @@
       ],
       "@lib/*": [
         "lib/*"
+      ],
+      "@config/*": [
+        "config/*"
       ]
     },
     "incremental": true
