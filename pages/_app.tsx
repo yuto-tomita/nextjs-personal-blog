@@ -3,6 +3,8 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { Head, Header, Footer } from '@components/common'
 import 'antd/dist/antd.css'
+import { DefaultSeo } from 'next-seo'
+import seo from '@config/seo.config'
 
 function MyApp ({ Component, pageProps }: AppProps) {
   // ant-designのMenuコンポーネントを使用するにはSSRだとエラーが起きるため画面に要素が描画されてからコンポーネントを描画するようにする
@@ -16,6 +18,7 @@ function MyApp ({ Component, pageProps }: AppProps) {
     return (
       <>
         <Head />
+        <DefaultSeo {...seo} />
         <Header />
         <Component {...pageProps} />
         <Footer />
