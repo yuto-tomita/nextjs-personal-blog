@@ -1,25 +1,25 @@
 {
   "titleTemplate": "%s | とみーの個人ブログ",
-  "defaultTitle": "とみーの個人ブログ",
-  "additionalMetaTags": [
-    {
-      "property": "dc:creator",
-      "content": "冨田優斗"
-    },
-    {
-      "name": "application-name",
-      "content": "とみーの個人ブログ"
-    }
-  ],
+  "description": "冨田優斗の個人ブログ",
   "openGraph": {
-    "url": "https://nextjs-personal-blog-five.vercel.app/",
+    "title": "とみーの個人ブログ",
+    "description": "とみーの個人ブログ - https://nextjs-personal-blog-five.vercel.app/",
     "type": "website",
     "locale": "ja_JP",
-    "site_name": "とみーの個人ブログ"
+    "url": "https://nextjs-personal-blog-five.vercel.app/",
+    "site_name": "とみーの個人ブログ",
+    "images": [
+      {
+        "url": "/next.jpeg",
+        "width": 800,
+        "height": 600,
+        "alt": "とみーの個人ブログ"
+      }
+    ]
   },
   "twitter": {
-    "handle": "@hogehoge",
-    "site": "@fugafuga",
+    "handle": "@qualidea04",
+    "site": "@qualidea04",
     "cardType": "summary_large_image"
   }
 }
