@@ -22,13 +22,15 @@ export async function getStaticProps (context: any) {
 	const mdFileContent = readFileFromFileName(`${slug}.md`, 'teck-blog')
 	const parseMdContent = parseMdFile(mdFileContent)
 
+	console.log(parseMdContent)
+
 	return {
 		props: {
 			title: parseMdContent.data.title,
 			content: parseMdContent.content,
 			description: parseMdContent.data.description,
 			tag: parseMdContent.data.tag,
-			created_at: parseMdContent.data.created_at,
+			created_at: Date.parse(parseMdContent.data.created_at),
 			slug
 		}
 	}
