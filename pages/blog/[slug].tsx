@@ -1,6 +1,6 @@
 import { getMdFileFromDir, readFileFromFileName, parseMdFile } from '@lib/MdFileOperation'
 import type { InferGetStaticPropsType } from 'next'
-import { NextSeo } from 'next-seo'
+import { NextSeo, BlogJsonLd } from 'next-seo'
 
 export async function getStaticPaths () {
 	const mdFileNames = getMdFileFromDir('teck-blog')
@@ -29,6 +29,7 @@ export async function getStaticProps (context: any) {
 			description: parseMdContent.data.description,
 			tag: parseMdContent.data.tag,
 			created_at: parseMdContent.data.created_at,
+			slug
 		}
 	}
 }
@@ -38,10 +39,23 @@ const Post = ({
 	content,
 	description,
 	tag,
-	created_at
+	created_at,
+	slug
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   return (
 		<div>
+			<BlogJsonLd
+				images={[
+					'./public/next.jpeg'
+				]}
+				url={`https://nextjs-personal-blog-five.vercel.app/blog/${slug}`}
+				title={title}
+				datePublished={created_at}
+				dateModified="2015-02-05T09:00:00+08:00"
+				authorName="冨田 優斗"
+				description={description}
+			/>
+
 			<p>Title: {title}</p>
 			<p>Content: {content}</p>
 
