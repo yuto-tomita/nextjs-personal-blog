@@ -1,6 +1,7 @@
 import { getMdFileFromDir, readFileFromFileName, parseMdFile } from '@lib/MdFileOperation'
 import type { InferGetStaticPropsType } from 'next'
 import { NextSeo, BlogJsonLd } from 'next-seo'
+import dayjs from 'dayjs'
 
 export async function getStaticPaths () {
 	const mdFileNames = getMdFileFromDir('teck-blog')
@@ -22,8 +23,6 @@ export async function getStaticProps (context: any) {
 	const mdFileContent = readFileFromFileName(`${slug}.md`, 'teck-blog')
 	const parseMdContent = parseMdFile(mdFileContent)
 
-	console.log(parseMdContent)
-
 	return {
 		props: {
 			title: parseMdContent.data.title,
@@ -44,6 +43,8 @@ const Post = ({
 	created_at,
 	slug
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
+	const formatDate = dayjs(created_at).format('YYYY-MM-DD HH:mm:ss')
+
   return (
 		<div>
 			<BlogJsonLd
@@ -52,7 +53,7 @@ const Post = ({
 				]}
 				url={`https://nextjs-personal-blog-five.vercel.app/blog/${slug}`}
 				title={title}
-				datePublished={created_at}
+				datePublished={formatDate}
 				dateModified="2015-02-05T09:00:00+08:00"
 				authorName="冨田 優斗"
 				description={description}
@@ -77,7 +78,7 @@ const Post = ({
             },
           ],
 					article: {
-						publishedTime: created_at,
+						publishedTime: formatDate,
 						tags: tag
 					}
         }}
