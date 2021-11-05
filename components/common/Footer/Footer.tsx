@@ -1,5 +1,6 @@
 import { FC } from 'react'
 import { SocialProfileJsonLd } from 'next-seo'
+import { GithubOutlined, TwitterOutlined } from '@ant-design/icons'
 import style from './Footer.module.css'
 
 const Footer: FC = () => {
@@ -7,7 +8,8 @@ const Footer: FC = () => {
 		<>
 			<div className={style.footerContainer}>
 				<div className={style.icons}>
-					hogehoge
+					<GithubOutlined />
+					<TwitterOutlined />
 				</div>
 			</div>
 
