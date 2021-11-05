@@ -42,6 +42,25 @@ const Header: FC = () => {
 
 	return (
 		<>
+			<ProfilePageJsonLd
+        breadcrumb={[
+          {
+            position: 1,
+            name: 'Home',
+            item: 'https://nextjs-personal-blog-elqgxu4dl-tommy-personal-blog.vercel.app/'
+          },
+          {
+            position: 2,
+            name: 'Blog',
+            item: 'https://nextjs-personal-blog-elqgxu4dl-tommy-personal-blog.vercel.app/blog'
+          },
+          {
+            position: 3,
+            name: 'Contact',
+            item: 'https://nextjs-personal-blog-elqgxu4dl-tommy-personal-blog.vercel.app/contact'
+          }
+        ]}
+      />
 			<header>
 				<Menu mode="horizontal" selectedKeys={[menuState]} onClick={handleClick}>
 					{['Home', 'Blog', 'Contact'].map((menuName, index) => (
