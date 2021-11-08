@@ -5,7 +5,7 @@ import { Row, Col, Card } from 'antd'
 import Image from 'next/image'
 import { Container } from '@components/ui'
 import { getSpanValue } from '@lib/GetArticleSpan'
-import { useWindowDimensions } from '@lib/hooks/DetectScreenSize'
+import { useWindowDimensions } from '@lib/hooks/useDetectScreenSize'
 
 export async function getStaticProps () {
 	const mdFileNames = getMdFileFromDir('teck-blog')
