@@ -4,13 +4,28 @@ import { GithubOutlined, TwitterOutlined } from '@ant-design/icons'
 import style from './Footer.module.css'
 
 const Footer: FC = () => {
+	const transitionToGithub = () => {
+		window.open('https://github.com/yuto-tomita', '_blank')
+	}
+
+	const transitionToTwitter = () => {
+		window.open('https://twitter.com/qualidea04')
+	}
+
 	return (
 		<>
 			<div className={style.footerContainer}>
 				<div className={style.icons}>
-					<GithubOutlined />
-					<TwitterOutlined />
+					<div onClick={transitionToGithub}>
+						<GithubOutlined className={style.githubIcon} />
+					</div>
+					<div onClick={transitionToTwitter}>
+						<TwitterOutlined className={style.twitterIcon} />
+					</div>
 				</div>
+				<p className={style.creator}>
+					created_by: yuto-tomita
+				</p>
 			</div>
 
 			<SocialProfileJsonLd
