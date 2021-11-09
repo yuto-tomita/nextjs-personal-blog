@@ -1,11 +1,12 @@
 import type { NextPage } from 'next'
 import { Container } from '@components/ui'
-import { Input } from 'antd'
+import { Input, Button } from 'antd'
+import { SendOutlined } from '@ant-design/icons'
 import { useMail } from '@lib/hooks/useMail'
 import style from '../styles/Contact.module.css'
 
 const Contact: NextPage = () => {
-	const { setMail, setName, setSubject, setBody } = useMail()
+	const { setMail, setName, setSubject, setBody, send } = useMail()
 	const { TextArea } = Input
 
 	return (
@@ -41,6 +42,18 @@ const Contact: NextPage = () => {
 					allowClear
 					onChange={(e) => setBody(e.target.value)}
 				/>
+			</div>
+
+			<div className={style.buttonPosition}>
+				<Button
+					type="primary"
+					shape="round"
+					icon={<SendOutlined />}
+					size="large"
+					onClick={send}
+				>
+					Send
+				</Button>
 			</div>
 		</Container>
 	)
