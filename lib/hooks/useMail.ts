@@ -22,8 +22,7 @@ export const useMail = () => {
 
 メールアドレス：${mail}
 
-お問い合わせ内容
-${body}
+お問い合わせ内容：${body}
 		`
 	}
 
