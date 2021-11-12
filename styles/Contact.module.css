@@ -5,3 +5,8 @@
 .buttonPosition {
 	margin-left: auto;
 }
+
+.error {
+	font-size: 0.7rem;
+	color: red;	
+}

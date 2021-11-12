@@ -3,11 +3,37 @@ import { Container } from '@components/ui'
 import { Input, Button } from 'antd'
 import { SendOutlined } from '@ant-design/icons'
 import { useMail } from '@lib/hooks/useMail'
+import { useState } from 'react'
 import style from '../styles/Contact.module.css'
 
 const Contact: NextPage = () => {
-	const { setMail, setName, setSubject, setBody, send } = useMail()
+	const {
+		setMail,
+		setName,
+		setSubject,
+		setBody,
+		send,
+		errorMessage
+	} = useMail()
+	const [displayErrorMessage, setDisplayErrorMessage] = useState(false) 
 	const { TextArea } = Input
+	
+	const sendBackConfirmation = () => {
+		setDisplayErrorMessage(false)
+
+		if (!Object.values(errorMessage()).some(val => typeof val === 'string')) {
+			send()
+		} else {
+			setDisplayErrorMessage(true)
+		}
+	}
+	
+	type FormObjectKey = 'mail' | 'name' | 'subject' | 'body'
+	const getErrorMessage = (formObjectKey: FormObjectKey) => {
+		if (displayErrorMessage) {
+			return <div className={style.error}>{errorMessage()[formObjectKey]}</div>
+		}
+	}
 
 	return (
 		<Container>
@@ -15,33 +41,33 @@ const Contact: NextPage = () => {
 				<label>件名</label>
 				<Input
 				  placeholder="件名を入力してください"
-					allowClear
 					onChange={(e) => setSubject(e.target.value)}
 				/>
+				{getErrorMessage('mail')}
 			</div>
 			<div className={style.formContainer}>
 				<label>メールアドレス</label>
 				<Input
 					placeholder="メールアドレスを入力してください"
-					allowClear
 					onChange={(e) => setMail(e.target.value)}
 				/>
+				{getErrorMessage('mail')}
 			</div>
 			<div className={style.formContainer}>
 				<label>名前</label>
 				<Input
 					placeholder="名前を入力してください"
-					allowClear
 					onChange={(e) => setName(e.target.value)}
 				/>
+				{getErrorMessage('name')}
 			</div>
 			<div className={style.formContainer}>
 				<label>お問い合わせ内容</label>
 				<TextArea
 					placeholder="お問い合わせ内容を入力してください"
-					allowClear
 					onChange={(e) => setBody(e.target.value)}
 				/>
+				{getErrorMessage('body')}
 			</div>
 
 			<div className={style.buttonPosition}>
@@ -50,7 +76,7 @@ const Contact: NextPage = () => {
 					shape="round"
 					icon={<SendOutlined />}
 					size="large"
-					onClick={send}
+					onClick={sendBackConfirmation}
 				>
 					Send
 				</Button>
