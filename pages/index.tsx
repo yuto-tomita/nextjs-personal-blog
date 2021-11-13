@@ -104,7 +104,7 @@ const Home = ({
                 style={{width: 400}}
               >
                 <Link
-                  href={`/blog/${mdContents.slug}`}
+                  href={`/resume/${mdContents.slug}`}
                   key={index}
                   passHref
                 >
