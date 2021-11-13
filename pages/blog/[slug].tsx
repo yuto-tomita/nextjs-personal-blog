@@ -1,7 +1,14 @@
 import { getMdFileFromDir, readFileFromFileName, parseMdFile } from '@lib/MdFileOperation'
 import type { InferGetStaticPropsType } from 'next'
 import { NextSeo, BlogJsonLd } from 'next-seo'
+import { Container } from '@components/ui'
+import { Row, Col, Tag } from 'antd'
 import dayjs from 'dayjs'
+import style from '../../styles/Article.module.css'
+import { getSpanValue } from '@lib/GetArticleSpan'
+import { useWindowDimensions } from '@lib/hooks/useDetectScreenSize'
+import { StarOutlined, StarFilled } from '@ant-design/icons'
+import { useState } from 'react'
 
 export async function getStaticPaths () {
 	const mdFileNames = getMdFileFromDir('teck-blog')
@@ -44,9 +51,26 @@ const Post = ({
 	slug
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
 	const formatDate = dayjs(created_at).format('YYYY-MM-DD HH:mm:ss')
+	const [isButtonActive, setIsButtonActive] = useState(false)
+	const { width } = useWindowDimensions()
+
+	const changeButtonStatus = () => {
+		if (isButtonActive) {
+			setIsButtonActive(false)
+		} else {
+			setIsButtonActive(true)
+		}
+	}
+	const getStarIcon = () => {
+		if (isButtonActive) {
+			return <StarOutlined className={style.starButton} />
+		} else {
+			return <StarFilled className={style.starButtonActive} />
+		}
+	}
 
   return (
-		<div>
+		<>
 			<BlogJsonLd
 				images={[
 					'./public/next.jpeg'
@@ -58,32 +82,72 @@ const Post = ({
 				authorName="冨田 優斗"
 				description={description}
 			/>
-
-			<p>Title: {title}</p>
-			<p>Content: {content}</p>
-
 			<NextSeo
-        title={title}
-        description={description}
-        openGraph={{
-          type: 'article',
-          title: title,
-          description: `${content}`,
-          images: [
-            {
-              url: './public/next.jpeg',
-              width: 800,
-              height: 600,
-              alt: 'プレビュー画像',
-            },
-          ],
+				title={title}
+				description={description}
+				openGraph={{
+					type: 'article',
+					title: title,
+					description: `${content}`,
+					images: [
+						{
+							url: './public/next.jpeg',
+							width: 800,
+							height: 600,
+							alt: 'プレビュー画像',
+						},
+					],
 					article: {
 						publishedTime: formatDate,
 						tags: tag
 					}
-        }}
-      />
-		</div>
+				}}
+			/>
+			<Container
+			  style={{background: 'rgb(248, 246, 246)', height: '100%'}}
+			>
+				<Row
+					align="top"
+					gutter={[8, 8]}
+				>
+					<Col span={getSpanValue(width) === 24 ? 24 : 2}>
+						<div className={style.startButtonContainer}>
+							<div onClick={changeButtonStatus}>
+								{getStarIcon()}
+							</div>
+						</div>
+					</Col>
+
+					<Col
+						span={getSpanValue(width) === 24 ? 24 : 15}
+						className={style.contentArea}
+					>
+						<h1 className={style.title}>
+							{title}
+						</h1>
+						<div className={style.content}>
+							{content}
+						</div>
+					</Col>
+
+					<Col
+						span={getSpanValue(width) === 24 ? 24 : 6}
+						className={style.tagContentArea}
+					>
+						<h1 className={style.title}>
+							Tag
+						</h1>
+						<div className={style.content}>
+							{
+								tag.map((val: string, index: string | number) => {
+									return <Tag key={index}>{val}</Tag>
+								})
+							}
+						</div>
+					</Col>
+				</Row>
+			</Container>
+		</>
 	)
 };
 
