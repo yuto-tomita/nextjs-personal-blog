@@ -27,7 +27,7 @@ function getPathAndCreateDate (dirName: DirName) {
 		const getParseMdFile = parseMdFile(mdFile)
 
 		return {
-			path: `${join(process.cwd(), dirName)}/${val}`,
+			path: `${process.env.SITE_URL}/${dirName}/${val}`,
 			lastmod: getParseMdFile.data.created_at
 		}
 	})
