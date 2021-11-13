@@ -63,9 +63,9 @@ const Post = ({
 	}
 	const getStarIcon = () => {
 		if (isButtonActive) {
-			return <StarOutlined className={style.starButton} />
-		} else {
 			return <StarFilled className={style.starButtonActive} />
+		} else {
+			return <StarOutlined className={style.starButton} />
 		}
 	}
 
