@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { Container } from '@components/ui'
 import { getSpanValue } from '@lib/GetArticleSpan'
 import { useWindowDimensions } from '@lib/hooks/useDetectScreenSize'
+import dayjs from 'dayjs'
 
 export async function getStaticProps () {
 	const mdFileNames = getMdFileFromDir('teck-blog')
@@ -18,9 +19,12 @@ export async function getStaticProps () {
 			content: parseMdContent.content,
 			slug: parseMdContent.data.slug,
 			image: parseMdContent.data.image,
-			description: parseMdContent.data.description
+			description: parseMdContent.data.description,
+			created_at: Date.parse(parseMdContent.data.created_at)
 		}
 	})
+
+	parseMarkdownContent.sort((a, b) => (dayjs(a.created_at).isAfter(dayjs(b.created_at)) ? -1 : 1))
 
 	return {
 		props: {
