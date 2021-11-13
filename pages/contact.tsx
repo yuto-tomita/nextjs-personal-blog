@@ -43,7 +43,7 @@ const Contact: NextPage = () => {
 				  placeholder="件名を入力してください"
 					onChange={(e) => setSubject(e.target.value)}
 				/>
-				{getErrorMessage('mail')}
+				{getErrorMessage('subject')}
 			</div>
 			<div className={style.formContainer}>
 				<label>メールアドレス</label>
