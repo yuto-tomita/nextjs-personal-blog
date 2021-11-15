@@ -46,3 +46,37 @@
 	color: rgb(245, 241, 8);
 	cursor: pointer;
 }
+
+.profileContentArea {
+	background: #fff;
+	border-radius: 2rem;
+	padding-bottom: 1rem;
+	margin-top: 1rem;
+	padding-top: 1rem;
+}
+
+.profileContainer {
+	/* display: flex; */
+}
+
+.profileImage {
+	border-radius: 50%;
+	overflow: hidden;
+	width: 15vh;
+	height: 15vh;
+	position: relative;
+	margin-left: 1rem;
+	margin: 0 auto;
+}
+
+.profileName {
+	font-weight: bold;
+	margin-top: 1rem;
+	font-size: 1.1rem;
+	text-align: center;
+}
+
+.profileText {
+	font-size: 0.7rem;
+	margin: 0 0.5rem;
+}

@@ -13,6 +13,7 @@ import { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { base16AteliersulphurpoolLight } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import Image from 'next/image'
 
 export async function getStaticPaths () {
 	const mdFileNames = getMdFileFromDir('teck-blog')
@@ -122,51 +123,82 @@ const Post = ({
 						</div>
 					</Col>
 
-					<Col
-						span={getSpanValue(width) === 24 ? 24 : 15}
-						className={style.contentArea}
-					>
-						<h1 className={style.title}>
-							{title}
-						</h1>
-						<div className={style.content}>
-							<ReactMarkdown 
-							  children={content}
-								components={{
-									code ({node, inline, className, children, ...props}) {
-										const match = /language-(\w+)/.exec(className || '')
-										return !inline && match ? (
-											<SyntaxHighlighter
-												children={String(children).replace(/\n$/, '')}
-												style={base16AteliersulphurpoolLight}
-												language={match[1]}
-												// PreTag="div"
-												// {...props}
-											/>
-										) : (
-											<code className={className} {...props}>
-												{children}
-											</code>
-										)
-									}
-								}}
-							/>
+					<Col span={getSpanValue(width) === 24 ? 24 : 15}>
+						<div className={style.contentArea}>
+							<h1 className={style.title}>
+								{title}
+							</h1>
+							<div className={style.content}>
+								<ReactMarkdown 
+									children={content}
+									components={{
+										code ({node, inline, className, children, ...props}) {
+											const match = /language-(\w+)/.exec(className || '')
+											return !inline && match ? (
+												<SyntaxHighlighter
+													children={String(children).replace(/\n$/, '')}
+													style={base16AteliersulphurpoolLight}
+													language={match[1]}
+													// PreTag="div"
+													// {...props}
+												/>
+											) : (
+												<code className={className} {...props}>
+													{children}
+												</code>
+											)
+										}
+									}}
+								/>
+							</div>
 						</div>
 					</Col>
 
-					<Col
-						span={getSpanValue(width) === 24 ? 24 : 6}
-						className={style.tagContentArea}
-					>
-						<h1 className={style.title}>
-							Tag
-						</h1>
-						<div className={style.content}>
-							{
-								tag.map((val: string, index: string | number) => {
-									return <Tag key={index}>{val}</Tag>
-								})
-							}
+					<Col span={getSpanValue(width) === 24 ? 24 : 6}>
+						<div className={style.tagContentArea}>
+							<h1 className={style.title}>
+								Tag
+							</h1>
+							<div className={style.content}>
+								{
+									tag.map((val: string, index: string | number) => {
+										return <Tag key={index}>{val}</Tag>
+									})
+								}
+							</div>
+						</div>
+						<div className={style.profileContentArea}>
+							<div className={style.profileContainer}>
+								<div className={style.profileImage}>
+									<Image
+										src="/MyProfileImage.jpeg"
+										alt="my profile image"
+										layout="fill"
+										objectFit="cover"
+									/>
+								</div>
+
+								<p className={style.profileName}>
+									冨田優斗
+								</p>
+
+								<p className={style.profileText}>
+									初めまして！冨田 優斗と申します。<br />
+									<br />
+									現在、受託とSESをやっている会社でフロントエンドエンジニアとして働いています。<br />
+									20歳の頃に新卒でIT業界に入り、現在業界3年目になります。<br />
+									<br />
+									仕事では主にVue.jsを使ってtoC向けのwebアプリを開発しています。<br />
+									過去にはLaravelを使用してAPI開発と認証認可システムを作成しました。<br />
+									<br />
+									Node.jsを使用したバックエンド開発とReactを用いたフロントエンドの開発に興味があります。<br />
+									<br />
+									趣味でGithubでフロント周りの便利なライブラリを調べたり、
+									個人開発で気になっているライブラリやフレームワークを余暇で触っています。<br />
+									<br />
+									私の詳しい経歴が気になっていただけた方は本ページの「Home」をクリックしていただき、resumeの方をご覧いただければと思います！
+								</p>
+							</div>
 						</div>
 					</Col>
 				</Row>
