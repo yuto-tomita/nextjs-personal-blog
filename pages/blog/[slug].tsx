@@ -1,6 +1,7 @@
 /* eslint-disable react/no-children-prop */
 import { getMdFileFromDir, readFileFromFileName, parseMdFile } from '@lib/MdFileOperation'
 import type { InferGetStaticPropsType } from 'next'
+import { useState, useCallback } from 'react'
 import { NextSeo, BlogJsonLd } from 'next-seo'
 import { Container } from '@components/ui'
 import { Row, Col, Tag } from 'antd'
@@ -9,11 +10,11 @@ import style from '../../styles/Article.module.css'
 import { getSpanValue } from '@lib/GetArticleSpan'
 import { useWindowDimensions } from '@lib/hooks/useDetectScreenSize'
 import { StarOutlined, StarFilled } from '@ant-design/icons'
-import { useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { base16AteliersulphurpoolLight } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import Image from 'next/image'
+import { useScrollAmount } from '@lib/hooks/useScrollAmount'
 
 export async function getStaticPaths () {
 	const mdFileNames = getMdFileFromDir('teck-blog')
@@ -57,8 +58,10 @@ const Post = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
 	const formatDate = dayjs(created_at).format('YYYY-MM-DD HH:mm:ss')
 	const [isButtonActive, setIsButtonActive] = useState(false)
+	const [onlyHeadings, setOnlyHeadings] = useState<HTMLHeadingElement[]>([])
 	const { width } = useWindowDimensions()
-
+	const { yaxisAmount } = useScrollAmount()
+	
 	const changeButtonStatus = () => {
 		if (isButtonActive) {
 			setIsButtonActive(false)
@@ -73,6 +76,19 @@ const Post = ({
 			return <StarOutlined className={style.starButton} />
 		}
 	}
+
+	const getOneHeadingTexts = () => {
+		return onlyHeadings.map(val => val.innerText)
+	}
+	const getActiveHeading = () => {
+		return ''
+	}
+	const testRef = useCallback((node: HTMLElement | null) => {
+		if (node) {
+			const onlyHeadings = Array.from(node.querySelectorAll('h1'))
+			setOnlyHeadings(onlyHeadings)
+		}
+	}, [])
 
   return (
 		<>
@@ -125,10 +141,10 @@ const Post = ({
 
 					<Col span={getSpanValue(width) === 24 ? 24 : 15}>
 						<div className={style.contentArea}>
-							<h1 className={style.title}>
+							<p className={style.title}>
 								{title}
-							</h1>
-							<div className={style.content}>
+							</p>
+							<div className={style.content} ref={testRef}>
 								<ReactMarkdown 
 									children={content}
 									components={{
@@ -139,8 +155,6 @@ const Post = ({
 													children={String(children).replace(/\n$/, '')}
 													style={base16AteliersulphurpoolLight}
 													language={match[1]}
-													// PreTag="div"
-													// {...props}
 												/>
 											) : (
 												<code className={className} {...props}>
@@ -156,9 +170,9 @@ const Post = ({
 
 					<Col span={getSpanValue(width) === 24 ? 24 : 6}>
 						<div className={style.tagContentArea}>
-							<h1 className={style.title}>
+							<p className={style.title}>
 								Tag
-							</h1>
+							</p>
 							<div className={style.content}>
 								{
 									tag.map((val: string, index: string | number) => {
@@ -167,6 +181,19 @@ const Post = ({
 								}
 							</div>
 						</div>
+
+						<div className={style.tagContentArea}>
+							<p className={style.title}>
+								目次
+							</p>
+							<ul>
+								{getActiveHeading()}
+								{getOneHeadingTexts().map((text: string, index) => {
+									return <li key={index}>{text}</li>
+								})}
+							</ul>
+						</div>
+
 						<div className={style.profileContentArea}>
 							<div className={style.profileContainer}>
 								<div className={style.profileImage}>
