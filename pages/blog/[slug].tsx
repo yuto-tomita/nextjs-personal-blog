@@ -82,10 +82,6 @@ const Post = ({
 	}
 	const getActiveHeading = (index: number) => {
 		const heddingOffsetTop = onlyHeadings.map(val => val.offsetTop)
-		// if (heddingOffsetTop[index] < yaxisAmount - 100) return
-		// if (yaxisAmount > heddingOffsetTop[index]) {
-		// 	return style.contentActive
-		// }
 		if (heddingOffsetTop[index + 1]) {
 			if (between(yaxisAmount, heddingOffsetTop[index], heddingOffsetTop[index + 1])) {
 				return style.contentActive
