@@ -59,7 +59,7 @@ const Post = ({
 	const formatDate = dayjs(created_at).format('YYYY-MM-DD HH:mm:ss')
 	const [isButtonActive, setIsButtonActive] = useState(false)
 	const [onlyHeadings, setOnlyHeadings] = useState<HTMLHeadingElement[]>([])
-	const { width } = useWindowDimensions()
+	const { width, height } = useWindowDimensions()
 	const { yaxisAmount } = useScrollAmount()
 	
 	const changeButtonStatus = () => {
@@ -80,8 +80,22 @@ const Post = ({
 	const getOneHeadingTexts = () => {
 		return onlyHeadings.map(val => val.innerText)
 	}
-	const getActiveHeading = () => {
-		return ''
+	const getActiveHeading = (index: number) => {
+		const heddingOffsetTop = onlyHeadings.map(val => val.offsetTop)
+		// if (heddingOffsetTop[index] < yaxisAmount - 100) return
+		// if (yaxisAmount > heddingOffsetTop[index]) {
+		// 	return style.contentActive
+		// }
+		if (heddingOffsetTop[index + 1]) {
+			if (between(yaxisAmount, heddingOffsetTop[index], heddingOffsetTop[index + 1])) {
+				return style.contentActive
+			}
+		} else if (between(yaxisAmount, heddingOffsetTop[index], height + 200)) {
+			return style.contentActive
+		}
+	}
+	const between = (x: number, min: number, max: number) => {
+		return x >= min && x <= max;
 	}
 	const testRef = useCallback((node: HTMLElement | null) => {
 		if (node) {
@@ -131,15 +145,28 @@ const Post = ({
 					align="top"
 					gutter={[8, 8]}
 				>
-					<Col span={getSpanValue(width) === 24 ? 24 : 2}>
+					<Col span={getSpanValue(width) === 24 ? 24 : 5}>
 						<div className={style.startButtonContainer}>
 							<div onClick={changeButtonStatus}>
 								{getStarIcon()}
 							</div>
 						</div>
+
+						<div className={style.tagContentArea}>
+							<p className={style.title}>
+								Tag
+							</p>
+							<div className={style.content}>
+								{
+									tag.map((val: string, index: string | number) => {
+										return <Tag key={index}>{val}</Tag>
+									})
+								}
+							</div>
+						</div>
 					</Col>
 
-					<Col span={getSpanValue(width) === 24 ? 24 : 15}>
+					<Col span={getSpanValue(width) === 24 ? 24 : 13}>
 						<div className={style.contentArea}>
 							<p className={style.title}>
 								{title}
@@ -168,29 +195,24 @@ const Post = ({
 						</div>
 					</Col>
 
-					<Col span={getSpanValue(width) === 24 ? 24 : 6}>
-						<div className={style.tagContentArea}>
-							<p className={style.title}>
-								Tag
-							</p>
-							<div className={style.content}>
-								{
-									tag.map((val: string, index: string | number) => {
-										return <Tag key={index}>{val}</Tag>
-									})
-								}
-							</div>
-						</div>
-
+					<Col span={getSpanValue(width) === 24 ? 24 : 5} className={style.sticky}>
 						<div className={style.tagContentArea}>
 							<p className={style.title}>
 								目次
 							</p>
 							<ul>
-								{getActiveHeading()}
-								{getOneHeadingTexts().map((text: string, index) => {
-									return <li key={index}>{text}</li>
-								})}
+								{
+									getOneHeadingTexts().map((text, index) => {
+										return (
+												<li
+													className={getActiveHeading(index)}
+													key={index}
+												>
+													{text}
+												</li>
+										)
+									})
+								}
 							</ul>
 						</div>
 
@@ -210,20 +232,15 @@ const Post = ({
 								</p>
 
 								<p className={style.profileText}>
-									初めまして！冨田 優斗と申します。<br />
+									受託とSESをやっている会社でフロントエンドエンジニアとして働いています。<br />
 									<br />
-									現在、受託とSESをやっている会社でフロントエンドエンジニアとして働いています。<br />
-									20歳の頃に新卒でIT業界に入り、現在業界3年目になります。<br />
+									20歳の頃に新卒でIT業界に入り、業界3年目になります。<br />
 									<br />
-									仕事では主にVue.jsを使ってtoC向けのwebアプリを開発しています。<br />
-									過去にはLaravelを使用してAPI開発と認証認可システムを作成しました。<br />
+									普段の仕事ではVue.jsやLaravelを用いてtoB向けのソフトウェア開発を行なっております。
 									<br />
-									Node.jsを使用したバックエンド開発とReactを用いたフロントエンドの開発に興味があります。<br />
 									<br />
-									趣味でGithubでフロント周りの便利なライブラリを調べたり、
-									個人開発で気になっているライブラリやフレームワークを余暇で触っています。<br />
-									<br />
-									私の詳しい経歴が気になっていただけた方は本ページの「Home」をクリックしていただき、resumeの方をご覧いただければと思います！
+									Node.jsやReactを用いた開発に興味があります！<br />
+									もし興味がございましたら、Contactページからメールいただけると幸いです。
 								</p>
 							</div>
 						</div>
