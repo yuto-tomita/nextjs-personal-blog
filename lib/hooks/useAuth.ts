@@ -7,14 +7,16 @@ const supabaseAnonKey = () => process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
 const supabase = createClient(supabaseUrl(), supabaseAnonKey())
 
 export const useAuth = () => {
-	const [accessToken, setAccessToken] = useState('')
 	const signInGithub = async () => {
 		await supabase.auth.signIn({ provider: 'github'})
 	}
 
+	const guard = () => {
+		return !!localStorage.getItem('accessToken')
+	}
+
 	return {
 		signInGithub,
-		setAccessToken,
-		accessToken
+		guard
 	}
 }

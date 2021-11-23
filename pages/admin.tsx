@@ -2,12 +2,17 @@ import Container from '@components/ui/Container'
 import { useAuth } from '@lib/hooks/useAuth'
 
 const Admin = () => {
-	const { signInGithub } = useAuth()
-	signInGithub()
+	const { signInGithub, guard } = useAuth()
+	
+	if (!guard()) {
+		signInGithub()
+	}
 
 	return (
 		<Container>
-			hoge
+			<div>
+				hoge
+			</div>
 		</Container>
 	)
 }

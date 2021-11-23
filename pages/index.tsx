@@ -42,18 +42,15 @@ const Home = ({
   const { width } = useWindowDimensions()
   const articleTitle = mdFileNames.map(val => val.replace(/.md/g, ''))
   const { Title } = Typography
-  const { setAccessToken } = useAuth()
 
-  useEffect(() => {
-    const accessToken = new URL(window.location.href).hash
+  const getAccessToken = new URL(window.location.href).hash
+  if (getAccessToken.length) {
+    const startIndex = getAccessToken.indexOf('=')
+    const endIndex = getAccessToken.indexOf('&')
+    const token = getAccessToken.slice(startIndex + 1, endIndex)
 
-    if (accessToken.length) {
-      const startIndex = accessToken.indexOf('=')
-      const endIndex = accessToken.indexOf('&')
-
-      setAccessToken(accessToken.slice(startIndex + 1, endIndex))
-    }
-  }, [setAccessToken])
+    localStorage.setItem('accessToken', token)
+  }
 
   const description = `
     初めまして！冨田 優斗と申します。
