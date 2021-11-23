@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import type { InferGetStaticPropsType } from 'next'
 import { getMdFileFromDir, readFileFromFileName, parseMdFile } from '@lib/MdFileOperation'
 import Link from 'next/link'
@@ -9,6 +9,7 @@ import { useWindowDimensions } from '@lib/hooks/useDetectScreenSize'
 import style from '../styles/Home.module.css'
 import { getSpanValue } from '@lib/GetArticleSpan'
 import { NextSeo } from 'next-seo'
+import { useAuth } from '@lib/hooks/useAuth'
 
 export async function getStaticProps () {
   const mdFileNames = getMdFileFromDir('resume')
@@ -39,9 +40,20 @@ const Home = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { Meta } = Card
   const { width } = useWindowDimensions()
-
   const articleTitle = mdFileNames.map(val => val.replace(/.md/g, ''))
   const { Title } = Typography
+  const { setAccessToken } = useAuth()
+
+  useEffect(() => {
+    const accessToken = new URL(window.location.href).hash
+
+    if (accessToken.length) {
+      const startIndex = accessToken.indexOf('=')
+      const endIndex = accessToken.indexOf('&')
+
+      setAccessToken(accessToken.slice(startIndex + 1, endIndex))
+    }
+  }, [setAccessToken])
 
   const description = `
     初めまして！冨田 優斗と申します。
