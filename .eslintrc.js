@@ -24,7 +24,13 @@ module.exports = {
   },
   plugins: ["@typescript-eslint", "react"],
   rules: {
-    //　ここに個別対応したいものを書く
+    quotes: ["error", "single"],
+    "arrow-parens": ["error", "always"],
+    "no-empty-function": "error",
+    "no-console": "error",
+    "valid-typeof": "error",
+    "keyword-spacing": ["error", { "before": true }],
+    "arrow-spacing": "error"
   },
   settings: { react: { version: "detect" } },
 };

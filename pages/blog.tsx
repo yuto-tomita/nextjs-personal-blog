@@ -10,8 +10,8 @@ import dayjs from 'dayjs'
 
 export async function getStaticProps () {
 	const mdFileNames = getMdFileFromDir('teck-blog')
-	const mdFile = mdFileNames.map(fileName => readFileFromFileName(fileName, 'teck-blog'))
-	const parseMarkdownContent = mdFile.map(markdown => {
+	const mdFile = mdFileNames.map((fileName) => readFileFromFileName(fileName, 'teck-blog'))
+	const parseMarkdownContent = mdFile.map((markdown) => {
 		const parseMdContent = parseMdFile(markdown)
 
 		return {
