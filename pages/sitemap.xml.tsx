@@ -15,13 +15,13 @@ export const getServerSideProps = async ({ res }: GetServerSidePropsContext) => 
 };
 
 async function generateSitemapXml ():Promise<string> {
-  let xml = `<?xml version="1.0" encoding="UTF-8"?>`;
-  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+  let xml = '<?xml version="1.0" encoding="UTF-8"?>';
+  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
   
   // ここでurlを足していく
   const { posts } = getAllPostsPath();
 	console.log(posts)
-  posts.forEach((post) =>{
+  posts.forEach((post) => {
     xml += `
       <url>
         <loc>${post.path}</loc>
@@ -31,7 +31,7 @@ async function generateSitemapXml ():Promise<string> {
     `
   })
   
-  xml += `</urlset>`;
+  xml += '</urlset>';
   return xml;
 }
 

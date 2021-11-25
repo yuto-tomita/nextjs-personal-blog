@@ -11,9 +11,12 @@ const Container: FC<ContainerProps> = ({
 	style
 }) => {
 	return (
-		<div className={styles.container} style={style}>
-			{children}
-		</div>
+  <div
+    className={styles.container}
+    style={style}
+  >
+    {children}
+  </div>
 	)
 }
 

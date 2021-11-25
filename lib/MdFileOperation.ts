@@ -22,7 +22,7 @@ export function parseMdFile (mdFile: string) {
 }
 
 function getPathAndCreateDate (dirName: DirName) {
-	return getMdFileFromDir(dirName).map(val => {
+	return getMdFileFromDir(dirName).map((val) => {
 		const mdFile = readFileFromFileName(val, dirName)
 		const getParseMdFile = parseMdFile(mdFile)
 

@@ -39,22 +39,37 @@ const Blog = ({
 	const { width } = useWindowDimensions()
 
 	return (
-		<Container>
-			<Row gutter={[48, 48]}>
-				{parseMarkdownContent.map((mdContents, index) => (
-					<Col key={index} span={getSpanValue(width)}>
-						<Card hoverable>
-							<Link href={`/blog/${mdContents.slug}`} key={index} passHref>
-								<div>
-									<Image src={`/${mdContents.image}`} alt="blog rogo" width={500} height={300} />
-									<Meta title={mdContents.title} description={mdContents.description} />
-								</div>
-							</Link>
-						</Card>
-					</Col>
+  <Container>
+    <Row gutter={[48, 48]}>
+      {parseMarkdownContent.map((mdContents, index) => (
+        <Col
+          key={index}
+          span={getSpanValue(width)}
+        >
+          <Card hoverable>
+            <Link
+              href={`/blog/${mdContents.slug}`}
+              key={index}
+              passHref
+            >
+              <div>
+                <Image
+                  src={`/${mdContents.image}`}
+                  alt="blog rogo"
+                  width={500}
+                  height={300}
+                />
+                <Meta
+                  title={mdContents.title}
+                  description={mdContents.description}
+                />
+              </div>
+            </Link>
+          </Card>
+        </Col>
 				))}
-			</Row>
-		</Container>
+    </Row>
+  </Container>
 	)
 }
 

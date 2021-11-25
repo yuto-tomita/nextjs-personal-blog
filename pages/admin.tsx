@@ -9,11 +9,11 @@ const Admin = () => {
 	}
 
 	return (
-		<Container>
-			<div>
-				hoge
-			</div>
-		</Container>
+  <Container>
+    <div>
+      hoge
+    </div>
+  </Container>
 	)
 }
 

@@ -13,8 +13,8 @@ import { useAuth } from '@lib/hooks/useAuth'
 
 export async function getStaticProps () {
   const mdFileNames = getMdFileFromDir('resume')
-	const mdFile = mdFileNames.map(fileName => readFileFromFileName(fileName, 'resume'))
-	const parseMarkdownContent = mdFile.map(markdown => {
+	const mdFile = mdFileNames.map((fileName) => readFileFromFileName(fileName, 'resume'))
+	const parseMarkdownContent = mdFile.map((markdown) => {
 		const parseMdContent = parseMdFile(markdown)
 
 		return {
@@ -40,8 +40,9 @@ const Home = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { Meta } = Card
   const { width } = useWindowDimensions()
-  const articleTitle = mdFileNames.map(val => val.replace(/.md/g, ''))
+  const articleTitle = mdFileNames.map((val) => val.replace(/.md/g, ''))
   const { Title } = Typography
+
 
   const getAccessToken = new URL(window.location.href).hash
   if (getAccessToken.length) {
@@ -106,7 +107,10 @@ const Home = ({
         {/* カードタイトルの文字の大きさをもう少し大きくする */}
         <Row gutter={[48, 48]}>
           {parseMarkdownContent.map((mdContents, index) => (
-            <Col key={index} span={getSpanValue(width)}>
+            <Col
+              key={index}
+              span={getSpanValue(width)}
+            >
               <Card
                 hoverable
                 title={articleTitle[index]}
@@ -125,11 +129,15 @@ const Home = ({
                       height={300}
                     />
                     <Meta
-                      title={
-                        <Title level={5} ellipsis={false} className={style.titleWrap} >
+                      title={(
+                        <Title
+                          level={5}
+                          ellipsis={false}
+                          className={style.titleWrap}
+                        >
                           {mdContents.title}
                         </Title>
-                      }
+                      )}
                       className={style.cardStyle}
                       description={mdContents.description}
                     />

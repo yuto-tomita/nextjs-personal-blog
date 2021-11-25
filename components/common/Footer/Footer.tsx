@@ -13,31 +13,31 @@ const Footer: FC = () => {
 	}
 
 	return (
-		<>
-			<div className={style.footerContainer}>
-				<div className={style.icons}>
-					<div onClick={transitionToGithub}>
-						<GithubOutlined className={style.githubIcon} />
-					</div>
-					<div onClick={transitionToTwitter}>
-						<TwitterOutlined className={style.twitterIcon} />
-					</div>
-				</div>
-				<p className={style.creator}>
-					created_by: yuto-tomita
-				</p>
-			</div>
+  <>
+    <div className={style.footerContainer}>
+      <div className={style.icons}>
+        <div onClick={transitionToGithub}>
+          <GithubOutlined className={style.githubIcon} />
+        </div>
+        <div onClick={transitionToTwitter}>
+          <TwitterOutlined className={style.twitterIcon} />
+        </div>
+      </div>
+      <p className={style.creator}>
+        created_by: yuto-tomita
+      </p>
+    </div>
 
-			<SocialProfileJsonLd
-				type="Person"
-				name="冨田 優斗"
-				url="https://nextjs-personal-blog-elqgxu4dl-tommy-personal-blog.vercel.app/"
-				sameAs={[
+    <SocialProfileJsonLd
+      type="Person"
+      name="冨田 優斗"
+      url="https://nextjs-personal-blog-elqgxu4dl-tommy-personal-blog.vercel.app/"
+      sameAs={[
 					'https://twitter.com/qualidea04',
 					'https://github.com/yuto-tomita'
 				]}
-			/>
-		</>
+    />
+  </>
 	)
 }
 

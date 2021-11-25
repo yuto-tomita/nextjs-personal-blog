@@ -21,7 +21,7 @@ const Header: FC = () => {
 
 	/** 現在表示されているパスから選択されているmenu名を返す */
 	const findCurrentPathFromMenu = (path: string) => {
-		return ['home', 'blog', 'contact'].find(val => path.includes(val))
+		return ['home', 'blog', 'contact'].find((val) => path.includes(val))
 	}
 
 	/** 選択されているMenuを小文字に変換して、選択されているMenuを更新する */
@@ -41,9 +41,9 @@ const Header: FC = () => {
 	}
 
 	return (
-		<>
-			<ProfilePageJsonLd
-        breadcrumb={[
+  <>
+    <ProfilePageJsonLd
+      breadcrumb={[
           {
             position: 1,
             name: 'Home',
@@ -60,15 +60,19 @@ const Header: FC = () => {
             item: 'https://nextjs-personal-blog-elqgxu4dl-tommy-personal-blog.vercel.app/contact'
           }
         ]}
-      />
-			<header>
-				<Menu mode="horizontal" selectedKeys={[menuState]} onClick={handleClick}>
-					{['Home', 'Blog', 'Contact'].map((menuName, index) => (
-						<Menu.Item key={menuName.toLowerCase()}>{menuName}</Menu.Item>
+    />
+    <header>
+      <Menu
+        mode="horizontal"
+        selectedKeys={[menuState]}
+        onClick={handleClick}
+      >
+        {['Home', 'Blog', 'Contact'].map((menuName, index) => (
+          <Menu.Item key={menuName.toLowerCase()}>{menuName}</Menu.Item>
 						))}
-				</Menu>
-			</header>
-		</>
+      </Menu>
+    </header>
+  </>
 	)
 }
 

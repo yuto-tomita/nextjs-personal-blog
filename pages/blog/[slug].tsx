@@ -18,8 +18,8 @@ import { useScrollAmount } from '@lib/hooks/useScrollAmount'
 
 export async function getStaticPaths () {
 	const mdFileNames = getMdFileFromDir('teck-blog')
-	const mdFile = mdFileNames.map(fileName => readFileFromFileName(fileName, 'teck-blog'))
-	const paths = mdFile.map(markdown => {
+	const mdFile = mdFileNames.map((fileName) => readFileFromFileName(fileName, 'teck-blog'))
+	const paths = mdFile.map((markdown) => {
 		const parseMdContent = parseMdFile(markdown)
 
 		return `/blog/${parseMdContent.data.slug}`
@@ -78,10 +78,10 @@ const Post = ({
 	}
 
 	const getOneHeadingTexts = () => {
-		return onlyHeadings.map(val => val.innerText)
+		return onlyHeadings.map((val) => val.innerText)
 	}
 	const getActiveHeading = (index: number) => {
-		const heddingOffsetTop = onlyHeadings.map(val => val.offsetTop)
+		const heddingOffsetTop = onlyHeadings.map((val) => val.offsetTop)
 		if (heddingOffsetTop[index + 1]) {
 			if (between(yaxisAmount, heddingOffsetTop[index], heddingOffsetTop[index + 1])) {
 				return style.contentActive
@@ -101,22 +101,22 @@ const Post = ({
 	}, [])
 
   return (
-		<>
-			<BlogJsonLd
-				images={[
+    <>
+      <BlogJsonLd
+        images={[
 					'./public/next.jpeg'
 				]}
-				url={`https://nextjs-personal-blog-five.vercel.app/blog/${slug}`}
-				title={title}
-				datePublished={formatDate}
-				dateModified="2015-02-05T09:00:00+08:00"
-				authorName="冨田 優斗"
-				description={description}
-			/>
-			<NextSeo
-				title={title}
-				description={description}
-				openGraph={{
+        url={`https://nextjs-personal-blog-five.vercel.app/blog/${slug}`}
+        title={title}
+        datePublished={formatDate}
+        dateModified="2015-02-05T09:00:00+08:00"
+        authorName="冨田 優斗"
+        description={description}
+      />
+      <NextSeo
+        title={title}
+        description={description}
+        openGraph={{
 					type: 'article',
 					title: title,
 					description: `${content}`,
@@ -133,117 +133,126 @@ const Post = ({
 						tags: tag
 					}
 				}}
-			/>
-			<Container
-			  style={{background: 'rgb(248, 246, 246)', height: '100%'}}
-			>
-				<Row
-					align="top"
-					gutter={[8, 8]}
-				>
-					<Col span={getSpanValue(width) === 24 ? 24 : 5}>
-						<div className={style.startButtonContainer}>
-							<div onClick={changeButtonStatus}>
-								{getStarIcon()}
-							</div>
-						</div>
+      />
+      <Container
+        style={{background: 'rgb(248, 246, 246)', height: '100%'}}
+      >
+        <Row
+          align="top"
+          gutter={[8, 8]}
+        >
+          <Col span={getSpanValue(width) === 24 ? 24 : 5}>
+            <div className={style.startButtonContainer}>
+              <div onClick={changeButtonStatus}>
+                {getStarIcon()}
+              </div>
+            </div>
 
-						<div className={style.tagContentArea}>
-							<p className={style.title}>
-								Tag
-							</p>
-							<div className={style.content}>
-								{
+            <div className={style.tagContentArea}>
+              <p className={style.title}>
+                Tag
+              </p>
+              <div className={style.content}>
+                {
 									tag.map((val: string, index: string | number) => {
 										return <Tag key={index}>{val}</Tag>
 									})
 								}
-							</div>
-						</div>
-					</Col>
+              </div>
+            </div>
+          </Col>
 
-					<Col span={getSpanValue(width) === 24 ? 24 : 13}>
-						<div className={style.contentArea}>
-							<p className={style.title}>
-								{title}
-							</p>
-							<div className={style.content} ref={testRef}>
-								<ReactMarkdown 
-									children={content}
-									components={{
+          <Col span={getSpanValue(width) === 24 ? 24 : 13}>
+            <div className={style.contentArea}>
+              <p className={style.title}>
+                {title}
+              </p>
+              <div
+                className={style.content}
+                ref={testRef}
+              >
+                <ReactMarkdown 
+                  children={content}
+                  components={{
 										code ({node, inline, className, children, ...props}) {
 											const match = /language-(\w+)/.exec(className || '')
 											return !inline && match ? (
-												<SyntaxHighlighter
-													children={String(children).replace(/\n$/, '')}
-													style={base16AteliersulphurpoolLight}
-													language={match[1]}
-												/>
+  <SyntaxHighlighter
+    children={String(children).replace(/\n$/, '')}
+    style={base16AteliersulphurpoolLight}
+    language={match[1]}
+  />
 											) : (
-												<code className={className} {...props}>
-													{children}
-												</code>
+  <code
+    className={className}
+    {...props}
+  >
+    {children}
+  </code>
 											)
 										}
 									}}
-								/>
-							</div>
-						</div>
-					</Col>
+                />
+              </div>
+            </div>
+          </Col>
 
-					<Col span={getSpanValue(width) === 24 ? 24 : 5} className={style.sticky}>
-						<div className={style.tagContentArea}>
-							<p className={style.title}>
-								目次
-							</p>
-							<ul>
-								{
+          <Col
+            span={getSpanValue(width) === 24 ? 24 : 5}
+            className={style.sticky}
+          >
+            <div className={style.tagContentArea}>
+              <p className={style.title}>
+                目次
+              </p>
+              <ul>
+                {
 									getOneHeadingTexts().map((text, index) => {
 										return (
-												<li
-													className={getActiveHeading(index)}
-													key={index}
-												>
-													{text}
-												</li>
+  <li
+    className={getActiveHeading(index)}
+    key={index}
+  >
+    {text}
+  </li>
 										)
 									})
 								}
-							</ul>
-						</div>
+              </ul>
+            </div>
 
-						<div className={style.profileContentArea}>
-							<div className={style.profileContainer}>
-								<div className={style.profileImage}>
-									<Image
-										src="/MyProfileImage.jpeg"
-										alt="my profile image"
-										layout="fill"
-										objectFit="cover"
-									/>
-								</div>
+            <div className={style.profileContentArea}>
+              <div className={style.profileContainer}>
+                <div className={style.profileImage}>
+                  <Image
+                    src="/MyProfileImage.jpeg"
+                    alt="my profile image"
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </div>
 
-								<p className={style.profileName}>
-									冨田優斗
-								</p>
+                <p className={style.profileName}>
+                  冨田優斗
+                </p>
 
-								<p className={style.profileText}>
-									受託とSESをやっている会社でフロントエンドエンジニアとして働いています。<br />
-									<br />
-									20歳の頃に新卒でIT業界に入り、業界3年目になります。<br />
-									<br />
-									普段の仕事ではVue.jsやLaravelを用いてtoB向けのソフトウェア開発を行なっております。
-									<br />
-									<br />
-									Node.jsやReactを用いた開発に興味があります！<br />
-									もし興味がございましたら、Contactページからメールいただけると幸いです。
-								</p>
-							</div>
-						</div>
-					</Col>
-				</Row>
-			</Container>
-		</>
+                <p className={style.profileText}>
+                  受託とSESをやっている会社でフロントエンドエンジニアとして働いています。<br />
+                  <br />
+                  20歳の頃に新卒でIT業界に入り、業界3年目になります。<br />
+                  <br />
+                  普段の仕事ではVue.jsやLaravelを用いてtoB向けのソフトウェア開発を行なっております。
+                  <br />
+                  <br />
+                  Node.jsやReactを用いた開発に興味があります！<br />
+                  もし興味がございましたら、Contactページからメールいただけると幸いです。
+                </p>
+              </div>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </>
 	)
 };
 
