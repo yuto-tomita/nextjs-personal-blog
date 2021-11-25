@@ -30,7 +30,29 @@ module.exports = {
     "no-console": "error",
     "valid-typeof": "error",
     "keyword-spacing": ["error", { "before": true }],
-    "arrow-spacing": "error"
+    "arrow-spacing": "error",
+    "no-multi-spaces": "error",
+    "react/self-closing-comp": ["error", {
+      "component": true,
+      "html": true
+    }],
+    "react/jsx-wrap-multilines": ["error", {
+      "declaration": "parens-new-line",
+      "assignment": "parens-new-line",
+      "return": "parens-new-line",
+      "arrow": "parens-new-line",
+      "condition": "parens-new-line",
+      "logical": "parens-new-line",
+      "prop": "parens-new-line"
+    }],
+    "react/jsx-closing-bracket-location": 1,
+    "react/jsx-closing-bracket-location": [1, 'tag-aligned'],
+    "react/jsx-closing-bracket-location": [1, 'line-aligned'],
+    "react/jsx-curly-newline": ["error", { multiline: "consistent", singleline: "consistent" }],
+    "react/jsx-first-prop-new-line": ["error", "multiline"],
+    "react/jsx-indent": [2, 2],
+    "react/jsx-indent-props": [2, 2],
+    "react/jsx-max-props-per-line": ["error"]
   },
   settings: { react: { version: "detect" } },
 };
