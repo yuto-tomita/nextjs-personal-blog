@@ -9,7 +9,6 @@ import { useWindowDimensions } from '@lib/hooks/useDetectScreenSize'
 import style from '../styles/Home.module.css'
 import { getSpanValue } from '@lib/GetArticleSpan'
 import { NextSeo } from 'next-seo'
-import { useAuth } from '@lib/hooks/useAuth'
 
 export async function getStaticProps () {
   const mdFileNames = getMdFileFromDir('resume')

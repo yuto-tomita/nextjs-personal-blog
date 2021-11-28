@@ -1,12 +1,13 @@
 import type { InferGetStaticPropsType } from 'next'
 import { getMdFileFromDir, readFileFromFileName, parseMdFile } from '@lib/MdFileOperation'
 import Link from 'next/link'
-import { Row, Col, Card } from 'antd'
+import { Row, Col, Card, Typography } from 'antd'
 import Image from 'next/image'
 import { Container } from '@components/ui'
 import { getSpanValue } from '@lib/GetArticleSpan'
 import { useWindowDimensions } from '@lib/hooks/useDetectScreenSize'
 import dayjs from 'dayjs'
+import style from '../styles/Home.module.css'
 
 export async function getStaticProps () {
 	const mdFileNames = getMdFileFromDir('teck-blog')
@@ -38,6 +39,8 @@ const Blog = ({
 	const { Meta } = Card
 	const { width } = useWindowDimensions()
 
+	const { Title } = Typography
+
 	return (
   <Container>
     <Row gutter={[48, 48]}>
@@ -60,7 +63,15 @@ const Blog = ({
                   height={300}
                 />
                 <Meta
-                  title={mdContents.title}
+                  title={(
+                    <Title
+                      level={5}
+                      ellipsis={false}
+                      className={style.titleWrap}
+                    >
+                      {mdContents.title}
+                    </Title>
+									)}
                   description={mdContents.description}
                 />
               </div>
