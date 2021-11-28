@@ -1,6 +1,6 @@
-import { Button } from 'antd';
+// import { Button } from 'antd';
 
-const ADMIN_TABLE_CONSTANT = [
+export const ADMIN_TABLE_CONSTANT = [
   {
     title: 'Title',
     dataIndex: 'title',
@@ -18,19 +18,18 @@ const ADMIN_TABLE_CONSTANT = [
   },
   {
     title: 'ViewCount',
-    dataIndex: 'view_count',
-    key: 'view_count',
+    dataIndex: 'viewCount',
+    key: 'viewCount',
   },
   {
-    title: 'Update',
+    title: 'Operation',
     dataIndex: '',
     key: 'x',
     render: () => (
-      <Button
-        value=""
-        type="primary"
-        shape="round"
-      />
-),
+      <div>
+        <a>編集</a>
+        <a>削除</a>
+      </div>
+		),
   },
 ];
