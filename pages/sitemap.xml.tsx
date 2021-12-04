@@ -20,7 +20,7 @@ async function generateSitemapXml ():Promise<string> {
   
   // ここでurlを足していく
   const { posts } = getAllPostsPath();
-	console.log(posts)
+
   posts.forEach((post) => {
     xml += `
       <url>

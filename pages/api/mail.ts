@@ -15,10 +15,10 @@ export default async function handler (
 		},
 	});
 	await transporter.sendMail({
-	  from: process.env.MAIL_FROM,
-	  to: process.env.MAIL_FROM,
-	  subject: 'お問い合わせ',
-	  text: req.body,
+		from: process.env.MAIL_FROM,
+		to: process.env.MAIL_FROM,
+		subject: 'お問い合わせ',
+		text: req.body,
 	});
 	res.status(200).json({
 		success: true,
