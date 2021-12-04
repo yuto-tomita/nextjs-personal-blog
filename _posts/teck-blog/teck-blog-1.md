@@ -2,7 +2,7 @@
 title: 【Vue2】computedプロパティで引数を受け取る方法
 slug: teck-blog-1
 tag: ['vue2', '初心者']
-image: next.jpeg
+image: vue.jpeg
 created_at: 2021-11-29T08:01:01
 description: vue2のcomputedプロパティで引数を受け取る方法
 ---
