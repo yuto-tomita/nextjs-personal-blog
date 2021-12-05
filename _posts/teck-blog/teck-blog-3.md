@@ -1,5 +1,5 @@
 ---
-title: どのようにしてインターネットは働いているのか
+title: どのようにしてインターネットは働いているのかメモ
 slug: teck-blog-3
 tag: ['TCP/IP', 'Internet', 'frontend loadmap']
 image: study.png
