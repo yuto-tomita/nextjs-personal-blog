@@ -1,7 +1,7 @@
 ---
 title: どのようにしてインターネットは働いているのか
 slug: teck-blog-3
-tag: ['TCP/IP', 'Internet']
+tag: ['TCP/IP', 'Internet', 'frontend loadmap']
 image: study.png
 created_at: 2021-12-02T23:11:36
 description: Frontend loadmapをみて推奨されているものについての勉強
@@ -27,4 +27,8 @@ TCPはIPと連携して、データの転送を信頼性を確保する。
 
 TCP/IPネットワークで通信を行う際、データはIPによって分割される。
 この分割されたデータのことをパケットと呼ぶ
+
+# 参考
+
+https://www.hp.com/us-en/shop/tech-takes/how-does-the-internet-work#:~:text=It%20works%20by%20using%20a,where%20you're%20using%20it.
 
