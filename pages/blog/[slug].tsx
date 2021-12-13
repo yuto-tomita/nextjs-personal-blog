@@ -9,7 +9,6 @@ import dayjs from 'dayjs'
 import style from '../../styles/Article.module.css'
 import { getSpanValue } from '@lib/GetArticleSpan'
 import { useWindowDimensions } from '@lib/hooks/useDetectScreenSize'
-import { StarOutlined, StarFilled } from '@ant-design/icons'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { base16AteliersulphurpoolLight } from 'react-syntax-highlighter/dist/cjs/styles/prism'
@@ -57,25 +56,9 @@ const Post = ({
 	slug
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
 	const formatDate = dayjs(created_at).format('YYYY-MM-DD HH:mm:ss')
-	const [isButtonActive, setIsButtonActive] = useState(false)
 	const [onlyHeadings, setOnlyHeadings] = useState<HTMLHeadingElement[]>([])
 	const { width, height } = useWindowDimensions()
 	const { yaxisAmount } = useScrollAmount()
-	
-	const changeButtonStatus = () => {
-		if (isButtonActive) {
-			setIsButtonActive(false)
-		} else {
-			setIsButtonActive(true)
-		}
-	}
-	const getStarIcon = () => {
-		if (isButtonActive) {
-			return <StarFilled className={style.starButtonActive} />
-		} else {
-			return <StarOutlined className={style.starButton} />
-		}
-	}
 
 	const getOneHeadingTexts = () => {
 		return onlyHeadings.map((val) => val.innerText)
@@ -142,12 +125,6 @@ const Post = ({
           gutter={[8, 8]}
         >
           <Col span={getSpanValue(width) === 24 ? 24 : 5}>
-            <div className={style.startButtonContainer}>
-              <div onClick={changeButtonStatus}>
-                {getStarIcon()}
-              </div>
-            </div>
-
             <div className={style.tagContentArea}>
               <p className={style.title}>
                 Tag
@@ -177,18 +154,18 @@ const Post = ({
 										code ({node, inline, className, children, ...props}) {
 											const match = /language-(\w+)/.exec(className || '')
 											return !inline && match ? (
-  <SyntaxHighlighter
-    children={String(children).replace(/\n$/, '')}
-    style={base16AteliersulphurpoolLight}
-    language={match[1]}
-  />
-											) : (
-  <code
-    className={className}
-    {...props}
-  >
-    {children}
-  </code>
+                        <SyntaxHighlighter
+                          children={String(children).replace(/\n$/, '')}
+                          style={base16AteliersulphurpoolLight}
+                          language={match[1]}
+                        />
+                      ) : (
+                        <code
+                          className={className}
+                          {...props}
+                        >
+                          {children}
+                        </code>
 											)
 										}
 									}}
@@ -209,12 +186,12 @@ const Post = ({
                 {
 									getOneHeadingTexts().map((text, index) => {
 										return (
-  <li
-    className={getActiveHeading(index)}
-    key={index}
-  >
-    {text}
-  </li>
+                      <li
+                        className={getActiveHeading(index)}
+                        key={index}
+                      >
+                        {text}
+                      </li>
 										)
 									})
 								}
