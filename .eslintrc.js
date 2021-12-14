@@ -53,8 +53,8 @@ module.exports = {
     "react/jsx-indent": [2, 2, {indentLogicalExpressions: true}],
     "react/jsx-indent-props": [2, 2],
     "react/jsx-max-props-per-line": ["error"],
-    "react/jsx-tag-spacing": {"beforeSelfClosing": "always"},
-    "react/jsx-newline": {"prevent": true}
+    "react/jsx-tag-spacing": ["error"],
+    "react/jsx-newline": [2, {"prevent": true}]
   },
   settings: { react: { version: "detect" } },
 };
