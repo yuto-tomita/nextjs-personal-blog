@@ -81,7 +81,6 @@ const Home = ({
       <NextSeo
         description={description}     
       />
-
       <Container>
         <div className={style.selfIntroduction}>
           <div>
@@ -90,7 +89,6 @@ const Home = ({
               { texts }
             </p>
           </div>
-
           <div className={style.image}>
             <Image
               src="/MyProfileImage.jpeg"
@@ -100,7 +98,6 @@ const Home = ({
             />
           </div>
         </div>
-
         <h1>resume</h1>
         {/* カードタイトルが長文の場合もすべて表示するようにする */}
         {/* カードタイトルの文字の大きさをもう少し大きくする */}
@@ -146,10 +143,8 @@ const Home = ({
             </Col>
           ))}
         </Row>
-
         <div>
           <h1>個人開発物</h1>
-
           <p>coming soon...</p>
         </div>
       </Container>

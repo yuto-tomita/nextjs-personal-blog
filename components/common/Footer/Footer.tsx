@@ -27,7 +27,6 @@ const Footer: FC = () => {
         created_by: yuto-tomita
       </p>
     </div>
-
     <SocialProfileJsonLd
       type="Person"
       name="冨田 優斗"

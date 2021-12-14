@@ -69,7 +69,6 @@ const Contact: NextPage = () => {
       />
       {getErrorMessage('body')}
     </div>
-
     <div className={style.buttonPosition}>
       <Button
         type="primary"
