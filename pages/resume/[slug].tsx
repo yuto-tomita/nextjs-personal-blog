@@ -9,6 +9,7 @@ import dayjs from 'dayjs'
 import style from '../../styles/Article.module.css'
 import { getSpanValue } from '@lib/GetArticleSpan'
 import { useWindowDimensions } from '@lib/hooks/useDetectScreenSize'
+import { MarkdownPreview } from '@components/ui'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { base16AteliersulphurpoolLight } from 'react-syntax-highlighter/dist/cjs/styles/prism'
@@ -62,6 +63,7 @@ const PostResume = ({
 	const getOneHeadingTexts = () => {
 		return onlyHeadings.map((val) => val.innerText)
 	}
+
 	const getActiveHeading = (index: number) => {
 		const heddingOffsetTop = onlyHeadings.map((val) => val.offsetTop)
 		if (heddingOffsetTop[index + 1]) {
@@ -72,10 +74,12 @@ const PostResume = ({
 			return style.contentActive
 		}
 	}
+
 	const between = (x: number, min: number, max: number) => {
 		return x >= min && x <= max;
 	}
-	const testRef = useCallback((node: HTMLElement | null) => {
+
+	const markdownRef = useCallback((node: HTMLElement | null) => {
 		if (node) {
 			const onlyHeadings = Array.from(node.querySelectorAll('h1'))
 			setOnlyHeadings(onlyHeadings)
@@ -87,7 +91,7 @@ const PostResume = ({
       <BlogJsonLd
         images={[
 					'./public/next.jpeg'
-				]}
+        ]}
         url={`https://nextjs-personal-blog-five.vercel.app/blog/${slug}`}
         title={title}
         datePublished={formatDate}
@@ -114,7 +118,7 @@ const PostResume = ({
 						publishedTime: formatDate,
 						tags: tag
 					}
-				}}
+        }}
       />
       <Container
         style={{background: 'rgb(248, 246, 246)', height: '100%'}}
@@ -137,7 +141,6 @@ const PostResume = ({
               </div>
             </div>
           </Col>
-
           <Col span={getSpanValue(width) === 24 ? 24 : 13}>
             <div className={style.contentArea}>
               <p className={style.title}>
@@ -145,34 +148,12 @@ const PostResume = ({
               </p>
               <div
                 className={style.content}
-                ref={testRef}
+                ref={markdownRef}
               >
-                <ReactMarkdown 
-                  children={content}
-                  components={{
-										code ({node, inline, className, children, ...props}) {
-											const match = /language-(\w+)/.exec(className || '')
-											return !inline && match ? (
-                        <SyntaxHighlighter
-                          children={String(children).replace(/\n$/, '')}
-                          style={base16AteliersulphurpoolLight}
-                          language={match[1]}
-                        />
-                      ) : (
-                        <code
-                          className={className}
-                          {...props}
-                        >
-                          {children}
-                        </code>
-											)
-										}
-									}}
-                />
+                <MarkdownPreview markdownContent={content} />
               </div>
             </div>
           </Col>
-
           <Col
             span={getSpanValue(width) === 24 ? 24 : 5}
             className={style.sticky}
@@ -183,8 +164,8 @@ const PostResume = ({
               </p>
               <ul>
                 {
-									getOneHeadingTexts().map((text, index) => {
-										return (
+									getOneHeadingTexts().map((text, index) =>
+                    (
                       <li
                         className={getActiveHeading(index)}
                         key={index}
@@ -192,11 +173,10 @@ const PostResume = ({
                         {text}
                       </li>
 										)
-									})
+									)
 								}
               </ul>
             </div>
-
             <div className={style.profileContentArea}>
               <div className={style.profileContainer}>
                 <div className={style.profileImage}>
@@ -207,11 +187,9 @@ const PostResume = ({
                     objectFit="cover"
                   />
                 </div>
-
                 <p className={style.profileName}>
                   冨田優斗
                 </p>
-
                 <p className={style.profileText}>
                   受託とSESをやっている会社でフロントエンドエンジニアとして働いています。<br />
                   <br />
