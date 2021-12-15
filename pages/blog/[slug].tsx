@@ -9,9 +9,7 @@ import dayjs from 'dayjs'
 import style from '../../styles/Article.module.css'
 import { getSpanValue } from '@lib/GetArticleSpan'
 import { useWindowDimensions } from '@lib/hooks/useDetectScreenSize'
-import ReactMarkdown from 'react-markdown'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { base16AteliersulphurpoolLight } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import { MarkdownPreview } from '@components/ui'
 import Image from 'next/image'
 import { useScrollAmount } from '@lib/hooks/useScrollAmount'
 
@@ -63,6 +61,7 @@ const Post = ({
 	const getOneHeadingTexts = () => {
 		return onlyHeadings.map((val) => val.innerText)
 	}
+
 	const getActiveHeading = (index: number) => {
 		const heddingOffsetTop = onlyHeadings.map((val) => val.offsetTop)
 		if (heddingOffsetTop[index + 1]) {
@@ -73,23 +72,27 @@ const Post = ({
 			return style.contentActive
 		}
 	}
+
 	const between = (x: number, min: number, max: number) => {
 		return x >= min && x <= max;
 	}
-	const testRef = useCallback((node: HTMLElement | null) => {
+
+	const markdownRef = useCallback((node: HTMLElement | null) => {
 		if (node) {
 			const onlyHeadings = Array.from(node.querySelectorAll('h1'))
 			setOnlyHeadings(onlyHeadings)
 		}
 	}, [])
 
+  const blogUrl = `https://nextjs-personal-blog-five.vercel.app/blog/${slug}`
+
   return (
     <>
       <BlogJsonLd
         images={[
 					'./public/next.jpeg'
-				]}
-        url={`https://nextjs-personal-blog-five.vercel.app/blog/${slug}`}
+        ]}
+        url={blogUrl}
         title={title}
         datePublished={formatDate}
         dateModified="2015-02-05T09:00:00+08:00"
@@ -100,12 +103,13 @@ const Post = ({
         title={title}
         description={description}
         openGraph={{
+          url: blogUrl,
 					type: 'article',
 					title: title,
 					description: `${content}`,
 					images: [
 						{
-							url: './public/next.jpeg',
+							url: '/next.jpeg',
 							width: 800,
 							height: 600,
 							alt: 'プレビュー画像',
@@ -115,7 +119,7 @@ const Post = ({
 						publishedTime: formatDate,
 						tags: tag
 					}
-				}}
+        }}
       />
       <Container
         style={{background: 'rgb(248, 246, 246)', height: '100%'}}
@@ -138,7 +142,6 @@ const Post = ({
               </div>
             </div>
           </Col>
-
           <Col span={getSpanValue(width) === 24 ? 24 : 13}>
             <div className={style.contentArea}>
               <p className={style.title}>
@@ -146,34 +149,12 @@ const Post = ({
               </p>
               <div
                 className={style.content}
-                ref={testRef}
+                ref={markdownRef}
               >
-                <ReactMarkdown 
-                  children={content}
-                  components={{
-										code ({node, inline, className, children, ...props}) {
-											const match = /language-(\w+)/.exec(className || '')
-											return !inline && match ? (
-                        <SyntaxHighlighter
-                          children={String(children).replace(/\n$/, '')}
-                          style={base16AteliersulphurpoolLight}
-                          language={match[1]}
-                        />
-                      ) : (
-                        <code
-                          className={className}
-                          {...props}
-                        >
-                          {children}
-                        </code>
-											)
-										}
-									}}
-                />
+                <MarkdownPreview markdownContent={content} />
               </div>
             </div>
           </Col>
-
           <Col
             span={getSpanValue(width) === 24 ? 24 : 5}
             className={style.sticky}
@@ -184,8 +165,8 @@ const Post = ({
               </p>
               <ul>
                 {
-									getOneHeadingTexts().map((text, index) => {
-										return (
+									getOneHeadingTexts().map((text, index) => 
+                    (
                       <li
                         className={getActiveHeading(index)}
                         key={index}
@@ -193,11 +174,10 @@ const Post = ({
                         {text}
                       </li>
 										)
-									})
+									)
 								}
               </ul>
             </div>
-
             <div className={style.profileContentArea}>
               <div className={style.profileContainer}>
                 <div className={style.profileImage}>
@@ -208,11 +188,9 @@ const Post = ({
                     objectFit="cover"
                   />
                 </div>
-
                 <p className={style.profileName}>
                   冨田優斗
                 </p>
-
                 <p className={style.profileText}>
                   受託とSESをやっている会社でフロントエンドエンジニアとして働いています。<br />
                   <br />
