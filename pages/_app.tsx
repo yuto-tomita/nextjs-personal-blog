@@ -18,7 +18,6 @@ function MyApp ({ Component, pageProps }: AppProps) {
     return (
       <>
         <Head />
-        <DefaultSeo {...config} />
         <Header />
         <Component {...pageProps} />
         <Footer />
