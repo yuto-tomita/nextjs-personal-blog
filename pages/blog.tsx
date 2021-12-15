@@ -40,7 +40,6 @@ const Blog = ({
 	const { width } = useWindowDimensions()
 
 	const { Title } = Typography
-
 	return (
   <Container>
     <Row gutter={[48, 48]}>
@@ -71,7 +70,7 @@ const Blog = ({
                     >
                       {mdContents.title}
                     </Title>
-									)}
+                  )}
                   description={mdContents.description}
                 />
               </div>
