@@ -50,11 +50,11 @@ module.exports = {
     "react/jsx-closing-bracket-location": [1, 'line-aligned'],
     "react/jsx-curly-newline": ["error", { multiline: "consistent", singleline: "consistent" }],
     "react/jsx-first-prop-new-line": ["error", "multiline"],
-    "react/jsx-indent": [2, 2, {indentLogicalExpressions: true}],
-    "react/jsx-indent-props": [2, 2],
+    "react/jsx-indent-props": [2, { indentMode: 2, ignoreTernaryOperator: true} ],
     "react/jsx-max-props-per-line": ["error"],
     "react/jsx-tag-spacing": ["error"],
-    "react/jsx-newline": [2, {"prevent": true}]
+    "react/jsx-newline": [2, {"prevent": true}],
+    "react/jsx-indent": [2, 2, {indentLogicalExpressions: true, checkAttributes: true}],
   },
   settings: { react: { version: "detect" } },
 };
