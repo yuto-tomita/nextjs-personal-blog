@@ -32,9 +32,9 @@ const Footer: FC = () => {
       name="冨田 優斗"
       url="https://nextjs-personal-blog-elqgxu4dl-tommy-personal-blog.vercel.app/"
       sameAs={[
-					'https://twitter.com/qualidea04',
-					'https://github.com/yuto-tomita'
-				]}
+        'https://twitter.com/qualidea04',
+        'https://github.com/yuto-tomita'
+      ]}
     />
   </>
 	)
