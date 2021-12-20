@@ -76,9 +76,9 @@ const Header: FC = () => {
         selectedKeys={[menuState]}
         onClick={handleClick}
       >
-        {['Home', 'Blog', 'Contact'].map((menuName, index) => (
+        {['Home', 'Blog', 'Contact'].map((menuName) => (
           <Menu.Item key={menuName.toLowerCase()}>{menuName}</Menu.Item>
-						))}
+				))}
       </Menu>
     </header>
   </>
