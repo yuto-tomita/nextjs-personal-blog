@@ -77,7 +77,7 @@ const Blog = ({
             </Link>
           </Card>
         </Col>
-				))}
+			))}
     </Row>
   </Container>
 	)
