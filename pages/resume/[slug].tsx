@@ -52,7 +52,7 @@ const PostResume = ({
         images={[
 					'./public/next.jpeg'
         ]}
-        url={`https://nextjs-personal-blog-five.vercel.app/blog/${slug}`}
+        url={`https://nextjs-personal-blog-five.vercel.app/resume/${slug}`}
         title={title}
         datePublished={formatDate}
         dateModified="2015-02-05T09:00:00+08:00"
