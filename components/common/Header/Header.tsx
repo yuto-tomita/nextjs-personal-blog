@@ -33,10 +33,19 @@ const Header: FC = () => {
 
 	/** Menuをクリックしたら該当のパスにルーティングするする */
 	const navigateToMenu = (routingPathName: string) => {
-		if (routingPathName === 'home') {
-			router.push('/')
+		if (process.env.NODE_ENV === 'development') {
+			if (routingPathName === 'home') {
+				router.push('/')
+			} else {
+				router.push(`/${routingPathName}`)
+			}
 		} else {
-			router.push(`/${routingPathName}`)
+			if (routingPathName === 'home') {
+				router.prefetch('/')
+			} else {
+				router.prefetch(`/${routingPathName}`)
+			}
+
 		}
 	}
 
@@ -59,7 +68,7 @@ const Header: FC = () => {
             name: 'Contact',
             item: 'https://nextjs-personal-blog-elqgxu4dl-tommy-personal-blog.vercel.app/contact'
           }
-        ]}
+      ]}
     />
     <header>
       <Menu
