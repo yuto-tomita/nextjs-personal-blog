@@ -9,16 +9,15 @@ const Header: FC = () => {
 	const [menuState, setSelectMenu] = useState('')
 	const router = useRouter()
 	const { session } = useAuth()
-	const headerContents = ['home', 'blog', 'contact', 'admin']
+	const [headerContents, setHeaderContents] = useState(['home', 'blog', 'contact'])
 
-	const notLoginHeaderContent = () => {
+	useEffect(() => {
 		if (session) {
-			return headerContents
+			setHeaderContents(['home', 'blog', 'contact', 'admin'])
 		} else {
-			return headerContents.filter((val) => val !== 'admin')
+			setHeaderContents(['home', 'blog', 'contact'])
 		}
-	}
-
+	}, [session])
 
 	/** 表示されているパスを取得して、Menuを選択されている状態にする */
 	useEffect(() => {
@@ -33,7 +32,7 @@ const Header: FC = () => {
 
 	/** 現在表示されているパスから選択されているmenu名を返す */
 	const findCurrentPathFromMenu = (path: string) => {
-		return notLoginHeaderContent().find((val) => path.includes(val))
+		return headerContents.find((val) => path.includes(val))
 	}
 
 	/** 選択されているMenuを小文字に変換して、選択されているMenuを更新する */
@@ -88,7 +87,7 @@ const Header: FC = () => {
         selectedKeys={[menuState]}
         onClick={handleClick}
       >
-        {notLoginHeaderContent().map((menuName) => (
+        {headerContents.map((menuName) => (
           <Menu.Item key={menuName.toLowerCase()}>{menuName}</Menu.Item>
 				))}
       </Menu>
