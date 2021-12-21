@@ -2,11 +2,23 @@ import React, { FC, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Menu } from 'antd'
 import { ProfilePageJsonLd } from 'next-seo'
+import { useAuth } from '@lib/hooks/useAuth'
 
 const Header: FC = () => {
 	// TODO: Google上でブログ記事がクリックされたときに選択されているmenuが'1'になるようにする
 	const [menuState, setSelectMenu] = useState('')
 	const router = useRouter()
+	const { session } = useAuth()
+	const headerContents = ['home', 'blog', 'contact', 'admin']
+
+	const notLoginHeaderContent = () => {
+		if (session) {
+			return headerContents
+		} else {
+			return headerContents.filter((val) => val !== 'admin')
+		}
+	}
+
 
 	/** 表示されているパスを取得して、Menuを選択されている状態にする */
 	useEffect(() => {
@@ -21,7 +33,7 @@ const Header: FC = () => {
 
 	/** 現在表示されているパスから選択されているmenu名を返す */
 	const findCurrentPathFromMenu = (path: string) => {
-		return ['home', 'blog', 'contact'].find((val) => path.includes(val))
+		return notLoginHeaderContent().find((val) => path.includes(val))
 	}
 
 	/** 選択されているMenuを小文字に変換して、選択されているMenuを更新する */
@@ -53,21 +65,21 @@ const Header: FC = () => {
   <>
     <ProfilePageJsonLd
       breadcrumb={[
-          {
-            position: 1,
-            name: 'Home',
-            item: 'https://nextjs-personal-blog-elqgxu4dl-tommy-personal-blog.vercel.app/'
-          },
-          {
-            position: 2,
-            name: 'Blog',
-            item: 'https://nextjs-personal-blog-elqgxu4dl-tommy-personal-blog.vercel.app/blog'
-          },
-          {
-            position: 3,
-            name: 'Contact',
-            item: 'https://nextjs-personal-blog-elqgxu4dl-tommy-personal-blog.vercel.app/contact'
-          }
+				{
+					position: 1,
+					name: 'Home',
+					item: 'https://nextjs-personal-blog-elqgxu4dl-tommy-personal-blog.vercel.app/'
+				},
+				{
+					position: 2,
+					name: 'Blog',
+					item: 'https://nextjs-personal-blog-elqgxu4dl-tommy-personal-blog.vercel.app/blog'
+				},
+				{
+					position: 3,
+					name: 'Contact',
+					item: 'https://nextjs-personal-blog-elqgxu4dl-tommy-personal-blog.vercel.app/contact'
+				}
       ]}
     />
     <header>
@@ -76,7 +88,7 @@ const Header: FC = () => {
         selectedKeys={[menuState]}
         onClick={handleClick}
       >
-        {['Home', 'Blog', 'Contact'].map((menuName) => (
+        {notLoginHeaderContent().map((menuName) => (
           <Menu.Item key={menuName.toLowerCase()}>{menuName}</Menu.Item>
 				))}
       </Menu>
