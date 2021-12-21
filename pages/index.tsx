@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import type { InferGetStaticPropsType } from 'next'
 import { getMdFileFromDir, readFileFromFileName, parseMdFile } from '@lib/MdFileOperation'
 import Link from 'next/link'
@@ -9,6 +9,7 @@ import { useWindowDimensions } from '@lib/hooks/useDetectScreenSize'
 import style from '../styles/Home.module.css'
 import { getSpanValue } from '@lib/GetArticleSpan'
 import { NextSeo } from 'next-seo'
+import { profileMessage } from '@lib/ProfileMessage'
 
 export async function getStaticProps () {
   const mdFileNames = getMdFileFromDir('resume')
@@ -52,23 +53,7 @@ const Home = ({
     localStorage.setItem('accessToken', token)
   }
 
-  const description = `
-    初めまして！冨田 優斗と申します。
-
-    現在、受託とSESをやっている会社でフロントエンドエンジニアとして働いています。
-    20歳の頃に新卒でIT業界に入り、現在業界3年目になります。
-
-    仕事では主にVue.jsを使ってtoB向けのwebアプリを開発しています。
-    過去にはLaravelを使用してAPI開発と認証認可システムを作成しました。
-    Node.jsを使用したバックエンド開発とReactを用いたフロントエンドの開発に興味があります。
-  
-    趣味でGithubでフロント周りの便利なライブラリを調べたり、
-    個人開発で気になっているライブラリやフレームワークを余暇で触っています。
-
-    私の詳しい経歴が気になっていただけた方はresumeの方をご覧いただければと思います！
-  `
-
-  const texts = description.split(/(\n)/).map((item, index) => {
+  const texts = profileMessage.split(/(\n)/).map((item, index) => {
     return (
       <React.Fragment key={index}>
         { item.match(/\n/) ? <br /> : item }
@@ -79,7 +64,7 @@ const Home = ({
   return (
     <>
       <NextSeo
-        description={description}     
+        description={profileMessage}     
       />
       <Container>
         <div className={style.selfIntroduction}>
