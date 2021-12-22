@@ -1,15 +1,15 @@
 import Container from '@components/ui/Container'
-import { useAuth } from '@lib/hooks/useAuth'
 import { ADMIN_TABLE_CONSTANT } from '@lib/constant/AdminTableConstant'
 import { Table } from 'antd'
+import { useAuth } from '@lib/hooks/useAuth'
 
 const Admin = () => {
-	const { signInGithub, guard } = useAuth()
-	
-	if (!guard()) {
+	const { session, signInGithub } = useAuth()
+
+	if (!session) {
 		signInGithub()
 	}
-
+	
 	const data = [
 		{
 			key: 1,
