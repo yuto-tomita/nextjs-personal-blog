@@ -28,4 +28,4 @@ function MyApp ({ Component, pageProps }: AppProps) {
     return null
   }
 }
-export default MyAppf
+export default MyApp
