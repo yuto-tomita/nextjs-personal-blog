@@ -12,12 +12,12 @@ const Header: FC = () => {
 	const [headerContents, setHeaderContents] = useState(['home', 'blog', 'contact'])
 
 	useEffect(() => {
-		if (session) {
+		if (session !== null) {
 			setHeaderContents(['home', 'blog', 'contact', 'admin'])
 		} else {
 			setHeaderContents(['home', 'blog', 'contact'])
 		}
-	}, [session])
+	}, [])
 
 	/** 表示されているパスを取得して、Menuを選択されている状態にする */
 	useEffect(() => {
