@@ -6,13 +6,7 @@ const supabaseAnonKey = () => process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
 const supabase = createClient(supabaseUrl(), supabaseAnonKey())
 
 export const useAuth = () => {
-	const hasSessionToSignIn = () => {
-		const session = supabase.auth.session()
-		
-		if (!session) {
-			signInGithub()
-		}
-	}
+	const session = () => supabase.auth.session()
 
 	const signInGithub = async () => {
 		await supabase.auth.signIn({ provider: 'github'})
@@ -20,6 +14,6 @@ export const useAuth = () => {
 
 	return {
 		signInGithub,
-		hasSessionToSignIn
+		session
 	}
 }
