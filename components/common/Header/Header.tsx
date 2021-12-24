@@ -12,7 +12,7 @@ const Header: FC = () => {
 	const [headerContents, setHeaderContents] = useState(['home', 'blog', 'contact'])
 
 	useEffect(() => {
-		if (session !== null) {
+		if (session() !== null) {
 			setHeaderContents(['home', 'blog', 'contact', 'admin'])
 		} else {
 			setHeaderContents(['home', 'blog', 'contact'])
