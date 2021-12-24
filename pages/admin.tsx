@@ -7,17 +7,15 @@ import { useEffect } from 'react'
 
 const Admin = () => {
 	const router = useRouter()
-	const { isExistSession, signInGithub, session } = useAuth()
+	const { signInGithub, session } = useAuth()
 
 	useEffect(() => {
 		// if (session)と記述するとsessionStateが初期化され無限ループが発生するためisExistSessionメソッドを挟む
-		if (isExistSession() !== null) {
+		if (session === null) {
 			signInGithub()
 		} else {
-			if (session) {
-				if (session.user?.email !== 'qualidea01@gmail.com') {
-					router.push('/')
-				}
+			if (session.user?.email !== 'qualidea01@gmail.com') {
+				router.push('/')
 			}
 		}
 	}, [])
