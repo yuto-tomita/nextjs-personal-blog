@@ -12,12 +12,12 @@ const Header: FC = () => {
 	const [headerContents, setHeaderContents] = useState(['home', 'blog', 'contact'])
 
 	useEffect(() => {
-		if (session() !== null) {
+		if (session !== null) {
 			setHeaderContents(['home', 'blog', 'contact', 'admin'])
 		} else {
 			setHeaderContents(['home', 'blog', 'contact'])
 		}
-	}, [])
+	}, [session])
 
 	/** 表示されているパスを取得して、Menuを選択されている状態にする */
 	useEffect(() => {
@@ -28,7 +28,8 @@ const Header: FC = () => {
 		} else {
 			setSelectMenu(currentMenuName)
 		}
-	}, [router])
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	/** 現在表示されているパスから選択されているmenu名を返す */
 	const findCurrentPathFromMenu = (path: string) => {
