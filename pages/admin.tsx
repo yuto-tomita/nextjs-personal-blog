@@ -2,13 +2,25 @@ import Container from '@components/ui/Container'
 import { ADMIN_TABLE_CONSTANT } from '@lib/constant/AdminTableConstant'
 import { Table } from 'antd'
 import { useAuth } from '@lib/hooks/useAuth'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 
 const Admin = () => {
-	const { session, signInGithub } = useAuth()
+	const router = useRouter()
+	const { isExistSession, signInGithub, session } = useAuth()
 
-	if (!session) {
-		signInGithub()
-	}
+	useEffect(() => {
+		// if (session)と記述するとsessionStateが初期化され無限ループが発生するためisExistSessionメソッドを挟む
+		if (isExistSession() !== null) {
+			signInGithub()
+		} else {
+			if (session) {
+				if (session.user?.email !== 'qualidea01@gmail.com') {
+					router.push('/')
+				}
+			}
+		}
+	}, [])
 	
 	const data = [
 		{

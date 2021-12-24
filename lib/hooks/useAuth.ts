@@ -20,8 +20,13 @@ export const useAuth = () => {
 		await supabase.auth.signIn({ provider: 'github'})
 	}
 
+	const isExistSession = () => {
+		return supabase.auth.session()
+	}
+
 	return {
 		signInGithub,
-		session
+		session,
+		isExistSession
 	}
 }
