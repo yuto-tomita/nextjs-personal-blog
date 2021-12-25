@@ -26,7 +26,7 @@ export const useAuth = () => {
 		return supabase.auth.session()
 	}
 
-	const navigationGurad = () => {
+	const navigationGuard = () => {
 		if (session === null) {
 			signInGithub()
 		} else {
@@ -40,6 +40,6 @@ export const useAuth = () => {
 		signInGithub,
 		session,
 		isExistSession,
-		navigationGurad
+		navigationGuard
 	}
 }
