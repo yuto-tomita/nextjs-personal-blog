@@ -45,19 +45,10 @@ const Header: FC = () => {
 
 	/** Menuをクリックしたら該当のパスにルーティングするする */
 	const navigateToMenu = (routingPathName: string) => {
-		if (process.env.NODE_ENV === 'development') {
-			if (routingPathName === 'home') {
-				router.push('/')
-			} else {
-				router.push(`/${routingPathName}`)
-			}
+		if (routingPathName === 'home') {
+			router.push('/')
 		} else {
-			if (routingPathName === 'home') {
-				router.prefetch('/')
-			} else {
-				router.prefetch(`/${routingPathName}`)
-			}
-
+			router.push(`/${routingPathName}`)
 		}
 	}
 

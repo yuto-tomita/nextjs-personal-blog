@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app'
 import { Head, Header, Footer } from '@components/common'
 import 'antd/dist/antd.css'
 import style from '@styles/App.module.css'
+import Router from 'next/router'
 
 function MyApp ({ Component, pageProps }: AppProps) {
   // ant-designのMenuコンポーネントを使用するにはSSRだとエラーが起きるため画面に要素が描画されてからコンポーネントを描画するようにする
@@ -11,6 +12,12 @@ function MyApp ({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     setShowComponent(true)
+
+    if (process.env.NODE_ENV === 'development') {
+      Router.prefetch('/home')
+      Router.prefetch('/blog')
+      Router.prefetch('/contact')
+    }
   }, [])
 
   if (showComponent) {
