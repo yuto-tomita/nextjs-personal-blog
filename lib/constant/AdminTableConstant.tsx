@@ -4,22 +4,22 @@ export const ADMIN_TABLE_CONSTANT = [
   {
     title: 'Title',
     dataIndex: 'title',
-    key: 'title',
+    key: 'title'
   },
   {
     title: 'Description',
     dataIndex: 'description',
-    key: 'description',
+    key: 'description'
   },
   {
     title: 'Tag',
     dataIndex: 'tag',
-    key: 'tag',
+    key: 'tag'
   },
   {
     title: 'ViewCount',
     dataIndex: 'viewCount',
-    key: 'viewCount',
+    key: 'viewCount'
   },
   {
     title: 'Operation',
@@ -30,6 +30,6 @@ export const ADMIN_TABLE_CONSTANT = [
         <a>編集</a>
         <a>削除</a>
       </div>
-		),
-  },
-];
+    )
+  }
+]

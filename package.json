@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky install",
-    "lint-staged": "next lint"
+    "lint-staged": "next lint",
+    "lint-fix": "eslint --fix './{lib,components,pages}/**/*.{ts,tsx}' && prettier --write './{lib,components,pages}/**/*.{ts,tsx}'"
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",

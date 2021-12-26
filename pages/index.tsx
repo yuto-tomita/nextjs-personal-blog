@@ -1,6 +1,10 @@
 import React from 'react'
 import type { InferGetStaticPropsType } from 'next'
-import { getMdFileFromDir, readFileFromFileName, parseMdFile } from '@lib/MdFileOperation'
+import {
+  getMdFileFromDir,
+  readFileFromFileName,
+  parseMdFile
+} from '@lib/MdFileOperation'
 import Link from 'next/link'
 import { Container } from '@components/ui'
 import { Row, Col, Card, Typography } from 'antd'
@@ -11,27 +15,29 @@ import { getSpanValue } from '@lib/GetArticleSpan'
 import { NextSeo } from 'next-seo'
 import { profileMessage } from '@lib/ProfileMessage'
 
-export async function getStaticProps () {
+export async function getStaticProps() {
   const mdFileNames = getMdFileFromDir('resume')
-	const mdFile = mdFileNames.map((fileName) => readFileFromFileName(fileName, 'resume'))
-	const parseMarkdownContent = mdFile.map((markdown) => {
-		const parseMdContent = parseMdFile(markdown)
+  const mdFile = mdFileNames.map((fileName) =>
+    readFileFromFileName(fileName, 'resume')
+  )
+  const parseMarkdownContent = mdFile.map((markdown) => {
+    const parseMdContent = parseMdFile(markdown)
 
-		return {
-			title: parseMdContent.data.title,
-			content: parseMdContent.content,
-			slug: parseMdContent.data.slug,
-			image: parseMdContent.data.image,
-			description: parseMdContent.data.description
-		}
+    return {
+      title: parseMdContent.data.title,
+      content: parseMdContent.content,
+      slug: parseMdContent.data.slug,
+      image: parseMdContent.data.image,
+      description: parseMdContent.data.description
+    }
   })
 
   return {
-		props: {
+    props: {
       mdFileNames,
-			parseMarkdownContent
-		}
-	}
+      parseMarkdownContent
+    }
+  }
 }
 
 const Home = ({
@@ -42,7 +48,6 @@ const Home = ({
   const { width } = useWindowDimensions()
   const articleTitle = mdFileNames.map((val) => val.replace(/.md/g, ''))
   const { Title } = Typography
-
 
   const getAccessToken = new URL(window.location.href).hash
   if (getAccessToken.length) {
@@ -56,23 +61,19 @@ const Home = ({
   const texts = profileMessage.split(/(\n)/).map((item, index) => {
     return (
       <React.Fragment key={index}>
-        { item.match(/\n/) ? <br /> : item }
+        {item.match(/\n/) ? <br /> : item}
       </React.Fragment>
     )
   })
 
   return (
     <>
-      <NextSeo
-        description={profileMessage}     
-      />
+      <NextSeo description={profileMessage} />
       <Container>
         <div className={style.selfIntroduction}>
           <div>
             <h1 className={style.title}>初めまして!</h1>
-            <p className={style.selfContents}>
-              { texts }
-            </p>
+            <p className={style.selfContents}>{texts}</p>
           </div>
           <div className={style.image}>
             <Image
@@ -88,29 +89,24 @@ const Home = ({
         {/* カードタイトルの文字の大きさをもう少し大きくする */}
         <Row gutter={[48, 48]}>
           {parseMarkdownContent.map((mdContents, index) => (
-            <Col
-              key={index}
-              span={getSpanValue(width)}
-            >
+            <Col key={index} span={getSpanValue(width)}>
               <Card
                 hoverable
                 title={articleTitle[index]}
-                style={{width: 400}}
+                style={{ width: 400 }}
               >
-                <Link
-                  href={`/resume/${mdContents.slug}`}
-                  key={index}
-                  passHref
-                >
+                <Link href={`/resume/${mdContents.slug}`} key={index} passHref>
                   <div>
                     <Image
-                      src={mdContents.image ? `/${mdContents.image}` : '/next.jpeg'}
+                      src={
+                        mdContents.image ? `/${mdContents.image}` : '/next.jpeg'
+                      }
                       alt="blog rogo"
                       width={500}
                       height={300}
                     />
                     <Meta
-                      title={(
+                      title={
                         <Title
                           level={5}
                           ellipsis={false}
@@ -118,7 +114,7 @@ const Home = ({
                         >
                           {mdContents.title}
                         </Title>
-                      )}
+                      }
                       className={style.cardStyle}
                       description={mdContents.description}
                     />

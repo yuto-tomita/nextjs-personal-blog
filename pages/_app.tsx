@@ -6,7 +6,7 @@ import 'antd/dist/antd.css'
 import style from '@styles/App.module.css'
 import Router from 'next/router'
 
-function MyApp ({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps) {
   // ant-designのMenuコンポーネントを使用するにはSSRだとエラーが起きるため画面に要素が描画されてからコンポーネントを描画するようにする
   const [showComponent, setShowComponent] = useState(false)
 

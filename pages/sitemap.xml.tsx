@@ -1,25 +1,27 @@
-import { GetServerSidePropsContext } from 'next';
+import { GetServerSidePropsContext } from 'next'
 import { getAllPostsPath } from '@lib/MdFileOperation'
 
-export const getServerSideProps = async ({ res }: GetServerSidePropsContext) => {
-  const xml = await generateSitemapXml(); // xmlコードを生成する処理（後で書く）
+export const getServerSideProps = async ({
+  res
+}: GetServerSidePropsContext) => {
+  const xml = await generateSitemapXml() // xmlコードを生成する処理（後で書く）
 
-  res.statusCode = 200;
-  res.setHeader('Cache-Control', 's-maxage=86400, stale-while-revalidate'); // 24時間のキャッシュ
-  res.setHeader('Content-Type', 'text/xml');
-  res.end(xml);
+  res.statusCode = 200
+  res.setHeader('Cache-Control', 's-maxage=86400, stale-while-revalidate') // 24時間のキャッシュ
+  res.setHeader('Content-Type', 'text/xml')
+  res.end(xml)
 
   return {
-    props: {},
-  };
-};
+    props: {}
+  }
+}
 
-async function generateSitemapXml ():Promise<string> {
-  let xml = '<?xml version="1.0" encoding="UTF-8"?>';
-  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
-  
+async function generateSitemapXml(): Promise<string> {
+  let xml = '<?xml version="1.0" encoding="UTF-8"?>'
+  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+
   // ここでurlを足していく
-  const { posts } = getAllPostsPath();
+  const { posts } = getAllPostsPath()
 
   posts.forEach((post) => {
     xml += `
@@ -30,10 +32,10 @@ async function generateSitemapXml ():Promise<string> {
       </url>
     `
   })
-  
-  xml += '</urlset>';
-  return xml;
+
+  xml += '</urlset>'
+  return xml
 }
 
-const Page = () => null;
-export default Page;
+const Page = () => null
+export default Page

@@ -1,28 +1,28 @@
 import { useState, useEffect } from 'react'
 
 const getScrollAmount = () => {
-	const { pageXOffset: xaxisAmount, pageYOffset: yaxisAmount } = window
+  const { pageXOffset: xaxisAmount, pageYOffset: yaxisAmount } = window
 
-	return {
-		xaxisAmount,
-		yaxisAmount
-	}
+  return {
+    xaxisAmount,
+    yaxisAmount
+  }
 }
 
 export const useScrollAmount = () => {
-	const [scrollAmount, setScrollAmount] = useState(getScrollAmount())
+  const [scrollAmount, setScrollAmount] = useState(getScrollAmount())
 
-	useEffect(() => {
-		const handleScroll = () => {
-			setScrollAmount(getScrollAmount())
-		}
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollAmount(getScrollAmount())
+    }
 
-		window.addEventListener('scroll', handleScroll)
-		return () => window.removeEventListener('resize', handleScroll)
-	}, [])
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('resize', handleScroll)
+  }, [])
 
-	return {
-		xaxisAmount: scrollAmount.xaxisAmount,
-		yaxisAmount: scrollAmount.yaxisAmount
-	}
+  return {
+    xaxisAmount: scrollAmount.xaxisAmount,
+    yaxisAmount: scrollAmount.yaxisAmount
+  }
 }

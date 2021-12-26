@@ -1,5 +1,9 @@
 /* eslint-disable react/no-children-prop */
-import { getMdFileFromDir, readFileFromFileName, parseMdFile } from '@lib/MdFileOperation'
+import {
+  getMdFileFromDir,
+  readFileFromFileName,
+  parseMdFile
+} from '@lib/MdFileOperation'
 import type { InferGetStaticPropsType } from 'next'
 import { useState, useCallback } from 'react'
 import { NextSeo, BlogJsonLd } from 'next-seo'
@@ -9,56 +13,56 @@ import { useWindowDimensions } from '@lib/hooks/useDetectScreenSize'
 import { ArticleContent } from '@components/article'
 import { useScrollAmount } from '@lib/hooks/useScrollAmount'
 
-export async function getStaticPaths () {
-	const mdFileNames = getMdFileFromDir('teck-blog')
-	const mdFile = mdFileNames.map((fileName) => readFileFromFileName(fileName, 'teck-blog'))
-	const paths = mdFile.map((markdown) => {
-		const parseMdContent = parseMdFile(markdown)
+export async function getStaticPaths() {
+  const mdFileNames = getMdFileFromDir('teck-blog')
+  const mdFile = mdFileNames.map((fileName) =>
+    readFileFromFileName(fileName, 'teck-blog')
+  )
+  const paths = mdFile.map((markdown) => {
+    const parseMdContent = parseMdFile(markdown)
 
-		return `/blog/${parseMdContent.data.slug}`
-	})
+    return `/blog/${parseMdContent.data.slug}`
+  })
 
-	return {
-		paths,
-		fallback: false
-	}
+  return {
+    paths,
+    fallback: false
+  }
 }
 
-export async function getStaticProps (context: any) {
-	const { slug } = context.params
-	const mdFileContent = readFileFromFileName(`${slug}.md`, 'teck-blog')
-	const parseMdContent = parseMdFile(mdFileContent)
+export async function getStaticProps(context: any) {
+  const { slug } = context.params
+  const mdFileContent = readFileFromFileName(`${slug}.md`, 'teck-blog')
+  const parseMdContent = parseMdFile(mdFileContent)
 
-	return {
-		props: {
-			title: parseMdContent.data.title,
-			content: parseMdContent.content,
-			description: parseMdContent.data.description,
-			tag: parseMdContent.data.tag,
-			created_at: Date.parse(parseMdContent.data.created_at),
-			slug
-		}
-	}
+  return {
+    props: {
+      title: parseMdContent.data.title,
+      content: parseMdContent.content,
+      description: parseMdContent.data.description,
+      tag: parseMdContent.data.tag,
+      created_at: Date.parse(parseMdContent.data.created_at),
+      slug
+    }
+  }
 }
 
 const Post = ({
-	title,
-	content,
-	description,
-	tag,
-	created_at,
-	slug
+  title,
+  content,
+  description,
+  tag,
+  created_at,
+  slug
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-	const formatDate = dayjs(created_at).format('YYYY-MM-DD HH:mm:ss')
+  const formatDate = dayjs(created_at).format('YYYY-MM-DD HH:mm:ss')
 
   const blogUrl = `https://nextjs-personal-blog-five.vercel.app/blog/${slug}`
 
   return (
     <>
       <BlogJsonLd
-        images={[
-					'./public/next.jpeg'
-        ]}
+        images={['./public/next.jpeg']}
         url={blogUrl}
         title={title}
         datePublished={formatDate}
@@ -71,21 +75,21 @@ const Post = ({
         description={description}
         openGraph={{
           url: blogUrl,
-					type: 'article',
-					title: title,
-					description: `${content}`,
-					images: [
-						{
-							url: '/next.jpeg',
-							width: 800,
-							height: 600,
-							alt: 'プレビュー画像',
-						},
-					],
-					article: {
-						publishedTime: formatDate,
-						tags: tag
-					}
+          type: 'article',
+          title: title,
+          description: `${content}`,
+          images: [
+            {
+              url: '/next.jpeg',
+              width: 800,
+              height: 600,
+              alt: 'プレビュー画像'
+            }
+          ],
+          article: {
+            publishedTime: formatDate,
+            tags: tag
+          }
         }}
       />
       <ArticleContent
@@ -97,7 +101,7 @@ const Post = ({
         slug={slug}
       />
     </>
-	)
-};
+  )
+}
 
-export default Post;
+export default Post
