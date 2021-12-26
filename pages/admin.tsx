@@ -1,24 +1,22 @@
-import Container from '@components/ui/Container'
+import { Container} from '@components/ui'
 import { ADMIN_TABLE_CONSTANT } from '@lib/constant/AdminTableConstant'
-import { Table } from 'antd'
+import { Table, Button } from 'antd'
 import { useAuth } from '@lib/hooks/useAuth'
-import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import style from '@styles/Admin.module.css'
+import Router from 'next/router'
 
 const Admin = () => {
-	const router = useRouter()
-	const { signInGithub, session } = useAuth()
+
+	const { navigationGuard } = useAuth()
 
 	useEffect(() => {
-		// if (session)と記述するとsessionStateが初期化され無限ループが発生するためisExistSessionメソッドを挟む
-		if (session === null) {
-			signInGithub()
-		} else {
-			if (session.user?.email !== 'qualidea01@gmail.com') {
-				router.push('/')
-			}
-		}
+		navigationGuard()
 	}, [])
+
+	const navigateToArticleCreatePage = () => {
+		Router.push('/article_create')
+	}
 	
 	const data = [
 		{
@@ -32,6 +30,14 @@ const Admin = () => {
 
 	return (
   <Container>
+    <div className={style.buttonPosition}>
+      <Button
+        type="primary"
+        onClick={() => navigateToArticleCreatePage()}
+      >
+        記事投稿
+      </Button>
+    </div>
     <Table
       columns={ADMIN_TABLE_CONSTANT}
       dataSource={data}
