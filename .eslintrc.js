@@ -39,18 +39,18 @@ module.exports = {
         html: true
       }
     ],
-    'react/jsx-wrap-multilines': [
-      'error',
-      {
-        declaration: 'parens-new-line',
-        assignment: 'parens-new-line',
-        return: 'parens-new-line',
-        arrow: 'parens-new-line',
-        condition: 'parens-new-line',
-        logical: 'parens-new-line',
-        prop: 'parens-new-line'
-      }
-    ],
+    // 'react/jsx-wrap-multilines': [
+    //   'error',
+    //   {
+    //     declaration: 'parens-new-line',
+    //     assignment: 'parens-new-line',
+    //     return: 'parens-new-line',
+    //     arrow: 'parens-new-line',
+    //     condition: 'parens-new-line',
+    //     logical: 'parens-new-line',
+    //     prop: 'parens-new-line'
+    //   }
+    // ],
     'react/jsx-closing-bracket-location': 1,
     'react/jsx-closing-bracket-location': [1, 'tag-aligned'],
     'react/jsx-closing-bracket-location': [1, 'line-aligned'],
