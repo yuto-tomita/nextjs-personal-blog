@@ -1,13 +1,8 @@
-import { createClient } from '@supabase/supabase-js'
 import { useEffect } from 'react'
 import type { Session } from '@supabase/supabase-js'
 import { useLocalStorage } from '@lib/hooks/useLocalStorage'
 import Router from 'next/router'
-
-const supabaseUrl = () => process.env.NEXT_PUBLIC_SUPABASE_URL || ''
-const supabaseAnonKey = () => process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
-
-const supabase = createClient(supabaseUrl(), supabaseAnonKey())
+import { supabase } from '@lib/SupabaseClient'
 
 export const useAuth = () => {
   const [session, setSession] = useLocalStorage<null | Session>('session', null)
