@@ -7,10 +7,14 @@ import style from '@styles/Admin.module.css'
 import Router from 'next/router'
 
 const Admin = () => {
-  const { navigationGuard } = useAuth()
+  const { navigationGuard, isExistSession, signInGithub } = useAuth()
 
   useEffect(() => {
-    navigationGuard()
+    if (isExistSession()) {
+      navigationGuard()
+    } else {
+      signInGithub()
+    }
   }, [])
 
   const navigateToArticleCreatePage = () => {
