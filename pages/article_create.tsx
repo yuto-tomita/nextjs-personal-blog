@@ -2,7 +2,7 @@ import { NextPage } from 'next'
 import { useEffect, useState } from 'react'
 import { useAuth } from '@lib/hooks/useAuth'
 import { Container } from '@components/ui'
-import { Input } from 'antd'
+import { Input, Button } from 'antd'
 import { MarkdownPreview } from '@components/article'
 import style from '@styles/Article.module.css'
 
@@ -18,6 +18,13 @@ const ArticleCreate: NextPage = () => {
 
   const switchPreview = () => setPreview(true)
   const switchWriting = () => setPreview(false)
+
+  const postArticle = async () => {
+    await fetch('/api/postArticle', {
+      method: 'POST',
+      body: value
+    })
+  }
 
   return (
     <Container>
@@ -42,12 +49,19 @@ const ArticleCreate: NextPage = () => {
             <MarkdownPreview markdownContent={value} />
           </div>
         ) : (
-          <div className={style.writingArea}>
-            <TextArea
-              onChange={(e) => setValue(e.target.value)}
-              autoSize={{ minRows: 20 }}
-              value={value}
-            />
+          <div>
+            <div className={style.writingArea}>
+              <TextArea
+                onChange={(e) => setValue(e.target.value)}
+                autoSize={{ minRows: 20 }}
+                value={value}
+              />
+            </div>
+            <div className={style.submitButton}>
+              <Button type="primary" onClick={postArticle}>
+                記事投稿
+              </Button>
+            </div>
           </div>
         )}
       </div>
