@@ -2,11 +2,12 @@ import { NextPage } from 'next'
 import { useEffect, useState } from 'react'
 import { useAuth } from '@lib/hooks/useAuth'
 import { Container } from '@components/ui'
-import { Input, Button } from 'antd'
+import { Input, Button, Select } from 'antd'
 import { MarkdownPreview } from '@components/article'
 import style from '@styles/Article.module.css'
 
 const ArticleCreate: NextPage = () => {
+  const { Option } = Select
   const { navigationGuard } = useAuth()
   const { TextArea } = Input
   const [value, setValue] = useState('')
@@ -28,6 +29,11 @@ const ArticleCreate: NextPage = () => {
 
   return (
     <Container>
+      <Input placeholder="title" />
+      <Input placeholder="slug" />
+      <Select placeholder="image" />
+      <Select placeholder="tag" mode="multiple" />
+      <div className={style.formBlank} />
       <div className={style.switchPreview}>
         <span
           className={preview ? style['notActive'] : style['active']}
