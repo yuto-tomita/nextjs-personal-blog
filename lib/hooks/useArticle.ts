@@ -5,7 +5,7 @@ import validate from '@lib/ArticleFormValidationRule'
 export const useArticle = () => {
   const [title, setTitle] = useState('')
   const [slug, setSlug] = useState('')
-  const [image, setImage] = useState<string>()
+  const [image, setImage] = useState<string>('')
   const [tag, setTag] = useState<string[]>([])
   const [errors, setErrors] = useState<Partial<Values>>({})
 
