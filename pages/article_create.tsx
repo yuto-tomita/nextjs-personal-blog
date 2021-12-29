@@ -1,13 +1,32 @@
-import { NextPage } from 'next'
+import type { InferGetStaticPropsType } from 'next'
 import { useEffect, useState } from 'react'
 import { useAuth } from '@lib/hooks/useAuth'
 import { Container } from '@components/ui'
 import { Input, Button, Select } from 'antd'
 import { MarkdownPreview } from '@components/article'
 import style from '@styles/Article.module.css'
+import { useArticle } from '@lib/hooks/useArticle'
+import fs from 'fs'
+import { join } from 'path'
 
-const ArticleCreate: NextPage = () => {
+export async function getStaticProps() {
+  const publicDirFiles = fs.readdirSync(join(process.cwd(), 'public'))
+  const filterImageFile = publicDirFiles.filter(
+    (val) => val.includes('png') || val.includes('jpeg')
+  )
+
+  return {
+    props: {
+      filterImageFile
+    }
+  }
+}
+
+const ArticleCreate = ({
+  filterImageFile
+}: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { Option } = Select
+  const { postArticle } = useArticle()
   const { navigationGuard } = useAuth()
   const { TextArea } = Input
   const [value, setValue] = useState('')
@@ -20,18 +39,17 @@ const ArticleCreate: NextPage = () => {
   const switchPreview = () => setPreview(true)
   const switchWriting = () => setPreview(false)
 
-  const postArticle = async () => {
-    await fetch('/api/postArticle', {
-      method: 'POST',
-      body: value
-    })
-  }
-
   return (
     <Container>
       <Input placeholder="title" />
       <Input placeholder="slug" />
-      <Select placeholder="image" />
+      <Select placeholder="image">
+        {filterImageFile.map((val, key) => (
+          <Option value={val} key={key}>
+            {val}
+          </Option>
+        ))}
+      </Select>
       <Select placeholder="tag" mode="multiple" />
       <div className={style.formBlank} />
       <div className={style.switchPreview}>
@@ -64,7 +82,7 @@ const ArticleCreate: NextPage = () => {
               />
             </div>
             <div className={style.submitButton}>
-              <Button type="primary" onClick={postArticle}>
+              <Button type="primary" onClick={() => postArticle(value)}>
                 記事投稿
               </Button>
             </div>
