@@ -8,6 +8,7 @@ import style from '@styles/Article.module.css'
 import { useArticle } from '@lib/hooks/useArticle'
 import fs from 'fs'
 import { join } from 'path'
+import { SelectValue } from 'antd/lib/select'
 
 export async function getStaticProps() {
   const publicDirFiles = fs.readdirSync(join(process.cwd(), 'public'))
@@ -31,9 +32,10 @@ const ArticleCreate = ({
     setTitle,
     setSlug,
     setImage,
-    setTag,
     tag,
-    onHandleEnterKey
+    onHandleEnterKey,
+    errors,
+    image
   } = useArticle()
   const { navigationGuard } = useAuth()
   const { TextArea } = Input
@@ -47,17 +49,40 @@ const ArticleCreate = ({
   const switchPreview = () => setPreview(true)
   const switchWriting = () => setPreview(false)
 
+  /** valueの型を特定してstrings型だったらstateを更新する */
+  const typeParticularToSetImage = (value: SelectValue) => {
+    if (typeof value === 'string') {
+      setImage(value)
+    }
+  }
+
+  const getErrorMessage = (key: 'title' | 'slug' | 'image') => {
+    return <div className={style.error}>{errors[key]}</div>
+  }
+
   return (
     <Container>
-      <Input placeholder="title" onChange={() => setTitle} />
-      <Input placeholder="slug" onChange={() => setSlug} />
-      <Select placeholder="image" onChange={() => setImage}>
+      <Input
+        placeholder="title"
+        onChange={(event) => setTitle(event.target.value)}
+      />
+      {getErrorMessage('title')}
+      <Input
+        placeholder="slug"
+        onChange={(event) => setSlug(event.target.value)}
+      />
+      {getErrorMessage('slug')}
+      <Select
+        placeholder="image"
+        onChange={(value) => typeParticularToSetImage(value)}
+      >
         {filterImageFile.map((val, key) => (
           <Option value={val} key={key}>
             {val}
           </Option>
         ))}
       </Select>
+      {getErrorMessage('image')}
       <Select
         placeholder="tag"
         mode="multiple"
