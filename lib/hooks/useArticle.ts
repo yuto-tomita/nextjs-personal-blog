@@ -1,44 +1,47 @@
 import { useState } from 'react'
+import type { Values } from '@lib/ArticleFormValidationRule'
+import validate from '@lib/ArticleFormValidationRule'
 
 export const useArticle = () => {
   const [title, setTitle] = useState('')
   const [slug, setSlug] = useState('')
   const [image, setImage] = useState('')
   const [tag, setTag] = useState<string[]>([])
+  const [errors, setErrors] = useState<Partial<Values>>({})
 
+  /** Enterキーを押下したら任意の文字列をtag変数に追加する */
   const onHandleEnterKey = (
     event: React.KeyboardEvent<HTMLInputElement>
   ) => {
     if (event.key === 'Enter') {
       if (
-        (<HTMLInputElement>event.target).value !== '' &&
-        !tag.includes((<HTMLInputElement>event.target).value)
+        (event.target as HTMLInputElement).value !== '' &&
+        !tag.includes((event.target as HTMLInputElement).value)
       ) {
-        setTag([...tag, (<HTMLInputElement>event.target).value])
+        setTag([...tag, (event.target as HTMLInputElement).value])
       }
     }
   }
 
   const postArticle = async (value: string) => {
-    validate()
+    setErrors({})
+    setErrors(validate({ title, slug, image }))
 
-    await fetch('/api/postArticle', {
-      method: 'POST',
-      body: value
-    })
-  }
-
-  const validate = () => {
-    //
+    if (!Object.keys(errors).length) {
+      await fetch('/api/postArticle', {
+        method: 'POST',
+        body: value
+      })
+    }
   }
 
   return {
     setTitle,
     setSlug,
     setImage,
-    setTag,
     postArticle,
     onHandleEnterKey,
-    tag
+    tag,
+    errors
   }
 }
