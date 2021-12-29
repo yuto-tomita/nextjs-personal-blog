@@ -26,7 +26,15 @@ const ArticleCreate = ({
   filterImageFile
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { Option } = Select
-  const { postArticle } = useArticle()
+  const {
+    postArticle,
+    setTitle,
+    setSlug,
+    setImage,
+    setTag,
+    tag,
+    onHandleEnterKey
+  } = useArticle()
   const { navigationGuard } = useAuth()
   const { TextArea } = Input
   const [value, setValue] = useState('')
@@ -41,16 +49,26 @@ const ArticleCreate = ({
 
   return (
     <Container>
-      <Input placeholder="title" />
-      <Input placeholder="slug" />
-      <Select placeholder="image">
+      <Input placeholder="title" onChange={() => setTitle} />
+      <Input placeholder="slug" onChange={() => setSlug} />
+      <Select placeholder="image" onChange={() => setImage}>
         {filterImageFile.map((val, key) => (
           <Option value={val} key={key}>
             {val}
           </Option>
         ))}
       </Select>
-      <Select placeholder="tag" mode="multiple" />
+      <Select
+        placeholder="tag"
+        mode="multiple"
+        onInputKeyDown={(event) => onHandleEnterKey(event)}
+      >
+        {tag.map((val, key) => (
+          <Option value={val} key={key}>
+            {val}
+          </Option>
+        ))}
+      </Select>
       <div className={style.formBlank} />
       <div className={style.switchPreview}>
         <span
@@ -82,7 +100,10 @@ const ArticleCreate = ({
               />
             </div>
             <div className={style.submitButton}>
-              <Button type="primary" onClick={() => postArticle(value)}>
+              <Button
+                type="primary"
+                onClick={() => postArticle(value)}
+              >
                 記事投稿
               </Button>
             </div>
