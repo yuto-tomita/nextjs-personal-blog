@@ -42,7 +42,6 @@ export const useArticle = () => {
     postArticle,
     onHandleEnterKey,
     tag,
-    errors,
-    image
+    errors
   }
 }

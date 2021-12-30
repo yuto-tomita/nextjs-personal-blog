@@ -34,8 +34,7 @@ const ArticleCreate = ({
     setImage,
     tag,
     onHandleEnterKey,
-    errors,
-    image
+    errors
   } = useArticle()
   const { navigationGuard } = useAuth()
   const { TextArea } = Input
