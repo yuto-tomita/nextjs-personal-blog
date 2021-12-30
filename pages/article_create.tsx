@@ -34,11 +34,12 @@ const ArticleCreate = ({
     setImage,
     tag,
     onHandleEnterKey,
-    errors
+    errors,
+    setBody,
+    body
   } = useArticle()
   const { navigationGuard } = useAuth()
   const { TextArea } = Input
-  const [value, setValue] = useState('')
   const [preview, setPreview] = useState(false)
 
   useEffect(() => {
@@ -55,7 +56,9 @@ const ArticleCreate = ({
     }
   }
 
-  const getErrorMessage = (key: 'title' | 'slug' | 'image') => {
+  const getErrorMessage = (
+    key: 'title' | 'slug' | 'image' | 'body'
+  ) => {
     return <div className={style.error}>{errors[key]}</div>
   }
 
@@ -112,16 +115,17 @@ const ArticleCreate = ({
       <div className={style.articleCreateWrapper}>
         {preview ? (
           <div className={style.previewArea}>
-            <MarkdownPreview markdownContent={value} />
+            <MarkdownPreview markdownContent={body} />
           </div>
         ) : (
           <div>
             <div className={style.writingArea}>
               <TextArea
-                onChange={(e) => setValue(e.target.value)}
+                onChange={(e) => setBody(e.target.value)}
                 autoSize={{ minRows: 20 }}
-                value={value}
+                value={body}
               />
+              {getErrorMessage('body')}
             </div>
             <div className={style.submitButton}>
               <Button type="primary" onClick={() => postArticle()}>

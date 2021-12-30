@@ -7,6 +7,7 @@ export const useArticle = () => {
   const [slug, setSlug] = useState('')
   const [image, setImage] = useState<string>('')
   const [tag, setTag] = useState<string[]>([])
+  const [body, setBody] = useState('')
   const [errors, setErrors] = useState<Partial<Values>>({})
 
   /** Enterキーを押下したら任意の文字列をtag変数に追加する */
@@ -25,12 +26,14 @@ export const useArticle = () => {
 
   const postArticle = async () => {
     setErrors({})
-    setErrors(validate({ title, slug, image }))
+    setErrors(validate({ title, slug, image, body }))
 
-    if (Object.keys(validate({ title, slug, image })).length === 0) {
+    if (
+      Object.keys(validate({ title, slug, image, body })).length === 0
+    ) {
       await fetch('/api/postArticle', {
         method: 'POST',
-        body: JSON.stringify({ title, slug, image, tag })
+        body: JSON.stringify({ title, slug, image, tag, body })
       })
     }
   }
@@ -42,6 +45,8 @@ export const useArticle = () => {
     postArticle,
     onHandleEnterKey,
     tag,
-    errors
+    errors,
+    setBody,
+    body
   }
 }
