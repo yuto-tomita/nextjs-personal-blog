@@ -60,11 +60,11 @@ const PostResume = ({
         datePublished={formatDate}
         dateModified="2015-02-05T09:00:00+08:00"
         authorName="冨田 優斗"
-        description={description}
+        description={content}
       />
       <NextSeo
         title={title}
-        description={description}
+        description={content}
         openGraph={{
           type: 'article',
           title: title,

@@ -5,13 +5,9 @@ import {
   parseMdFile
 } from '@lib/MdFileOperation'
 import type { InferGetStaticPropsType } from 'next'
-import { useState, useCallback } from 'react'
 import { NextSeo, BlogJsonLd } from 'next-seo'
 import dayjs from 'dayjs'
-import style from '../../styles/Article.module.css'
-import { useWindowDimensions } from '@lib/hooks/useDetectScreenSize'
 import { ArticleContent } from '@components/article'
-import { useScrollAmount } from '@lib/hooks/useScrollAmount'
 
 export async function getStaticPaths() {
   const mdFileNames = getMdFileFromDir('teck-blog')
@@ -32,7 +28,10 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context: any) {
   const { slug } = context.params
-  const mdFileContent = readFileFromFileName(`${slug}.md`, 'teck-blog')
+  const mdFileContent = readFileFromFileName(
+    `${slug}.md`,
+    'teck-blog'
+  )
   const parseMdContent = parseMdFile(mdFileContent)
 
   return {
@@ -68,11 +67,11 @@ const Post = ({
         datePublished={formatDate}
         dateModified="2015-02-05T09:00:00+08:00"
         authorName="冨田 優斗"
-        description={description}
+        description={content}
       />
       <NextSeo
         title={title}
-        description={description}
+        description={content}
         openGraph={{
           url: blogUrl,
           type: 'article',
