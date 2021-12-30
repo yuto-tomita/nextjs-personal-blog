@@ -124,10 +124,7 @@ const ArticleCreate = ({
               />
             </div>
             <div className={style.submitButton}>
-              <Button
-                type="primary"
-                onClick={() => postArticle(value)}
-              >
+              <Button type="primary" onClick={() => postArticle()}>
                 記事投稿
               </Button>
             </div>
