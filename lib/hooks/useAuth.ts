@@ -2,10 +2,13 @@ import { useEffect } from 'react'
 import type { Session } from '@supabase/supabase-js'
 import { useLocalStorage } from '@lib/hooks/useLocalStorage'
 import Router from 'next/router'
-import { supabase } from '@lib/SupabaseClient'
+import { supabase } from '@lib/constant/SupabaseClient'
 
 export const useAuth = () => {
-  const [session, setSession] = useLocalStorage<null | Session>('session', null)
+  const [session, setSession] = useLocalStorage<null | Session>(
+    'session',
+    null
+  )
 
   useEffect(() => {
     supabase.auth.onAuthStateChange((_event, session) => {

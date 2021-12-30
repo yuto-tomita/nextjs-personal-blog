@@ -13,7 +13,7 @@ import { useWindowDimensions } from '@lib/hooks/useDetectScreenSize'
 import style from '../styles/Home.module.css'
 import { getSpanValue } from '@lib/GetArticleSpan'
 import { NextSeo } from 'next-seo'
-import { profileMessage } from '@lib/ProfileMessage'
+import { profileMessage } from '@lib/constant/ProfileMessage'
 
 export async function getStaticProps() {
   const mdFileNames = getMdFileFromDir('resume')
@@ -46,7 +46,9 @@ const Home = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { Meta } = Card
   const { width } = useWindowDimensions()
-  const articleTitle = mdFileNames.map((val) => val.replace(/.md/g, ''))
+  const articleTitle = mdFileNames.map((val) =>
+    val.replace(/.md/g, '')
+  )
   const { Title } = Typography
 
   const getAccessToken = new URL(window.location.href).hash
@@ -95,11 +97,17 @@ const Home = ({
                 title={articleTitle[index]}
                 style={{ width: 400 }}
               >
-                <Link href={`/resume/${mdContents.slug}`} key={index} passHref>
+                <Link
+                  href={`/resume/${mdContents.slug}`}
+                  key={index}
+                  passHref
+                >
                   <div>
                     <Image
                       src={
-                        mdContents.image ? `/${mdContents.image}` : '/next.jpeg'
+                        mdContents.image
+                          ? `/${mdContents.image}`
+                          : '/next.jpeg'
                       }
                       alt="blog rogo"
                       width={500}
