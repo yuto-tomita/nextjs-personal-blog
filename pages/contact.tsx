@@ -7,25 +7,48 @@ import { useState } from 'react'
 import style from '../styles/Contact.module.css'
 
 const Contact: NextPage = () => {
-  const { setMail, setName, setSubject, setBody, send, errorMessage } =
-    useMail()
-  const [displayErrorMessage, setDisplayErrorMessage] = useState(false)
+  const {
+    setMail,
+    setName,
+    setSubject,
+    setBody,
+    send,
+    errorMessage
+  } = useMail()
+  const [displayErrorMessage, setDisplayErrorMessage] =
+    useState(false)
   const { TextArea } = Input
 
   const sendBackConfirmation = () => {
     setDisplayErrorMessage(false)
 
-    if (!Object.values(errorMessage()).some((val) => typeof val === 'string')) {
+    if (
+      !Object.values(errorMessage()).some(
+        (val) => typeof val === 'string'
+      )
+    ) {
       send()
+      initialFormValue()
     } else {
       setDisplayErrorMessage(true)
     }
   }
 
+  const initialFormValue = () => {
+    setSubject('')
+    setMail('')
+    setName('')
+    setBody('')
+  }
+
   type FormObjectKey = 'mail' | 'name' | 'subject' | 'body'
   const getErrorMessage = (formObjectKey: FormObjectKey) => {
     if (displayErrorMessage) {
-      return <div className={style.error}>{errorMessage()[formObjectKey]}</div>
+      return (
+        <div className={style.error}>
+          {errorMessage()[formObjectKey]}
+        </div>
+      )
     }
   }
 
