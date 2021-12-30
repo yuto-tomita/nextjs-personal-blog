@@ -23,14 +23,14 @@ export const useArticle = () => {
     }
   }
 
-  const postArticle = async (value: string) => {
+  const postArticle = async () => {
     setErrors({})
     setErrors(validate({ title, slug, image }))
 
-    if (!Object.keys(errors).length) {
+    if (Object.keys(validate({ title, slug, image })).length === 0) {
       await fetch('/api/postArticle', {
         method: 'POST',
-        body: value
+        body: JSON.stringify({ title, slug, image, tag })
       })
     }
   }
