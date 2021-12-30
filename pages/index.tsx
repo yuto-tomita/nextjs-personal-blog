@@ -103,16 +103,16 @@ const Home = ({
                   passHref
                 >
                   <div>
-                    <Image
-                      src={
-                        mdContents.image
-                          ? `/${mdContents.image}`
-                          : '/next.jpeg'
-                      }
-                      alt="blog rogo"
-                      width={500}
-                      height={300}
-                    />
+                    {mdContents.image ? (
+                      <Image
+                        src={`/${mdContents.image}`}
+                        alt="blog rogo"
+                        width={500}
+                        height={300}
+                      />
+                    ) : (
+                      <></>
+                    )}
                     <Meta
                       title={
                         <Title
