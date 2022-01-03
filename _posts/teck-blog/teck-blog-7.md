@@ -1,9 +1,9 @@
 ---
 title: 【TypeORM + Nest.js】Mysqlコンテナとの連携でハマった点を書いていく
-slug: teck-blog-6
+slug: teck-blog-7
 tag: ['JavaScript', 'TypeScript', 'TypeORM']
 image: study.png
-created_at: 2021-1-3T22:43:20
+created_at: 2022-1-3T22:43:20
 description: typeormとnest.jsでのDB周りでハマった点を書いていく
 ---
 
