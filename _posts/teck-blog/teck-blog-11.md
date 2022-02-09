@@ -1,6 +1,6 @@
 ---
 title: TIL
-slug: teck-blog-10
+slug: teck-blog-11
 tag: ['nest', 'typeorm', 'eslint', 'webStorm']
 image: study.png
 created_at: 2022-2-7T9:24:20
