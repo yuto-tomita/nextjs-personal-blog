@@ -7,7 +7,10 @@ export const getServerSideProps = async ({
   const xml = await generateSitemapXml() // xmlコードを生成する処理（後で書く）
 
   res.statusCode = 200
-  res.setHeader('Cache-Control', 's-maxage=86400, stale-while-revalidate') // 24時間のキャッシュ
+  res.setHeader(
+    'Cache-Control',
+    's-maxage=86400, stale-while-revalidate'
+  ) // 24時間のキャッシュ
   res.setHeader('Content-Type', 'text/xml')
   res.end(xml)
 
@@ -18,7 +21,8 @@ export const getServerSideProps = async ({
 
 async function generateSitemapXml(): Promise<string> {
   let xml = '<?xml version="1.0" encoding="UTF-8"?>'
-  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+  xml +=
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
 
   // ここでurlを足していく
   const { posts } = getAllPostsPath()

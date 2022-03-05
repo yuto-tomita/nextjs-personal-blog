@@ -8,7 +8,10 @@ const Head: FC = () => {
     <>
       <DefaultSeo {...config} />
       <NextHead>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1"
+        />
         <title>とみーの個人ブログ</title>
         <meta
           name="google-site-verification"

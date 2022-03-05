@@ -34,7 +34,10 @@ const Admin = () => {
   return (
     <Container>
       <div className={style.buttonPosition}>
-        <Button type="primary" onClick={() => navigateToArticleCreatePage()}>
+        <Button
+          type="primary"
+          onClick={() => navigateToArticleCreatePage()}
+        >
           記事投稿
         </Button>
       </div>

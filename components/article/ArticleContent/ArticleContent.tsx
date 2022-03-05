@@ -19,7 +19,9 @@ interface Props {
 }
 
 const ArticleContent: FC<Props> = ({ title, content, tag }) => {
-  const [onlyHeadings, setOnlyHeadings] = useState<HTMLHeadingElement[]>([])
+  const [onlyHeadings, setOnlyHeadings] = useState<
+    HTMLHeadingElement[]
+  >([])
   const { width, height } = useWindowDimensions()
   const { yaxisAmount } = useScrollAmount()
 
@@ -39,7 +41,9 @@ const ArticleContent: FC<Props> = ({ title, content, tag }) => {
       ) {
         return style.contentActive
       }
-    } else if (between(yaxisAmount, heddingOffsetTop[index], height + 200)) {
+    } else if (
+      between(yaxisAmount, heddingOffsetTop[index], height + 200)
+    ) {
       return style.contentActive
     }
   }
@@ -56,7 +60,9 @@ const ArticleContent: FC<Props> = ({ title, content, tag }) => {
   }, [])
 
   return (
-    <Container style={{ background: 'rgb(248, 246, 246)', height: '100%' }}>
+    <Container
+      style={{ background: 'rgb(248, 246, 246)', height: '100%' }}
+    >
       <Row align="top" gutter={[8, 8]}>
         <Col span={getSpanValue(width) === 24 ? 24 : 5}>
           <div className={style.tagContentArea}>

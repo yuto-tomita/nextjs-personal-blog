@@ -84,7 +84,9 @@ const Header: FC = () => {
           onClick={handleClick}
         >
           {headerContents.map((menuName) => (
-            <Menu.Item key={menuName.toLowerCase()}>{menuName}</Menu.Item>
+            <Menu.Item key={menuName.toLowerCase()}>
+              {menuName}
+            </Menu.Item>
           ))}
         </Menu>
       </header>

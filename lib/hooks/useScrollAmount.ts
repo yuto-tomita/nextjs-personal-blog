@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 
 const getScrollAmount = () => {
-  const { pageXOffset: xaxisAmount, pageYOffset: yaxisAmount } = window
+  const { pageXOffset: xaxisAmount, pageYOffset: yaxisAmount } =
+    window
 
   return {
     xaxisAmount,

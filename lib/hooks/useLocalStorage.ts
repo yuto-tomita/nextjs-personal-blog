@@ -12,7 +12,8 @@ export const useLocalStorage = <T>(key: string, initialValue: T) => {
   })
 
   const setValue = (value: T | ((val: T) => T)) => {
-    const valueToStore = value instanceof Function ? value(storeValue) : value
+    const valueToStore =
+      value instanceof Function ? value(storeValue) : value
 
     setStoreValue(valueToStore)
 

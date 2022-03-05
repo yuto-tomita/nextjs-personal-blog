@@ -12,8 +12,14 @@ export function getMdFileFromDir(dirName: DirName) {
 }
 
 /** 引数のファイル名から、引数のディレクトリ名配下のファイルを読み込む */
-export function readFileFromFileName(fileName: string, dirName: DirName) {
-  return fs.readFileSync(`${MD_FILE_PATH}/${dirName}/${fileName}`, 'utf8')
+export function readFileFromFileName(
+  fileName: string,
+  dirName: DirName
+) {
+  return fs.readFileSync(
+    `${MD_FILE_PATH}/${dirName}/${fileName}`,
+    'utf8'
+  )
 }
 
 /** 読み込んだファイル名を扱いやすいデータ形式に変換する */
@@ -27,7 +33,10 @@ function getPathAndCreateDate(dirName: DirName) {
     const getParseMdFile = parseMdFile(mdFile)
 
     return {
-      path: `${process.env.SITE_URL}${dirName}/${val.replace('.md', '')}`,
+      path: `${process.env.SITE_URL}${dirName}/${val.replace(
+        '.md',
+        ''
+      )}`,
       lastmod: getParseMdFile.data.created_at
     }
   })
