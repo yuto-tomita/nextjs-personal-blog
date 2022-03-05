@@ -1,0 +1,27 @@
+.list {
+	list-style: none;
+	border-bottom: solid 1px rgb(211, 211, 211);
+	cursor: pointer;
+}
+
+.list:hover {
+	opacity: 0.3;
+}
+
+.listTitle {
+	font-size: 1.2rem;
+	font-weight: bold;
+	padding: 0.5rem 0;
+}
+
+.listPostDate {
+	font-size: 0.35rem;
+	padding-top: 0.3rem;
+	color: rgb(116, 114, 114);
+}
+
+.listDescription {
+	font-size: 0.4rem;
+	padding-bottom: 0.3rem;
+	color: rgb(116, 114, 114);
+}
