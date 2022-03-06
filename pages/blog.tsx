@@ -4,8 +4,9 @@ import {
   readFileFromFileName,
   parseMdFile
 } from '@lib/MdFileOperation'
-import { Container, List } from '@components/ui'
+import { Container, List, Pagination } from '@components/ui'
 import dayjs from 'dayjs'
+import { useState, useEffect } from 'react'
 
 export async function getStaticProps() {
   const mdFileNames = getMdFileFromDir('teck-blog')
@@ -38,7 +39,14 @@ export async function getStaticProps() {
 const Blog = ({
   parseMarkdownContent
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const listTitles = parseMarkdownContent.map((val) => {
+  const [pagination, usePagination] = useState(1)
+
+  const slicePostArticles = parseMarkdownContent.slice(
+    (pagination - 1) * 10,
+    10 * pagination
+  )
+
+  const listTitles = slicePostArticles.map((val) => {
     return {
       title: String(val.title),
       description: String(val.description),
@@ -46,9 +54,16 @@ const Blog = ({
       created_at: dayjs(val.created_at).format('YYYY-MM-DD')
     }
   })
+    
   return (
     <Container>
       <List articleInfo={listTitles} />
+      {pagination}
+      <Pagination
+        currentPage={pagination}
+        onClick={usePagination}
+        data={parseMarkdownContent}
+      />
     </Container>
   )
 }
