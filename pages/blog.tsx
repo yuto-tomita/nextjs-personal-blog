@@ -6,7 +6,8 @@ import {
 } from '@lib/MdFileOperation'
 import { Container, List, Pagination } from '@components/ui'
 import dayjs from 'dayjs'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import style from 'styles/Blog.module.css'
 
 export async function getStaticProps() {
   const mdFileNames = getMdFileFromDir('teck-blog')
@@ -54,12 +55,12 @@ const Blog = ({
       created_at: dayjs(val.created_at).format('YYYY-MM-DD')
     }
   })
-    
+
   return (
     <Container>
       <List articleInfo={listTitles} />
-      {pagination}
       <Pagination
+        className={style.topMargin}
         currentPage={pagination}
         onClick={usePagination}
         data={parseMarkdownContent}
