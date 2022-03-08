@@ -1,7 +1,7 @@
 ---
 title: TIL
 slug: teck-blog-20
-tag: ['javascript']
+tag: ['html', 'form']
 image: study.png
 description: web.devフォームセクション1-1のリーディング - formタグと入力データについて
 created_at: 2022-3-8T23:24:20
