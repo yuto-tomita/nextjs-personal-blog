@@ -65,12 +65,20 @@ console.log(a()) // => 0が二つ表示される
 		console.log(0)
 	}
 	const d = 0
+	const e = function() {
+		console.log(0)
+	}
 }
 
 console.log(a) // 0
 console.log(b) // error!
 console.log(c()) // 0
 console.log(d) // error!
+cosole.log(e()) // error!
 ```
 
 `var`宣言するとスコープ範囲が`let`や`const`よりも広く参照可能なため、バグの温床となりやすくなっているため、開発者周りからは嫌われている。
+
+`function`も`var`同様スコープ範囲が広いため、どこからでも呼びやすいという観点から、最近だと`const hoge = function()`みたいな無名関数と呼ばれるのが主流になっている。
+
+ES6以降ならばアロー関数を用いて`const hoge = () => {}`みたいな書き方が多い。
