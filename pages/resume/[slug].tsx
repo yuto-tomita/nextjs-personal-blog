@@ -6,6 +6,8 @@ import {
 import type { InferGetStaticPropsType } from 'next'
 import { NextSeo, BlogJsonLd } from 'next-seo'
 import { ArticleContent } from '@components/article'
+import { Button } from 'antd'
+import { DownloadOutlined } from '@ant-design/icons'
 import dayjs from 'dayjs'
 
 export async function getStaticPaths() {
@@ -83,6 +85,13 @@ const PostResume = ({
           }
         }}
       />
+      <Button
+        type="primary"
+        icon={<DownloadOutlined />}
+        size="middle"
+      >
+        職務経歴書をダウンロード
+      </Button>
       <ArticleContent
         title={title}
         content={content}
