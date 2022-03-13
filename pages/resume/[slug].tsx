@@ -9,6 +9,7 @@ import { ArticleContent } from '@components/article'
 import { Button } from 'antd'
 import { DownloadOutlined } from '@ant-design/icons'
 import dayjs from 'dayjs'
+import style from '@styles/Article.module.css'
 
 export async function getStaticPaths() {
   const mdFileNames = getMdFileFromDir('resume')
@@ -85,13 +86,6 @@ const PostResume = ({
           }
         }}
       />
-      <Button
-        type="primary"
-        icon={<DownloadOutlined />}
-        size="middle"
-      >
-        職務経歴書をダウンロード
-      </Button>
       <ArticleContent
         title={title}
         content={content}
@@ -100,6 +94,15 @@ const PostResume = ({
         created_at={created_at}
         slug={slug}
       />
+      <div className={style.downloadButton}>
+        <Button
+          type="primary"
+          icon={<DownloadOutlined />}
+          size="middle"
+        >
+          職務経歴書をダウンロード
+        </Button>
+      </div>
     </>
   )
 }

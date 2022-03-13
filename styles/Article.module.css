@@ -115,3 +115,10 @@
 .formBlank {
 	margin-bottom: 1rem;
 }
+
+.downloadButton {
+	text-align: center;
+	background: rgb(248, 246, 246);
+	margin-top: -1rem;
+	padding-bottom: 1rem;
+}
