@@ -1,9 +1,9 @@
 ---
-title: TIL
-slug: teck-blog-22
-tag: ['javascript', 'graphql', 'typescript']
+title: GraphQLの基礎を学ぶ
+slug: teck-blog-23
+tag: ['graphql']
 image: study.png
-description: GraphQLとはなにか
+description: GraphQLとはなにか, 用語のメモ
 created_at: 2022-3-17T22:57:20
 ---
 
