@@ -52,3 +52,10 @@ GraphQLではクエリは三種類ある
 - サーバーサイドの開発が複雑になる
 - 実装方法によっては、RESTとは異なるAPI管理が必要なってくる(レートの制限、料金の設定を考慮する場合)
 - キャッシュがRESTよりも複雑になる
+
+# GraphQLのオープンソース
+
+- Apollo
+- Offix
+- Graphback
+- OpenApiToGraphQL 
