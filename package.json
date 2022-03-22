@@ -17,6 +17,7 @@
     "@types/nodemailer": "^6.4.4",
     "antd": "^4.16.13",
     "apollo-server-micro": "^3.6.4",
+    "axios": "^0.26.1",
     "classnames": "^2.3.1",
     "dayjs": "^1.10.7",
     "graphql": "^16.3.0",
