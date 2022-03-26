@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import type { InferGetStaticPropsType } from 'next'
 import {
   getMdFileFromDir,
@@ -14,6 +14,7 @@ import style from '../styles/Home.module.css'
 import { getSpanValue } from '@lib/GetArticleSpan'
 import { NextSeo } from 'next-seo'
 import { profileMessage } from '@lib/constant/ProfileMessage'
+import { contributionCalendar } from '@lib/hooks/useFetchData'
 
 export async function getStaticProps() {
   const mdFileNames = getMdFileFromDir('resume')
@@ -50,6 +51,15 @@ const Home = ({
     val.replace(/.md/g, '')
   )
   const { Title } = Typography
+  const [calendar, setCalendar] = useState({})
+
+  useEffect(() => {
+    const getContoributionCalendar = async () => {
+      setCalendar(await contributionCalendar())
+    }
+
+    getContoributionCalendar()
+  }, [])
 
   const getAccessToken = new URL(window.location.href).hash
   if (getAccessToken.length) {
