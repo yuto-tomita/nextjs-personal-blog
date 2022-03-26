@@ -2,26 +2,12 @@ import React, { FC, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Menu } from 'antd'
 import { ProfilePageJsonLd } from 'next-seo'
-import { useAuth } from '@lib/hooks/useAuth'
 
 const Header: FC = () => {
   // TODO: Google上でブログ記事がクリックされたときに選択されているmenuが'1'になるようにする
   const [menuState, setSelectMenu] = useState('')
   const router = useRouter()
-  const { session } = useAuth()
-  const [headerContents, setHeaderContents] = useState([
-    'home',
-    'blog',
-    'contact'
-  ])
-
-  useEffect(() => {
-    if (session !== null) {
-      setHeaderContents(['home', 'blog', 'contact', 'admin'])
-    } else {
-      setHeaderContents(['home', 'blog', 'contact'])
-    }
-  }, [session])
+  const headerContents = ['home', 'blog', 'contact']
 
   /** 表示されているパスを取得して、Menuを選択されている状態にする */
   useEffect(() => {
