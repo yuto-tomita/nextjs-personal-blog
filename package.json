@@ -3,18 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "yarn run relay && next dev",
-    "build": "yarn run relay && next build",
-    "start": "yarn run relay && next start",
+    "dev": "next dev",
     "lint": "next lint",
     "prepare": "husky install",
     "lint-staged": "next lint",
     "format": "eslint --fix './{lib,components,pages}/**/*.{ts,tsx}' && prettier --write './{lib,components,pages}/**/*.{ts,tsx}'",
+    "start": "yarn run relay && next start",
+    "build": "yarn run relay && next build",
     "relay": "yarn run relay-compiler $@"
   },
   "relay": {
     "src": "./",
-    "schema": "./schema.graphql"
+    "schema": "./schema/schema.graphql"
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "@types/react": "17.0.24",
+    "@types/react-relay": "^13.0.1",
     "@types/react-syntax-highlighter": "^13.5.2",
     "@types/relay-runtime": "^13.0.2",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
@@ -48,6 +49,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "graphql": "^16.3.0",
     "husky": "^7.0.0",
     "lint-staged": "^12.1.3",
     "prettier": "^2.5.1",
