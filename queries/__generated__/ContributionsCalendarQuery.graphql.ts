@@ -1,39 +1,36 @@
 /**
- * @generated SignedSource<<6017370b78b2f800050b2b81fd1cd68b>>
- * @flow
+ * @generated SignedSource<<0c42e442bb064990fb12b98bbfa2d1b7>>
  * @lightSyntaxTransform
  * @nogrep
  */
 
+/* tslint:disable */
 /* eslint-disable */
+// @ts-nocheck
 
-'use strict';
+import { ConcreteRequest, Query } from 'relay-runtime';
+export type ContributionsCalendarQuery$variables = {};
+export type ContributionsCalendarQuery$data = {
+  readonly user: {
+    readonly contributionsCollection: {
+      readonly contributionCalendar: {
+        readonly totalContributions: number;
+        readonly weeks: ReadonlyArray<{
+          readonly contributionDays: ReadonlyArray<{
+            readonly contributionCount: number;
+            readonly date: any;
+          }>;
+        }>;
+      };
+    };
+  } | null;
+};
+export type ContributionsCalendarQuery = {
+  variables: ContributionsCalendarQuery$variables;
+  response: ContributionsCalendarQuery$data;
+};
 
-/*::
-import type { ConcreteRequest, Query } from 'relay-runtime';
-export type ContributionsCalendarQuery$variables = {||};
-export type ContributionsCalendarQuery$data = {|
-  +user: ?{|
-    +contributionsCollection: {|
-      +contributionCalendar: {|
-        +totalContributions: number,
-        +weeks: $ReadOnlyArray<{|
-          +contributionDays: $ReadOnlyArray<{|
-            +contributionCount: number,
-            +date: any,
-          |}>,
-        |}>,
-      |},
-    |},
-  |},
-|};
-export type ContributionsCalendarQuery = {|
-  variables: ContributionsCalendarQuery$variables,
-  response: ContributionsCalendarQuery$data,
-|};
-*/
-
-var node/*: ConcreteRequest*/ = (function(){
+const node: ConcreteRequest = (function(){
 var v0 = [
   {
     "kind": "Literal",
@@ -167,9 +164,6 @@ return {
 };
 })();
 
-(node/*: any*/).hash = "c1d100f8e3196f1f458e97c7911a6650";
+(node as any).hash = "c1d100f8e3196f1f458e97c7911a6650";
 
-module.exports = ((node/*: any*/)/*: Query<
-  ContributionsCalendarQuery$variables,
-  ContributionsCalendarQuery$data,
->*/);
+export default node;
