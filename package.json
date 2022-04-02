@@ -10,11 +10,13 @@
     "format": "eslint --fix './{lib,components,pages}/**/*.{ts,tsx}' && prettier --write './{lib,components,pages}/**/*.{ts,tsx}'",
     "start": "yarn run relay && next start",
     "build": "yarn run relay && next build",
-    "relay": "relay-compiler --src ./ --schema ./schema/schema.graphql"
+    "relay": "yarn run relay-compiler $@"
   },
   "relay": {
     "src": "./",
-    "schema": "./schema/schema.graphql"
+    "schema": "./schema/schema.graphql",
+    "language": "typescript",
+    "artifactDirectory": "queries/__generated__"
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
