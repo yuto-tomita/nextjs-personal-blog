@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<0c42e442bb064990fb12b98bbfa2d1b7>>
+ * @generated SignedSource<<fbf7ab440cd5ddc92e3f84bfba4809c2>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -14,6 +14,7 @@ export type ContributionsCalendarQuery$data = {
   readonly user: {
     readonly contributionsCollection: {
       readonly contributionCalendar: {
+        readonly colors: ReadonlyArray<string>;
         readonly totalContributions: number;
         readonly weeks: ReadonlyArray<{
           readonly contributionDays: ReadonlyArray<{
@@ -54,6 +55,13 @@ v1 = {
       "name": "contributionCalendar",
       "plural": false,
       "selections": [
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "colors",
+          "storageKey": null
+        },
         {
           "alias": null,
           "args": null,
@@ -154,16 +162,16 @@ return {
     ]
   },
   "params": {
-    "cacheID": "14a0977376724558c1283a050a42c8fb",
+    "cacheID": "d576672f7398abb2bd0133df4959384b",
     "id": null,
     "metadata": {},
     "name": "ContributionsCalendarQuery",
     "operationKind": "query",
-    "text": "query ContributionsCalendarQuery {\n  user(login: \"yuto-tomita\") {\n    contributionsCollection {\n      contributionCalendar {\n        totalContributions\n        weeks {\n          contributionDays {\n            contributionCount\n            date\n          }\n        }\n      }\n    }\n    id\n  }\n}\n"
+    "text": "query ContributionsCalendarQuery {\n  user(login: \"yuto-tomita\") {\n    contributionsCollection {\n      contributionCalendar {\n        colors\n        totalContributions\n        weeks {\n          contributionDays {\n            contributionCount\n            date\n          }\n        }\n      }\n    }\n    id\n  }\n}\n"
   }
 };
 })();
 
-(node as any).hash = "c1d100f8e3196f1f458e97c7911a6650";
+(node as any).hash = "6bac9edf2f8dc097f224e37e79507f62";
 
 export default node;

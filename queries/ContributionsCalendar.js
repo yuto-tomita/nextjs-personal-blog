@@ -5,6 +5,7 @@ export default graphql`
     user(login: "yuto-tomita") {
       contributionsCollection {
         contributionCalendar {
+          colors
           totalContributions
           weeks {
             contributionDays {
