@@ -64,7 +64,9 @@ const ContributionsCalendar: FC<ContributionsCalendarProps> = ({
                     )
                   }}
                 >
-                  {val2.contributionCount}
+                  <span className={style.countFontHide}>
+                    {val2.contributionCount}
+                  </span>
                 </div>
               )
             })}
