@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import type { InferGetStaticPropsType } from 'next'
 import {
   getMdFileFromDir,
@@ -14,36 +14,16 @@ import style from '../styles/Home.module.css'
 import { getSpanValue } from '@lib/GetArticleSpan'
 import { NextSeo } from 'next-seo'
 import { profileMessage } from '@lib/constant/ProfileMessage'
-import { contributionCalendar } from '@lib/hooks/useFetchData'
-
-export async function getStaticProps() {
-  const mdFileNames = getMdFileFromDir('resume')
-  const mdFile = mdFileNames.map((fileName) =>
-    readFileFromFileName(fileName, 'resume')
-  )
-  const parseMarkdownContent = mdFile.map((markdown) => {
-    const parseMdContent = parseMdFile(markdown)
-
-    return {
-      title: parseMdContent.data.title,
-      content: parseMdContent.content,
-      slug: parseMdContent.data.slug,
-      image: parseMdContent.data.image,
-      description: parseMdContent.data.description
-    }
-  })
-
-  return {
-    props: {
-      mdFileNames,
-      parseMarkdownContent
-    }
-  }
-}
+import { fetchQuery } from 'react-relay'
+import { initEnvironment } from '../lib/relay'
+import contributionsCalendarQuery from 'queries/ContributionsCalendar'
+import type { ContributionsCalendarQuery } from 'queries/__generated__/ContributionsCalendarQuery.graphql'
+import ContributionsCalendar from '../components/common/ContributionsCalendar/ContributionsCalendar'
 
 const Home = ({
   mdFileNames,
-  parseMarkdownContent
+  parseMarkdownContent,
+  calendarData
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { Meta } = Card
   const { width } = useWindowDimensions()
@@ -51,15 +31,6 @@ const Home = ({
     val.replace(/.md/g, '')
   )
   const { Title } = Typography
-  const [calendar, setCalendar] = useState({})
-
-  useEffect(() => {
-    const getContoributionCalendar = async () => {
-      setCalendar(await contributionCalendar())
-    }
-
-    getContoributionCalendar()
-  }, [])
 
   const getAccessToken = new URL(window.location.href).hash
   if (getAccessToken.length) {
@@ -142,11 +113,51 @@ const Home = ({
             </Col>
           ))}
         </Row>
-        `<h1>個人開発物</h1>
+        <h1>活動ログ</h1>
+        <ContributionsCalendar
+          contributionsCalendarData={calendarData}
+        />
+        <h1>個人開発物</h1>
         <p>coming soon...</p>
       </Container>
     </>
   )
+}
+
+export async function getStaticProps() {
+  const mdFileNames = getMdFileFromDir('resume')
+  const mdFile = mdFileNames.map((fileName) =>
+    readFileFromFileName(fileName, 'resume')
+  )
+  const parseMarkdownContent = mdFile.map((markdown) => {
+    const parseMdContent = parseMdFile(markdown)
+
+    return {
+      title: parseMdContent.data.title,
+      content: parseMdContent.content,
+      slug: parseMdContent.data.slug,
+      image: parseMdContent.data.image,
+      description: parseMdContent.data.description
+    }
+  })
+  const environment = initEnvironment({})
+  const queryProps: any = await fetchQuery(
+    environment,
+    contributionsCalendarQuery,
+    {}
+  ).toPromise()
+
+  const calendarData: ContributionsCalendarQuery['response'] = {
+    ...queryProps
+  }
+
+  return {
+    props: {
+      mdFileNames,
+      parseMarkdownContent,
+      calendarData
+    }
+  }
 }
 
 export default Home

@@ -1,15 +1,14 @@
 .calendarContainer {
 	display: flex;
+	gap: 0.2rem;
 }
 
 .week {
 	width: 30px;
-	border-top: 1px solid ;
 }
 
 .day {
-	border-bottom: 1px solid;
 	text-align: center;
-	border-right: 1px solid;
-	border-left: 1px solid;
+	margin-bottom: 0.1rem;
+	border-radius: 0.3rem;
 }
