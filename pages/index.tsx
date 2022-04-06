@@ -49,8 +49,6 @@ export async function getStaticProps() {
     ...queryProps
   }
 
-  console.log(calendarData)
-
   return {
     props: {
       mdFileNames,
