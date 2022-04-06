@@ -20,6 +20,42 @@ import contributionsCalendarQuery from 'queries/ContributionsCalendar'
 import type { ContributionsCalendarQuery } from 'queries/__generated__/ContributionsCalendarQuery.graphql'
 import ContributionsCalendar from '../components/common/ContributionsCalendar/ContributionsCalendar'
 
+export async function getStaticProps() {
+  const mdFileNames = getMdFileFromDir('resume')
+  const mdFile = mdFileNames.map((fileName) =>
+    readFileFromFileName(fileName, 'resume')
+  )
+  const parseMarkdownContent = mdFile.map((markdown) => {
+    const parseMdContent = parseMdFile(markdown)
+
+    return {
+      title: parseMdContent.data.title,
+      content: parseMdContent.content,
+      slug: parseMdContent.data.slug,
+      image: parseMdContent.data.image,
+      description: parseMdContent.data.description
+    }
+  })
+  const environment = initEnvironment({})
+  const queryProps: any = await fetchQuery(
+    environment,
+    contributionsCalendarQuery,
+    {}
+  ).toPromise()
+
+  const calendarData: ContributionsCalendarQuery['response'] = {
+    ...queryProps
+  }
+
+  return {
+    props: {
+      mdFileNames,
+      parseMarkdownContent,
+      calendarData
+    }
+  }
+}
+
 const Home = ({
   mdFileNames,
   parseMarkdownContent,
@@ -127,42 +163,6 @@ const Home = ({
       </Container>
     </>
   )
-}
-
-export async function getStaticProps() {
-  const mdFileNames = getMdFileFromDir('resume')
-  const mdFile = mdFileNames.map((fileName) =>
-    readFileFromFileName(fileName, 'resume')
-  )
-  const parseMarkdownContent = mdFile.map((markdown) => {
-    const parseMdContent = parseMdFile(markdown)
-
-    return {
-      title: parseMdContent.data.title,
-      content: parseMdContent.content,
-      slug: parseMdContent.data.slug,
-      image: parseMdContent.data.image,
-      description: parseMdContent.data.description
-    }
-  })
-  const environment = initEnvironment({})
-  const queryProps: any = await fetchQuery(
-    environment,
-    contributionsCalendarQuery,
-    {}
-  ).toPromise()
-
-  const calendarData: ContributionsCalendarQuery['response'] = {
-    ...queryProps
-  }
-
-  return {
-    props: {
-      mdFileNames,
-      parseMarkdownContent,
-      calendarData
-    }
-  }
 }
 
 export default Home
