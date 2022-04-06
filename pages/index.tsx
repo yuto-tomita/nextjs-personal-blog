@@ -113,7 +113,12 @@ const Home = ({
             </Col>
           ))}
         </Row>
-        <h1>活動ログ</h1>
+        <h1>直近一年の活動ログ</h1>
+        総コミット回数:
+        {
+          calendarData.user?.contributionsCollection
+            .contributionCalendar.totalContributions
+        }
         <ContributionsCalendar
           contributionsCalendarData={calendarData}
         />
