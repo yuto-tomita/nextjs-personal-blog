@@ -149,15 +149,21 @@ const Home = ({
             </Col>
           ))}
         </Row>
-        <h1>直近一年の活動ログ</h1>
-        総コミット回数:
-        {
-          calendarData.user?.contributionsCollection
-            .contributionCalendar.totalContributions
-        }
-        <ContributionsCalendar
-          contributionsCalendarData={calendarData}
-        />
+        {calendarData.user ? (
+          <div>
+            <h1>直近一年の活動ログ</h1>
+            総コミット回数:
+            {
+              calendarData.user?.contributionsCollection
+                .contributionCalendar.totalContributions
+            }
+            <ContributionsCalendar
+              contributionsCalendarData={calendarData}
+            />
+          </div>
+        ) : (
+          <></>
+        )}
         <h1>個人開発物</h1>
         <p>coming soon...</p>
       </Container>
