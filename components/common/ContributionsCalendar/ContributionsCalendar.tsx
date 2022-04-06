@@ -2,6 +2,8 @@ import { FC, useMemo } from 'react'
 import style from './Calendar.module.css'
 import type { ContributionsCalendarQuery } from 'queries/__generated__/ContributionsCalendarQuery.graphql'
 import cn from 'classnames'
+import { Tooltip } from 'antd'
+
 interface ContributionsCalendarProps {
   contributionsCalendarData: ContributionsCalendarQuery['response']
 }
@@ -64,9 +66,11 @@ const ContributionsCalendar: FC<ContributionsCalendarProps> = ({
                     )
                   }}
                 >
-                  <span className={style.countFontHide}>
-                    {val2.contributionCount}
-                  </span>
+                  <Tooltip title={val2.date}>
+                    <span className={style.countFontHide}>
+                      {val2.contributionCount}
+                    </span>
+                  </Tooltip>
                 </div>
               )
             })}
