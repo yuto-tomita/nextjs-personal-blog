@@ -43,7 +43,9 @@ export async function getStaticProps() {
     {}
   ).toPromise()
 
-  const calendarData: ContributionsCalendarQuery['response'] = {
+  const calendarData:
+    | ContributionsCalendarQuery['response']
+    | undefined = {
     ...queryProps
   }
 
@@ -59,7 +61,7 @@ export async function getStaticProps() {
 const Home = ({
   mdFileNames,
   parseMarkdownContent,
-  calendarData
+  calendarData = undefined
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { Meta } = Card
   const { width } = useWindowDimensions()
@@ -149,7 +151,7 @@ const Home = ({
             </Col>
           ))}
         </Row>
-        {calendarData.user ? (
+        {calendarData ? (
           <div>
             <h1>直近一年の活動ログ</h1>
             総コミット回数:
