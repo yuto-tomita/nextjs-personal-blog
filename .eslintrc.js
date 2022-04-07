@@ -27,7 +27,7 @@ module.exports = {
     quotes: ['error', 'single'],
     'arrow-parens': ['error', 'always'],
     'no-empty-function': 'error',
-    // 'no-console': 'error',
+    'no-console': 'error',
     'valid-typeof': 'error',
     'keyword-spacing': ['error', { before: true }],
     'arrow-spacing': 'error',
