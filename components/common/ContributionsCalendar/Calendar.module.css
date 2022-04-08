@@ -17,3 +17,24 @@
 .countFontHide {
 	visibility: hidden;
 }
+
+.mondayLabel {
+	position: absolute;
+	left: 25px;
+	margin-top: 18px;
+	font-size: 0.5rem;
+}
+
+.wednesdayLabel {
+	position: absolute;
+	left: 25px;
+	margin-top: 50px;
+	font-size: 0.5rem;
+}
+
+.fridayLabel {
+	position: absolute;
+	left: 25px;
+	margin-top: 83px;
+	font-size: 0.5rem;
+}

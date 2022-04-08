@@ -77,6 +77,9 @@ const ContributionsCalendar: FC<ContributionsCalendarProps> = ({
           </div>
         )
       })}
+      <span className={style.mondayLabel}>月</span>
+      <span className={style.wednesdayLabel}>水</span>
+      <span className={style.fridayLabel}>金</span>
     </div>
   )
 }
