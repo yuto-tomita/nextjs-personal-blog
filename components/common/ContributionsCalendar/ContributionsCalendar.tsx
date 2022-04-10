@@ -2,7 +2,6 @@ import { FC, useMemo } from 'react'
 import style from './Calendar.module.css'
 import type { ContributionsCalendarQuery } from 'queries/__generated__/ContributionsCalendarQuery.graphql'
 import cn from 'classnames'
-import { Tooltip } from 'antd'
 
 interface ContributionsCalendarProps {
   contributionsCalendarData: ContributionsCalendarQuery['response']
@@ -49,7 +48,6 @@ const ContributionsCalendar: FC<ContributionsCalendarProps> = ({
       return colors[3]
     }
   }
-
   return (
     <div className={style.calendarContainer}>
       {weekContributions().map((val, key) => {
@@ -59,18 +57,18 @@ const ContributionsCalendar: FC<ContributionsCalendarProps> = ({
               return (
                 <div
                   key={index2}
-                  className={cn(style.day)}
+                  className={cn(style.day, style.tooltipContainer)}
                   style={{
                     background: getContributeColorClass(
                       val2.contributionCount
                     )
                   }}
                 >
-                  <Tooltip title={val2.date}>
-                    <span className={style.countFontHide}>
-                      {val2.contributionCount}
-                    </span>
-                  </Tooltip>
+                  <div className={cn(style.tooltipContents)}>
+                    {val2.date}
+                    <br />
+                    {val2.contributionCount}回
+                  </div>
                 </div>
               )
             })}
