@@ -67,3 +67,8 @@
 	top: -75px;
 	left: -40px;
 }
+
+.switchFormLabel {
+	font-size: 0.7rem;
+	margin-right: 0.4rem;
+}

@@ -86,13 +86,13 @@ const ContributionsCalendar: FC<ContributionsCalendarProps> = ({
         <span className={style.wednesdayLabel}>水</span>
         <span className={style.fridayLabel}>金</span>
       </div>
-      <div>
+      <label className={style.switchFormLabel}>
         草の色をハロウィン仕様にする
-        <Switch
-          size="small"
-          onChange={() => switchStatusHalloweenColor()}
-        />
-      </div>
+      </label>
+      <Switch
+        size="small"
+        onChange={() => switchStatusHalloweenColor()}
+      />
     </>
   )
 }
