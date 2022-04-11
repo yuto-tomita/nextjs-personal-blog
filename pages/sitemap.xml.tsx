@@ -4,7 +4,7 @@ import { getAllPostsPath } from '@lib/MdFileOperation'
 export const getServerSideProps = async ({
   res
 }: GetServerSidePropsContext) => {
-  const xml = await generateSitemapXml() // xmlコードを生成する処理（後で書く）
+  const xml = await generateSitemapXml()
 
   res.statusCode = 200
   res.setHeader(
