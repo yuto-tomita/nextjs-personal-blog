@@ -54,6 +54,22 @@ const PostResume = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const formatDate = dayjs(created_at).format('YYYY-MM-DD HH:mm:ss')
 
+  const downloadResume = async () => {
+    const res = await fetch('/api/resume-download', {
+      method: 'GET'
+    })
+
+    const texts: { resume: string } = await res.json()
+    const a = document.createElement('a')
+    a.download = 'tomita_resume.md'
+
+    const blob = new Blob([texts.resume], { type: 'text/plain' })
+
+    a.href = URL.createObjectURL(blob)
+    a.click()
+    URL.revokeObjectURL(a.href)
+  }
+
   return (
     <>
       <BlogJsonLd
@@ -99,6 +115,7 @@ const PostResume = ({
           type="primary"
           icon={<DownloadOutlined />}
           size="middle"
+          onClick={() => downloadResume()}
         >
           職務経歴書をダウンロード
         </Button>
