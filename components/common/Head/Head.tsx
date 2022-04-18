@@ -1,12 +1,10 @@
 import { FC } from 'react'
 import NextHead from 'next/head'
-import { DefaultSeo } from 'next-seo'
-import config from '@config/seo.json'
+import config from '@config/next-seo.config'
 
 const Head: FC = () => {
   return (
     <>
-      <DefaultSeo {...config} />
       <NextHead>
         <meta
           name="viewport"

@@ -1,4 +1,4 @@
-import { useEffect, useState, Suspense } from 'react'
+import { useEffect, useState } from 'react'
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { Head, Header, Footer } from '@components/common'
@@ -7,6 +7,8 @@ import style from '@styles/App.module.css'
 import Router from 'next/router'
 import { ReactRelayContext } from 'react-relay'
 import { useEnvironment } from '../lib/relay'
+import { DefaultSeo } from 'next-seo'
+import seo from '@config/next-seo.config'
 
 function MyApp({ Component, pageProps }: AppProps) {
   // ant-designのMenuコンポーネントを使用するにはSSRだとエラーが起きるため画面に要素が描画されてからコンポーネントを描画するようにする
@@ -28,6 +30,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <ReactRelayContext.Provider value={{ environment }}>
         <>
           <Head />
+          <DefaultSeo {...seo} />
           <div className={style.appContent}>
             <Header />
             <Component {...pageProps} />
