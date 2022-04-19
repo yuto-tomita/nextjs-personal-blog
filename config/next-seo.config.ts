@@ -1,7 +1,7 @@
 export default {
-  'titleTemplate': '%s | とみーの個人ブログ',
-  'description': '冨田優斗の個人ブログ',
-  'additionalMetaTags': [
+  titleTemplate: '%s | とみーの個人ブログ',
+  description: '冨田優斗の個人ブログ',
+  additionalMetaTags: [
     {
       'property': 'dc:creator',
       'content': '冨田優斗'
@@ -11,7 +11,12 @@ export default {
       'content': 'とみーの個人ブログ'
     }
   ],
-  'openGraph': {
+  twitter: {
+    'handle': '@qualidea04',
+    'site': '@qualidea04',
+    'cardType': 'summary_large_image'
+  },
+  openGraph: {
     'title': 'とみーの個人ブログ',
     'description': 'とみーの個人ブログ - https://nextjs-personal-blog-five.vercel.app/',
     'type': 'website',
@@ -26,10 +31,5 @@ export default {
         'alt': 'とみーの個人ブログ'
       }
     ]
-  },
-  'twitter': {
-    'handle': '@冨田優斗',
-    'site': '@冨田優斗',
-    'cardType': 'summary_large_image'
   }
 }
