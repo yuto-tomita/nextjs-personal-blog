@@ -98,7 +98,7 @@ const Home = ({
           </div>
           <div className={style.image}>
             <Image
-              src="/MyProfileImage.jpeg"
+              src="/MyProfileImage.jpg"
               alt="my profile image"
               layout="fill"
               objectFit="cover"
