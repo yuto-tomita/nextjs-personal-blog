@@ -20,7 +20,7 @@ export default {
     'site_name': 'とみーの個人ブログ',
     'images': [
       {
-        'url': '/MyProfileImage.jpeg',
+        'url': 'https://nextjs-personal-blog-five.vercel.app/MyProfileImage.jpeg',
         'width': 800,
         'height': 600,
         'alt': 'とみーの個人ブログ'
