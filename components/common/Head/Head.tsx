@@ -1,6 +1,5 @@
 import { FC } from 'react'
 import NextHead from 'next/head'
-import config from '@config/next-seo.config'
 
 const Head: FC = () => {
   return (

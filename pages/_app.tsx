@@ -29,8 +29,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     return (
       <ReactRelayContext.Provider value={{ environment }}>
         <>
-          <Head />
           <DefaultSeo {...seo} />
+          <Head />
           <div className={style.appContent}>
             <Header />
             <Component {...pageProps} />
