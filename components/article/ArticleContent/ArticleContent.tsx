@@ -102,7 +102,7 @@ const ArticleContent: FC<Props> = ({ title, content, tag }) => {
             <div className={style.profileContainer}>
               <div className={style.profileImage}>
                 <Image
-                  src="/MyProfileImage.jpeg"
+                  src="/MyProfileImage.jpg"
                   alt="my profile image"
                   layout="fill"
                   objectFit="cover"
