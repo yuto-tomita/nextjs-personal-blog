@@ -1,16 +1,16 @@
 export default {
-  // titleTemplate: '%s | とみーの個人ブログ',
-  // description: '冨田優斗の個人ブログ',
-  // additionalMetaTags: [
-  //   {
-  //     property: 'dc:creator',
-  //     content: '冨田優斗'
-  //   },
-  //   {
-  //     name: 'application-name',
-  //     content: 'とみーの個人ブログ'
-  //   }
-  // ],
+  titleTemplate: '%s | とみーの個人ブログ',
+  description: '冨田優斗の個人ブログ',
+  additionalMetaTags: [
+    {
+      property: 'dc:creator',
+      content: '冨田優斗'
+    },
+    {
+      name: 'application-name',
+      content: 'とみーの個人ブログ'
+    }
+  ],
   twitter: {
     handle: '@qualidea04',
     site: '@qualidea04',
