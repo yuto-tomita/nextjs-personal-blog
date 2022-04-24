@@ -36,24 +36,34 @@ export async function getStaticProps() {
       description: parseMdContent.data.description
     }
   })
-  const environment = initEnvironment({})
-  const queryProps: any = await fetchQuery(
-    environment,
-    contributionsCalendarQuery,
-    {}
-  ).toPromise()
 
-  const calendarData:
-    | ContributionsCalendarQuery['response']
-    | undefined = {
-    ...queryProps
-  }
+  try {
+    const environment = initEnvironment({})
+    const queryProps: any = await fetchQuery(
+      environment,
+      contributionsCalendarQuery,
+      {}
+    ).toPromise()
 
-  return {
-    props: {
-      mdFileNames,
-      parseMarkdownContent,
-      calendarData
+    const calendarData:
+      | ContributionsCalendarQuery['response']
+      | undefined = {
+      ...queryProps
+    }
+
+    return {
+      props: {
+        mdFileNames,
+        parseMarkdownContent,
+        calendarData
+      }
+    }
+  } catch (e) {
+    return {
+      props: {
+        mdFileNames,
+        parseMarkdownContent
+      }
     }
   }
 }
