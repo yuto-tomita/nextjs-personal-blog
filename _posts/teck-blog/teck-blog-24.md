@@ -1,7 +1,7 @@
 ---
 title: SPA,SSRの用語メモ
 slug: teck-blog-24
-tag: ['graphql']
+tag: ['JavaScript']
 image: study.png
 description: SPA、SSR何か
 created_at: 2022-4-23T22:57:20
