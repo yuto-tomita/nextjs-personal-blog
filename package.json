@@ -10,7 +10,8 @@
     "format": "eslint --fix './{lib,components,pages}/**/*.{ts,tsx}'",
     "start": "yarn run relay && next start",
     "build": "yarn run relay && next build",
-    "relay": "yarn run relay-compiler $@"
+    "relay": "yarn run relay-compiler $@",
+    "bundle-analyzer": "ANALYZE=true next build"
   },
   "relay": {
     "src": "./",
@@ -20,6 +21,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
+    "@next/bundle-analyzer": "^12.1.6",
     "@types/nodemailer": "^6.4.4",
     "antd": "^4.16.13",
     "axios": "^0.26.1",
