@@ -1,6 +1,7 @@
 import fs from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
+import dayjs from 'dayjs'
 
 type DirName = 'resume' | 'teck-blog';
 
@@ -28,7 +29,7 @@ function getPathAndCreateDate(dirName: DirName) {
 
     return {
       path: `${process.env.SITE_URL}${dirName}/${val.replace('.md', '')}`,
-      lastmod: getParseMdFile.data.created_at,
+      lastmod: dayjs(getParseMdFile.data.created_at).format('YYYY-MM-DD'),
     }
   })
 }
