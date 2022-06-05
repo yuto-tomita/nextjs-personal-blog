@@ -2,8 +2,8 @@ import { FC, CSSProperties } from 'react'
 import styles from './Container.module.css'
 
 interface ContainerProps {
-  children?: any
-  style?: CSSProperties
+  children?: any;
+  style?: CSSProperties;
 }
 
 const Container: FC<ContainerProps> = ({ children, style }) => {

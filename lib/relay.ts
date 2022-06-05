@@ -1,9 +1,4 @@
-import {
-  Environment,
-  Network,
-  RecordSource,
-  Store
-} from 'relay-runtime'
+import { Environment, Network, RecordSource, Store } from 'relay-runtime'
 import { useMemo } from 'react'
 import { RecordMap } from 'relay-runtime/lib/store/RelayStoreTypes'
 
@@ -16,12 +11,12 @@ async function fetchQuery(operation: any, variables: any) {
     method: 'POST',
     headers: {
       Authorization: `bearer ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
       query: operation.text,
-      variables
-    })
+      variables,
+    }),
   })
   return await response.json()
 }
@@ -29,12 +24,10 @@ async function fetchQuery(operation: any, variables: any) {
 // Export a singleton instance of Relay Environment configured with our network function:
 export const createEnvironment = new Environment({
   network: Network.create(fetchQuery),
-  store: new Store(new RecordSource())
+  store: new Store(new RecordSource()),
 })
 
-export const initEnvironment = (
-  initalRecords: RecordMap | undefined
-) => {
+export const initEnvironment = (initalRecords: RecordMap | undefined) => {
   // Create a network layer from the fetch function
   const environment = relayEnvironment ?? createEnvironment
 
@@ -52,9 +45,6 @@ export const initEnvironment = (
 }
 
 export function useEnvironment(initalRecords: RecordMap | undefined) {
-  const store = useMemo(
-    () => initEnvironment(initalRecords),
-    [initalRecords]
-  )
+  const store = useMemo(() => initEnvironment(initalRecords), [initalRecords])
   return store
 }

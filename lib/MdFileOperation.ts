@@ -2,7 +2,7 @@ import fs from 'fs'
 import { join } from 'path'
 import matter from 'gray-matter'
 
-type DirName = 'resume' | 'teck-blog'
+type DirName = 'resume' | 'teck-blog';
 
 const MD_FILE_PATH = join(process.cwd(), '_posts')
 
@@ -12,14 +12,8 @@ export function getMdFileFromDir(dirName: DirName) {
 }
 
 /** 引数のファイル名から、引数のディレクトリ名配下のファイルを読み込む */
-export function readFileFromFileName(
-  fileName: string,
-  dirName: DirName
-) {
-  return fs.readFileSync(
-    `${MD_FILE_PATH}/${dirName}/${fileName}`,
-    'utf8'
-  )
+export function readFileFromFileName(fileName: string, dirName: DirName) {
+  return fs.readFileSync(`${MD_FILE_PATH}/${dirName}/${fileName}`, 'utf8')
 }
 
 /** 読み込んだファイル名を扱いやすいデータ形式に変換する */
@@ -33,11 +27,8 @@ function getPathAndCreateDate(dirName: DirName) {
     const getParseMdFile = parseMdFile(mdFile)
 
     return {
-      path: `${process.env.SITE_URL}${dirName}/${val.replace(
-        '.md',
-        ''
-      )}`,
-      lastmod: getParseMdFile.data.created_at
+      path: `${process.env.SITE_URL}${dirName}/${val.replace('.md', '')}`,
+      lastmod: getParseMdFile.data.created_at,
     }
   })
 }
@@ -47,7 +38,7 @@ export function getAllPostsPath() {
   return {
     posts: [
       ...getPathAndCreateDate('resume'),
-      ...getPathAndCreateDate('teck-blog')
-    ]
+      ...getPathAndCreateDate('teck-blog'),
+    ],
   }
 }

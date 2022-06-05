@@ -4,7 +4,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { base16AteliersulphurpoolLight } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
 interface Props {
-  markdownContent: string
+  markdownContent: string;
 }
 
 const MarkdownPreview: FC<Props> = ({ markdownContent }) => {
@@ -26,7 +26,7 @@ const MarkdownPreview: FC<Props> = ({ markdownContent }) => {
                 {children}
               </code>
             )
-          }
+          },
         }}
       >
         {markdownContent}

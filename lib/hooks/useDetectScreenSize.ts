@@ -5,7 +5,7 @@ const getWindowDimensions = () => {
 
   return {
     width,
-    height
+    height,
   }
 }
 
@@ -24,6 +24,6 @@ export const useWindowDimensions = () => {
 
   return {
     height: windowDimensions.height,
-    width: windowDimensions.width
+    width: windowDimensions.width,
   }
 }

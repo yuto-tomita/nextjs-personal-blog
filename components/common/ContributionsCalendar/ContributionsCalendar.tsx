@@ -5,11 +5,11 @@ import cn from 'classnames'
 import { Switch } from 'antd'
 
 interface ContributionsCalendarProps {
-  contributionsCalendarData: ContributionsCalendarQuery['response']
+  contributionsCalendarData: ContributionsCalendarQuery['response'];
 }
 
 const ContributionsCalendar: FC<ContributionsCalendarProps> = ({
-  contributionsCalendarData
+  contributionsCalendarData,
 }) => {
   const [isHalloweenStatus, setIsHalloweenStatus] = useState(false)
   const average = useMemo(() => {
@@ -68,7 +68,7 @@ const ContributionsCalendar: FC<ContributionsCalendarProps> = ({
                     style={{
                       background: getContributeColorClass(
                         val2.contributionCount
-                      )
+                      ),
                     }}
                   >
                     <div className={cn(style.tooltipContents)}>
@@ -89,10 +89,7 @@ const ContributionsCalendar: FC<ContributionsCalendarProps> = ({
       <label className={style.switchFormLabel}>
         草の色をハロウィン仕様にする
       </label>
-      <Switch
-        size="small"
-        onChange={() => switchStatusHalloweenColor()}
-      />
+      <Switch size="small" onChange={() => switchStatusHalloweenColor()} />
     </>
   )
 }

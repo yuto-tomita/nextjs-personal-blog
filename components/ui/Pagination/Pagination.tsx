@@ -3,17 +3,17 @@ import style from './Pagination.module.css'
 import cn from 'classnames'
 
 interface PaginationProps {
-  currentPage: number
-  onClick: (arg: number) => void
-  data: unknown[]
-  className?: string
+  currentPage: number;
+  onClick: (arg: number) => void;
+  data: unknown[];
+  className?: string;
 }
 
 const Pagination: FC<PaginationProps> = ({
   currentPage,
   onClick,
   data = [],
-  className = ''
+  className = '',
 }) => {
   const pageCount = Math.ceil(data.length / 10)
 
@@ -24,9 +24,7 @@ const Pagination: FC<PaginationProps> = ({
           <div
             className={cn(
               style.pagination,
-              currentPage === index + 1
-                ? style.currentPagination
-                : '',
+              currentPage === index + 1 ? style.currentPagination : '',
               className
             )}
             key={index}

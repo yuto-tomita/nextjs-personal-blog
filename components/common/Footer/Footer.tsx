@@ -31,7 +31,7 @@ const Footer: FC = () => {
         url="https://nextjs-personal-blog-elqgxu4dl-tommy-personal-blog.vercel.app/"
         sameAs={[
           'https://twitter.com/qualidea04',
-          'https://github.com/yuto-tomita'
+          'https://github.com/yuto-tomita',
         ]}
       />
     </>

@@ -1,7 +1,7 @@
 import {
   getMdFileFromDir,
   readFileFromFileName,
-  parseMdFile
+  parseMdFile,
 } from '@lib/MdFileOperation'
 import type { InferGetStaticPropsType } from 'next'
 import { NextSeo, BlogJsonLd } from 'next-seo'
@@ -24,7 +24,7 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: false
+    fallback: false,
   }
 }
 
@@ -40,8 +40,8 @@ export async function getStaticProps(context: any) {
       description: parseMdContent.data.description,
       tag: parseMdContent.data.tag,
       created_at: Date.parse(parseMdContent.data.created_at),
-      slug
-    }
+      slug,
+    },
   }
 }
 const PostResume = ({
@@ -50,13 +50,13 @@ const PostResume = ({
   description,
   tag,
   created_at,
-  slug
+  slug,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const formatDate = dayjs(created_at).format('YYYY-MM-DD HH:mm:ss')
 
   const downloadResume = async () => {
     const res = await fetch('/api/resume-download', {
-      method: 'GET'
+      method: 'GET',
     })
 
     const texts: { resume: string } = await res.json()
@@ -93,13 +93,13 @@ const PostResume = ({
               url: './public/next.jpeg',
               width: 800,
               height: 600,
-              alt: 'プレビュー画像'
-            }
+              alt: 'プレビュー画像',
+            },
           ],
           article: {
             publishedTime: formatDate,
-            tags: tag
-          }
+            tags: tag,
+          },
         }}
       />
       <ArticleContent

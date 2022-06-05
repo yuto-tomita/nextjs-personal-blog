@@ -2,7 +2,7 @@
 import {
   getMdFileFromDir,
   readFileFromFileName,
-  parseMdFile
+  parseMdFile,
 } from '@lib/MdFileOperation'
 import type { InferGetStaticPropsType } from 'next'
 import { NextSeo, BlogJsonLd } from 'next-seo'
@@ -22,16 +22,13 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: false
+    fallback: false,
   }
 }
 
 export async function getStaticProps(context: any) {
   const { slug } = context.params
-  const mdFileContent = readFileFromFileName(
-    `${slug}.md`,
-    'teck-blog'
-  )
+  const mdFileContent = readFileFromFileName(`${slug}.md`, 'teck-blog')
   const parseMdContent = parseMdFile(mdFileContent)
 
   return {
@@ -41,8 +38,8 @@ export async function getStaticProps(context: any) {
       description: parseMdContent.data.description,
       tag: parseMdContent.data.tag,
       created_at: Date.parse(parseMdContent.data.created_at),
-      slug
-    }
+      slug,
+    },
   }
 }
 
@@ -52,7 +49,7 @@ const Post = ({
   description,
   tag,
   created_at,
-  slug
+  slug,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const formatDate = dayjs(created_at).format('YYYY-MM-DD HH:mm:ss')
 
@@ -82,13 +79,13 @@ const Post = ({
               url: '/next.jpeg',
               width: 800,
               height: 600,
-              alt: 'プレビュー画像'
-            }
+              alt: 'プレビュー画像',
+            },
           ],
           article: {
             publishedTime: formatDate,
-            tags: tag
-          }
+            tags: tag,
+          },
         }}
       />
       <ArticleContent

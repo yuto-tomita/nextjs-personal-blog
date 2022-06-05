@@ -7,7 +7,7 @@
     "lint": "next lint",
     "prepare": "husky install",
     "lint-staged": "next lint",
-    "format": "eslint --fix './{lib,components,pages}/**/*.{ts,tsx}' && prettier --write './{lib,components,pages}/**/*.{ts,tsx}'",
+    "format": "eslint --fix './{lib,components,pages}/**/*.{ts,tsx}'",
     "start": "yarn run relay && next start",
     "build": "yarn run relay && next build",
     "relay": "yarn run relay-compiler $@"

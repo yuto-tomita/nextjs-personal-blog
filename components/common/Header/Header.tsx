@@ -49,18 +49,18 @@ const Header: FC = () => {
           {
             position: 1,
             name: 'Home',
-            item: 'https://nextjs-personal-blog-elqgxu4dl-tommy-personal-blog.vercel.app/'
+            item: 'https://nextjs-personal-blog-elqgxu4dl-tommy-personal-blog.vercel.app/',
           },
           {
             position: 2,
             name: 'Blog',
-            item: 'https://nextjs-personal-blog-elqgxu4dl-tommy-personal-blog.vercel.app/blog'
+            item: 'https://nextjs-personal-blog-elqgxu4dl-tommy-personal-blog.vercel.app/blog',
           },
           {
             position: 3,
             name: 'Contact',
-            item: 'https://nextjs-personal-blog-elqgxu4dl-tommy-personal-blog.vercel.app/contact'
-          }
+            item: 'https://nextjs-personal-blog-elqgxu4dl-tommy-personal-blog.vercel.app/contact',
+          },
         ]}
       />
       <header>
@@ -70,9 +70,7 @@ const Header: FC = () => {
           onClick={handleClick}
         >
           {headerContents.map((menuName) => (
-            <Menu.Item key={menuName.toLowerCase()}>
-              {menuName}
-            </Menu.Item>
+            <Menu.Item key={menuName.toLowerCase()}>{menuName}</Menu.Item>
           ))}
         </Menu>
       </header>

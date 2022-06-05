@@ -27,11 +27,24 @@ module.exports = {
     quotes: ['error', 'single'],
     'arrow-parens': ['error', 'always'],
     'no-empty-function': 'error',
-    'no-console': 'error',
+    // 'no-console': 'error',
     'valid-typeof': 'error',
     'keyword-spacing': ['error', { before: true }],
     'arrow-spacing': 'error',
     'no-multi-spaces': 'error',
+    semi: ['error', 'never'],
+    'no-duplicate-imports': 'error',
+    'space-in-parens': ['error', 'never'],
+    'object-curly-spacing': ['error', 'always'],
+    'no-self-compare': 'error',
+    'comma-spacing': ['error', { 'before': false, 'after': true }],
+    'computed-property-spacing': ['error', 'never'],
+    'func-call-spacing': ['error', 'never'],
+    'indent': ['error', 2],
+    'key-spacing': ['error', { 'beforeColon': false }],
+    'no-multiple-empty-lines': 'error',
+    'no-whitespace-before-property': 'error',
+    'rest-spread-spacing': ['error', 'never'],
     'react/self-closing-comp': [
       'error',
       {
@@ -39,18 +52,6 @@ module.exports = {
         html: true
       }
     ],
-    // 'react/jsx-wrap-multilines': [
-    //   'error',
-    //   {
-    //     declaration: 'parens-new-line',
-    //     assignment: 'parens-new-line',
-    //     return: 'parens-new-line',
-    //     arrow: 'parens-new-line',
-    //     condition: 'parens-new-line',
-    //     logical: 'parens-new-line',
-    //     prop: 'parens-new-line'
-    //   }
-    // ],
     'react/jsx-closing-bracket-location': 1,
     'react/jsx-closing-bracket-location': [1, 'tag-aligned'],
     'react/jsx-closing-bracket-location': [1, 'line-aligned'],
@@ -58,14 +59,12 @@ module.exports = {
       'error',
       { multiline: 'consistent', singleline: 'consistent' }
     ],
-    // 'react/jsx-first-prop-new-line': ['error', 'multiline'],
     'react/jsx-indent-props': [
       2,
       { indentMode: 2, ignoreTernaryOperator: true }
     ],
-    // 'react/jsx-max-props-per-line': ['error'],
     'react/jsx-tag-spacing': ['error'],
-    'react/jsx-newline': [2, { prevent: true }],
+    // 'react/jsx-newline': [2, { prevent: true }],
     'react/jsx-indent': [
       2,
       2,

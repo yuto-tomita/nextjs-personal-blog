@@ -1,15 +1,15 @@
-import { FC, CSSProperties } from 'react'
+import { FC } from 'react'
 import style from './List.module.css'
 import Link from 'next/link'
 
 interface ArticleInfo {
-  title: string
-  description: string
-  href: string
-  created_at: string
+  title: string;
+  description: string;
+  href: string;
+  created_at: string;
 }
 interface ListProps {
-  articleInfo: ArticleInfo[]
+  articleInfo: ArticleInfo[];
 }
 
 const List: FC<ListProps> = ({ articleInfo = [] }) => {
@@ -20,13 +20,9 @@ const List: FC<ListProps> = ({ articleInfo = [] }) => {
           return (
             <Link href={`/blog/${val.href}`} key={key}>
               <li className={style.list}>
-                <div className={style.listPostDate}>
-                  {val.created_at}
-                </div>
+                <div className={style.listPostDate}>{val.created_at}</div>
                 <div className={style.listTitle}>{val.title}</div>
-                <div className={style.listDescription}>
-                  {val.description}
-                </div>
+                <div className={style.listDescription}>{val.description}</div>
               </li>
             </Link>
           )

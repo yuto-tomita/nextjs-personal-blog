@@ -2,7 +2,7 @@ import type { InferGetStaticPropsType } from 'next'
 import {
   getMdFileFromDir,
   readFileFromFileName,
-  parseMdFile
+  parseMdFile,
 } from '@lib/MdFileOperation'
 import { Container, List, Pagination } from '@components/ui'
 import dayjs from 'dayjs'
@@ -23,7 +23,7 @@ export async function getStaticProps() {
       slug: parseMdContent.data.slug,
       image: parseMdContent.data.image,
       description: parseMdContent.data.description,
-      created_at: Date.parse(parseMdContent.data.created_at)
+      created_at: Date.parse(parseMdContent.data.created_at),
     }
   })
 
@@ -33,12 +33,12 @@ export async function getStaticProps() {
 
   return {
     props: {
-      parseMarkdownContent
-    }
+      parseMarkdownContent,
+    },
   }
 }
 const Blog = ({
-  parseMarkdownContent
+  parseMarkdownContent,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [pagination, usePagination] = useState(1)
 
@@ -52,7 +52,7 @@ const Blog = ({
       title: String(val.title),
       description: String(val.description),
       href: val.slug,
-      created_at: dayjs(val.created_at).format('YYYY-MM-DD')
+      created_at: dayjs(val.created_at).format('YYYY-MM-DD'),
     }
   })
 

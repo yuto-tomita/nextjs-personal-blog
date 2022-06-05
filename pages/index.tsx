@@ -3,7 +3,7 @@ import type { InferGetStaticPropsType } from 'next'
 import {
   getMdFileFromDir,
   readFileFromFileName,
-  parseMdFile
+  parseMdFile,
 } from '@lib/MdFileOperation'
 import Link from 'next/link'
 import { Container } from '@components/ui'
@@ -33,7 +33,7 @@ export async function getStaticProps() {
       content: parseMdContent.content,
       slug: parseMdContent.data.slug,
       image: parseMdContent.data.image,
-      description: parseMdContent.data.description
+      description: parseMdContent.data.description,
     }
   })
 
@@ -45,25 +45,23 @@ export async function getStaticProps() {
       {}
     ).toPromise()
 
-    const calendarData:
-      | ContributionsCalendarQuery['response']
-      | undefined = {
-      ...queryProps
+    const calendarData: ContributionsCalendarQuery['response'] | undefined = {
+      ...queryProps,
     }
 
     return {
       props: {
         mdFileNames,
         parseMarkdownContent,
-        calendarData
-      }
+        calendarData,
+      },
     }
   } catch (e) {
     return {
       props: {
         mdFileNames,
-        parseMarkdownContent
-      }
+        parseMarkdownContent,
+      },
     }
   }
 }
@@ -71,13 +69,11 @@ export async function getStaticProps() {
 const Home = ({
   mdFileNames,
   parseMarkdownContent,
-  calendarData = undefined
+  calendarData = undefined,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { Meta } = Card
   const { width } = useWindowDimensions()
-  const articleTitle = mdFileNames.map((val) =>
-    val.replace(/.md/g, '')
-  )
+  const articleTitle = mdFileNames.map((val) => val.replace(/.md/g, ''))
   const { Title } = Typography
 
   const getAccessToken = new URL(window.location.href).hash
@@ -126,11 +122,7 @@ const Home = ({
                 title={articleTitle[index]}
                 style={{ width: 400 }}
               >
-                <Link
-                  href={`/resume/${mdContents.slug}`}
-                  key={index}
-                  passHref
-                >
+                <Link href={`/resume/${mdContents.slug}`} key={index} passHref>
                   <div>
                     {mdContents.image ? (
                       <Image
@@ -166,12 +158,10 @@ const Home = ({
             <h1>直近一年の活動ログ</h1>
             総コミット回数:
             {
-              calendarData.user?.contributionsCollection
-                .contributionCalendar.totalContributions
+              calendarData.user?.contributionsCollection.contributionCalendar
+                .totalContributions
             }
-            <ContributionsCalendar
-              contributionsCalendarData={calendarData}
-            />
+            <ContributionsCalendar contributionsCalendarData={calendarData} />
           </div>
         ) : (
           <></>

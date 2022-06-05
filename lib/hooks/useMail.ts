@@ -11,14 +11,14 @@ export const useMail = () => {
       mail: mail.length ? null : 'メールアドレスを入力してください',
       name: name.length ? null : '名前を入力してください',
       subject: subject.length ? null : '件名を入力してください',
-      body: body.length ? null : 'お問い合わせ内容を入力してください'
+      body: body.length ? null : 'お問い合わせ内容を入力してください',
     }
   }
 
   const send = async () => {
     await fetch('/api/mail', {
       method: 'POST',
-      body: createBody()
+      body: createBody(),
     })
   }
 
@@ -40,6 +40,6 @@ export const useMail = () => {
     setSubject,
     setBody,
     send,
-    errorMessage
+    errorMessage,
   }
 }
