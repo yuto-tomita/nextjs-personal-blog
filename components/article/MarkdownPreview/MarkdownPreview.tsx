@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { PrismAsyncLight as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { base16AteliersulphurpoolLight } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import base16AteliersulphurpoolLight from 'react-syntax-highlighter/dist/cjs/styles/prism/base16-ateliersulphurpool.light'
 
 interface Props {
   markdownContent: string;
