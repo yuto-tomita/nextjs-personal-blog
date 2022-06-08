@@ -14,11 +14,6 @@ import style from '../styles/Home.module.css'
 import { getSpanValue } from '@lib/hooks/useArticleSpan'
 import { NextSeo } from 'next-seo'
 import { profileMessage } from '@lib/constant/ProfileMessage'
-import { fetchQuery } from 'react-relay'
-import { initEnvironment } from '../lib/relay'
-import contributionsCalendarQuery from 'queries/ContributionsCalendar'
-import type { ContributionsCalendarQuery } from 'queries/__generated__/ContributionsCalendarQuery.graphql'
-import ContributionsCalendar from '../components/common/ContributionsCalendar/ContributionsCalendar'
 
 export async function getStaticProps() {
   const mdFileNames = getMdFileFromDir('resume')
@@ -38,22 +33,10 @@ export async function getStaticProps() {
   })
 
   try {
-    const environment = initEnvironment({})
-    const queryProps: any = await fetchQuery(
-      environment,
-      contributionsCalendarQuery,
-      {}
-    ).toPromise()
-
-    const calendarData: ContributionsCalendarQuery['response'] | undefined = {
-      ...queryProps,
-    }
-
     return {
       props: {
         mdFileNames,
         parseMarkdownContent,
-        calendarData,
       },
     }
   } catch (e) {
@@ -69,7 +52,6 @@ export async function getStaticProps() {
 const Home = ({
   mdFileNames,
   parseMarkdownContent,
-  calendarData = undefined,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { Meta } = Card
   const { width } = useWindowDimensions()
@@ -153,19 +135,6 @@ const Home = ({
             </Col>
           ))}
         </Row>
-        {calendarData ? (
-          <div>
-            <h1>直近一年の活動ログ</h1>
-            総コミット回数:
-            {
-              calendarData.user?.contributionsCollection.contributionCalendar
-                .totalContributions
-            }
-            <ContributionsCalendar contributionsCalendarData={calendarData} />
-          </div>
-        ) : (
-          <></>
-        )}
         <h1>個人開発物</h1>
         <p>coming soon...</p>
       </Container>

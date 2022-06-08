@@ -5,15 +5,12 @@ import { Head, Header, Footer } from '@components/common'
 import 'antd/dist/antd.css'
 import style from '@styles/App.module.css'
 import Router from 'next/router'
-import { ReactRelayContext } from 'react-relay'
-import { useEnvironment } from '../lib/relay'
 import { DefaultSeo } from 'next-seo'
 import seo from '@config/next-seo.config'
 
 function MyApp({ Component, pageProps }: AppProps) {
   // ant-designのMenuコンポーネントを使用するにはSSRだとエラーが起きるため画面に要素が描画されてからコンポーネントを描画するようにする
   const [showComponent, setShowComponent] = useState(false)
-  const environment = useEnvironment(pageProps.intialRecords)
 
   useEffect(() => {
     setShowComponent(true)
@@ -27,17 +24,15 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   if (showComponent) {
     return (
-      <ReactRelayContext.Provider value={{ environment }}>
-        <>
-          <DefaultSeo {...seo} />
-          <Head />
-          <div className={style.appContent}>
-            <Header />
-            <Component {...pageProps} />
-            <Footer />
-          </div>
-        </>
-      </ReactRelayContext.Provider>
+      <>
+        <DefaultSeo {...seo} />
+        <Head />
+        <div className={style.appContent}>
+          <Header />
+          <Component {...pageProps} />
+          <Footer />
+        </div>
+      </>
     )
   } else {
     return null
