@@ -122,3 +122,10 @@
 	margin-top: -1rem;
 	padding-bottom: 1rem;
 }
+
+.listStyle {
+	list-style: none;
+	margin-left: -20px;
+	margin-top: 6px;
+	padding: 5px;
+}

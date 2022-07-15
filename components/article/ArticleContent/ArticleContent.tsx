@@ -1,4 +1,4 @@
-import { FC, useState, useCallback } from 'react'
+import { FC, useState, useEffect, useRef } from 'react'
 import { Container } from '@components/ui'
 import { MarkdownPreview } from '@components/article'
 import { Row, Col, Tag } from 'antd'
@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { getSpanValue } from '@lib/hooks/useArticleSpan'
 import style from '@styles/Article.module.css'
 import { useWindowDimensions } from '@lib/hooks/useDetectScreenSize'
-import { useScrollAmount } from '@lib/hooks/useScrollAmount'
+import cn from 'classnames'
 
 interface Props {
   title: string;
@@ -18,41 +18,49 @@ interface Props {
 }
 
 const ArticleContent: FC<Props> = ({ title, content, tag }) => {
-  const [onlyHeadings, setOnlyHeadings] = useState<HTMLHeadingElement[]>([])
+  const markdownRef = useRef<HTMLDivElement>(null)
+  const ulElement = useRef<HTMLUListElement>(null)
+  const [onlyHeadingsText, setOnlyHeadingsText] = useState<HTMLHeadingElement[]>([])
   const { width, height } = useWindowDimensions()
-  const { yaxisAmount } = useScrollAmount()
 
-  const getOneHeadingTexts = () => {
-    return onlyHeadings.map((val) => val.innerText)
-  }
-
-  const getActiveHeading = (index: number) => {
-    const heddingOffsetTop = onlyHeadings.map((val) => val.offsetTop)
-    if (heddingOffsetTop[index + 1]) {
-      if (
-        between(
-          yaxisAmount,
-          heddingOffsetTop[index],
-          heddingOffsetTop[index + 1]
-        )
-      ) {
-        return style.contentActive
+  const onIntersect = (
+    entries: IntersectionObserverEntry[],
+    currentViewHeadingIndex: number
+  ) => {
+    if (entries[0].isIntersecting) {
+      const currentViewContent = ulElement.current?.getElementsByClassName(`${style.contentActive}`)
+      if (currentViewContent && currentViewContent.length) {
+        currentViewContent[0].classList.remove(style.contentActive)
       }
-    } else if (between(yaxisAmount, heddingOffsetTop[index], height + 200)) {
-      return style.contentActive
+
+      const newActiveIndex = ulElement.current?.getElementsByClassName(`title_${currentViewHeadingIndex}`)
+      if (newActiveIndex) {
+        newActiveIndex[0].classList.add(style.contentActive)
+      }
     }
   }
 
-  const between = (x: number, min: number, max: number) => {
-    return x >= min && x <= max
-  }
+  useEffect(() => {
+    const headingElements = markdownRef.current?.querySelectorAll('h1')
+    
+    if (headingElements) {
+      setOnlyHeadingsText(Array.from(headingElements))
+      const options = {
+        root: null,
+        rootMargin: '10% 0px -60% 0px',
+        threshold: 0
+      }
 
-  const markdownRef = useCallback((node: HTMLElement | null) => {
-    if (node) {
-      const onlyHeadings = Array.from(node.querySelectorAll('h1'))
-      setOnlyHeadings(onlyHeadings)
+      headingElements.forEach((val, index) => {
+        const observer = new IntersectionObserver((entries) => onIntersect(entries, index), options)
+        observer.observe(val)
+      })
     }
   }, [])
+
+  const getOneHeadingTexts = () => {
+    return onlyHeadingsText.map((val) => val.innerText)
+  }
 
   return (
     <Container style={{ background: 'rgb(248, 246, 246)', height: '100%' }}>
@@ -69,7 +77,9 @@ const ArticleContent: FC<Props> = ({ title, content, tag }) => {
         </Col>
         <Col span={getSpanValue(width) === 24 ? 24 : 13}>
           <div className={style.contentArea}>
-            <p className={style.title}>{title}</p>
+            <p className={style.title}>
+              {title}
+            </p>
             <div className={style.content} ref={markdownRef}>
               <MarkdownPreview markdownContent={content} />
             </div>
@@ -80,11 +90,18 @@ const ArticleContent: FC<Props> = ({ title, content, tag }) => {
           className={style.sticky}
         >
           <div className={style.tagContentArea}>
-            <p className={style.title}>目次</p>
-            <ul>
+            <p className={style.title}>
+              目次
+            </p>
+            <ul ref={ulElement}>
               {getOneHeadingTexts().map((text, index) => {
                 return (
-                  <li className={getActiveHeading(index)} key={index}>
+                  <li
+                    key={index}
+                    className={cn(`title_${index}`, style.listStyle)}
+                  >
+                    {/* <a href={text}>
+                    </a> */}
                     {text}
                   </li>
                 )
