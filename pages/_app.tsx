@@ -3,7 +3,6 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { Head, Header, Footer } from '@components/common'
 import 'antd/dist/antd.css'
-import style from '@styles/App.module.css'
 import Router from 'next/router'
 import { DefaultSeo } from 'next-seo'
 import seo from '@config/next-seo.config'
@@ -27,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <>
         <DefaultSeo {...seo} />
         <Head />
-        <div className={style.appContent}>
+        <div className="h-screen relative pb-20 box-border">
           <Header />
           <Component {...pageProps} />
           <Footer />
