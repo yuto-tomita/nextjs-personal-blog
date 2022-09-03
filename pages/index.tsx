@@ -1,46 +1,7 @@
 import React from 'react'
-import {
-  getMdFileFromDir,
-  readFileFromFileName,
-  parseMdFile,
-} from '@lib/MdFileOperation'
 import { Text } from '@components/ui'
 import { NextSeo } from 'next-seo'
 import { profileMessage } from '@lib/constant/ProfileMessage'
-
-export async function getStaticProps() {
-  const mdFileNames = getMdFileFromDir('resume')
-  const mdFile = mdFileNames.map((fileName) =>
-    readFileFromFileName(fileName, 'resume')
-  )
-  const parseMarkdownContent = mdFile.map((markdown) => {
-    const parseMdContent = parseMdFile(markdown)
-
-    return {
-      title: parseMdContent.data.title,
-      content: parseMdContent.content,
-      slug: parseMdContent.data.slug,
-      image: parseMdContent.data.image,
-      description: parseMdContent.data.description,
-    }
-  })
-
-  try {
-    return {
-      props: {
-        mdFileNames,
-        parseMarkdownContent,
-      },
-    }
-  } catch (e) {
-    return {
-      props: {
-        mdFileNames,
-        parseMarkdownContent,
-      },
-    }
-  }
-}
 
 const Home = () => {
   const texts = profileMessage.split(/(\n)/).map((item, index) => {
@@ -74,9 +35,15 @@ const Home = () => {
           </span>
         </Text>
         <div className="flex flex-col mt-6 gap-2">
-          <a href="https://github.com/yuto-tomita">Gihub</a>
-          <a href="https://twitter.com/qualidea04">Twitter</a>
-          <a href="https://qiita.com/tommy0218">Qiita</a>
+          <a href="https://github.com/yuto-tomita">
+            Github
+          </a>
+          <a href="https://twitter.com/qualidea04">
+            Twitter
+          </a>
+          <a href="https://qiita.com/tommy0218">
+            Qiita
+          </a>
         </div>
       </div>
       {/* <h1>resume</h1> */}
