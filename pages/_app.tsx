@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <div className="h-screen relative pb-20 box-border">
           <Header />
           <Component {...pageProps} />
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </>
     )
