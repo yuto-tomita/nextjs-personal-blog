@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react'
 
-type Variant = 'title' | 'text'
+type Variant = 'title' | 'text' | 'resumeTitle'
 
 interface TextProps {
 	className?: string
@@ -12,14 +12,19 @@ const Text: FC<TextProps> = ({ className, children, variant }) => {
   const textClass = () => {
     const classes = {
       title: 'text-3xl font-bold',
-      text: 'text-xs font-bold'
+      text: 'text-xs',
+      resumeTitle: 'font-bold'
     }
 
     return classes[variant]
   }
 
+  const propClassName = () => {
+    return className || ''
+  }
+
   return (
-    <div className={`${textClass()}, ${className}`}>
+    <div className={`${textClass()} ${propClassName()}`}>
       {children}
     </div>
   )
