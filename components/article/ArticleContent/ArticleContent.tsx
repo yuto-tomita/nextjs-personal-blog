@@ -1,9 +1,8 @@
 import { FC, useState, useEffect, useRef } from 'react'
-import { Container } from '@components/ui'
+import { Container, Text } from '@components/ui'
 import { MarkdownPreview } from '@components/article'
-import { Row, Col, Tag } from 'antd'
+// import { Row, Col, Tag } from 'antd
 import Image from 'next/image'
-import { getSpanValue } from '@lib/hooks/useArticleSpan'
 import style from '@styles/Article.module.css'
 import { useWindowDimensions } from '@lib/hooks/useDetectScreenSize'
 import cn from 'classnames'
@@ -21,8 +20,8 @@ const ArticleContent: FC<Props> = ({ title, content, tag }) => {
   const markdownRef = useRef<HTMLDivElement>(null)
   const ulElement = useRef<HTMLUListElement>(null)
   const [onlyHeadingsText, setOnlyHeadingsText] = useState<HTMLHeadingElement[]>([])
-  const { width, height } = useWindowDimensions()
 
+  /** スクロール量に応じて、目次の色を変える処理 */
   const onIntersect = (
     entries: IntersectionObserverEntry[],
     currentViewHeadingIndex: number
@@ -63,54 +62,53 @@ const ArticleContent: FC<Props> = ({ title, content, tag }) => {
   }
 
   return (
-    <Container style={{ background: 'rgb(248, 246, 246)', height: '100%' }}>
-      <Row align="top" gutter={[8, 8]}>
-        <Col span={getSpanValue(width) === 24 ? 24 : 5}>
-          <div className={style.tagContentArea}>
-            <p className={style.title}>Tag</p>
-            <div className={style.content}>
-              {tag.map((val: string, index: string | number) => {
-                return <Tag key={index}>{val}</Tag>
-              })}
+    <Container style={{ background: 'rgb(248, 246, 246)' }}>
+      <div className="flex gap-2">
+        <div className="bg-white rounded-xl pb-4 h-full w-60">
+          <Text variant="title" className="text-center py-5">
+            Tag
+          </Text>
+          <div className="flex flex-col whitespace-nowrap mt-2 ml-2">
+            {tag.map((val: string, index: string | number) => {
+              return (
+                <span key={index}>{val}</span>
+              )
+            })}
+          </div>
+        </div>
+
+        <div className="bg-white rounded-xl mr-2 pb-4">
+          <Text variant="title" className="text-center py-5">
+            {title}
+          </Text>
+          <div className="mx-8" ref={markdownRef}>
+            <MarkdownPreview markdownContent={content} />
+          </div>
+        </div>
+        
+        {/* stickyを効かせるため、空divを挿入 */}
+        <div>
+          <div className="sticky top-0">
+            <div className="bg-white rounded-xl pb-4">
+              <Text variant="title" className="text-center py-5">
+                目次
+              </Text>
+              <ul ref={ulElement}>
+                {getOneHeadingTexts().map((text, index) => {
+                  return (
+                    <li
+                      key={index}
+                      className={cn(`title_${index}`, 'list-none mt-2 ml-5')}
+                    >
+                      {text}
+                    </li>
+                  )
+                })}
+              </ul>
             </div>
-          </div>
-        </Col>
-        <Col span={getSpanValue(width) === 24 ? 24 : 13}>
-          <div className={style.contentArea}>
-            <p className={style.title}>
-              {title}
-            </p>
-            <div className={style.content} ref={markdownRef}>
-              <MarkdownPreview markdownContent={content} />
-            </div>
-          </div>
-        </Col>
-        <Col
-          span={getSpanValue(width) === 24 ? 24 : 5}
-          className={style.sticky}
-        >
-          <div className={style.tagContentArea}>
-            <p className={style.title}>
-              目次
-            </p>
-            <ul ref={ulElement}>
-              {getOneHeadingTexts().map((text, index) => {
-                return (
-                  <li
-                    key={index}
-                    className={cn(`title_${index}`, style.listStyle)}
-                  >
-                    {/* <a href={text}>
-                    </a> */}
-                    {text}
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-          <div className={style.profileContentArea}>
-            <div className={style.profileContainer}>
-              <div className={style.profileImage}>
+
+            <div className="bg-white rounded-lg py-4 mt-4">
+              <div className="rounded-full overflow-hidden w-32 h-32 relative mx-auto">
                 <Image
                   src="/MyProfileImage.jpg"
                   alt="my profile image"
@@ -118,8 +116,10 @@ const ArticleContent: FC<Props> = ({ title, content, tag }) => {
                   objectFit="cover"
                 />
               </div>
-              <p className={style.profileName}>冨田優斗</p>
-              <p className={style.profileText}>
+              <p className="font-bold mt-4 text-center">
+                冨田優斗
+              </p>
+              <p className="text-xs mx-5">
                 受託とSESをやっている会社でフロントエンドエンジニアとして働いています。
                 <br />
                 <br />
@@ -135,8 +135,8 @@ const ArticleContent: FC<Props> = ({ title, content, tag }) => {
               </p>
             </div>
           </div>
-        </Col>
-      </Row>
+        </div>
+      </div>
     </Container>
   )
 }
