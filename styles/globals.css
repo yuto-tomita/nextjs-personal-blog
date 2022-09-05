@@ -6,4 +6,12 @@
 	html {
 		font-family: Proxima Nova, system-ui, sans-serif;
 	}
+
+	h1 {
+		@apply font-bold text-3xl border-b-2 border-gray-200 pb-4;
+	}
+
+	p {
+		@apply py-4;
+	}
 }
