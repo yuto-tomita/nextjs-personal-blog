@@ -1,13 +1,13 @@
 import React, { FC, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { Menu } from 'antd'
 import { ProfilePageJsonLd } from 'next-seo'
+import { Text } from '@components/ui'
 
 const Header: FC = () => {
   // TODO: Google上でブログ記事がクリックされたときに選択されているmenuが'1'になるようにする
   const [menuState, setSelectMenu] = useState('')
   const router = useRouter()
-  const headerContents = ['home', 'blog', 'contact']
+  const headerContents = ['Resume', 'Blog', 'Contact']
 
   /** 表示されているパスを取得して、Menuを選択されている状態にする */
   useEffect(() => {
@@ -27,8 +27,9 @@ const Header: FC = () => {
   }
 
   /** 選択されているMenuを小文字に変換して、選択されているMenuを更新する */
-  const handleClick = (event: any) => {
-    const menuName = event.key.toLowerCase()
+  const handleClick = (event: React.MouseEvent<HTMLParagraphElement, MouseEvent>) => {
+    const menuName = event.currentTarget.innerText.toLocaleLowerCase()
+    console.log(menuName)
     setSelectMenu(menuName)
     navigateToMenu(menuName)
   }
@@ -63,16 +64,29 @@ const Header: FC = () => {
           },
         ]}
       />
-      <header>
-        <Menu
-          mode="horizontal"
-          selectedKeys={[menuState]}
-          onClick={handleClick}
+      <header className="h-12 flex w-11/12 justify-between">
+        <div
+          className="h-hull my-auto ml-4 font-bold text-2xl cursor-pointer"
+          onClick={() => router.push('/')}
         >
-          {headerContents.map((menuName) => (
-            <Menu.Item key={menuName.toLowerCase()}>{menuName}</Menu.Item>
-          ))}
-        </Menu>
+          tommy portfolio
+        </div>
+
+        <div className="flex gap-4 h-full mt-auto">
+          {
+            headerContents.map((val, index) => {
+              return (
+                <p
+                  onClick={(e) => handleClick(e)}
+                  key={index}
+                  className="text-stone-500 mt-auto hover:text-black cursor-pointer"
+                >
+                  { val }
+                </p>
+              )
+            })
+          }
+        </div>
       </header>
     </>
   )
