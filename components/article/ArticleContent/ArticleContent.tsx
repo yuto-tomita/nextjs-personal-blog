@@ -1,10 +1,7 @@
 import { FC, useState, useEffect, useRef } from 'react'
 import { Container, Text } from '@components/ui'
 import { MarkdownPreview } from '@components/article'
-// import { Row, Col, Tag } from 'antd
 import Image from 'next/image'
-import style from '@styles/Article.module.css'
-import { useWindowDimensions } from '@lib/hooks/useDetectScreenSize'
 import cn from 'classnames'
 
 interface Props {
@@ -27,14 +24,14 @@ const ArticleContent: FC<Props> = ({ title, content, tag }) => {
     currentViewHeadingIndex: number
   ) => {
     if (entries[0].isIntersecting) {
-      const currentViewContent = ulElement.current?.getElementsByClassName(`${style.contentActive}`)
+      const currentViewContent = ulElement.current?.getElementsByClassName('text-red-700')
       if (currentViewContent && currentViewContent.length) {
-        currentViewContent[0].classList.remove(style.contentActive)
+        currentViewContent[0].classList.remove('text-red-700')
       }
 
       const newActiveIndex = ulElement.current?.getElementsByClassName(`title_${currentViewHeadingIndex}`)
       if (newActiveIndex) {
-        newActiveIndex[0].classList.add(style.contentActive)
+        newActiveIndex[0].classList.add('text-red-700')
       }
     }
   }
