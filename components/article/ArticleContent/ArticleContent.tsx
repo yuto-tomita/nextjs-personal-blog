@@ -85,8 +85,8 @@ const ArticleContent: FC<Props> = ({ title, content, tag }) => {
         
         {/* stickyを効かせるため、空divを挿入 */}
         <div>
-          <div className="sticky top-0">
-            <div className="bg-white rounded-xl pb-4">
+          <div className="md:sticky md:top-0 mt-4">
+            <div className="bg-white rounded-xl pb-4 md:mt-4">
               <Text variant="title" className="text-center py-5">
                 目次
               </Text>
