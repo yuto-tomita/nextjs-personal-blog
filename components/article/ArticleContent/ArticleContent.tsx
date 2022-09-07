@@ -60,8 +60,8 @@ const ArticleContent: FC<Props> = ({ title, content, tag }) => {
 
   return (
     <Container style={{ background: 'rgb(248, 246, 246)' }}>
-      <div className="flex gap-2">
-        <div className="bg-white rounded-xl pb-4 h-full w-60">
+      <div className="md:flex gap-2">
+        <div className="bg-white rounded-xl pb-4 h-full md:w-60 mb-4">
           <Text variant="title" className="text-center py-5">
             Tag
           </Text>
@@ -74,7 +74,7 @@ const ArticleContent: FC<Props> = ({ title, content, tag }) => {
           </div>
         </div>
 
-        <div className="bg-white rounded-xl mr-2 pb-4">
+        <div className="bg-white rounded-xl mr-2 pb-4 md:mb-4">
           <Text variant="title" className="text-center py-5">
             {title}
           </Text>
