@@ -8,10 +8,23 @@
 	}
 
 	h1 {
+		@apply font-bold text-4xl border-b-2 border-gray-200 pb-4;
+		font-weight: 800;
+	}
+
+	h2 {
 		@apply font-bold text-3xl border-b-2 border-gray-200 pb-4;
 	}
 
+	h3 {
+		@apply text-2xl pb-4
+	}
+
 	p {
-		@apply py-4;
+		@apply py-2;
+	}
+
+	li {
+		@apply list-disc ml-8 pb-2
 	}
 }
