@@ -33,13 +33,17 @@ const Contact: NextPage = () => {
   type FormObjectKey = 'mail' | 'name' | 'subject' | 'body';
   const getErrorMessage = (formObjectKey: FormObjectKey) => {
     if (displayErrorMessage) {
-      return <div className={style.error}>{errorMessage()[formObjectKey]}</div>
+      return (
+        <div className="text-xs text-red-500">
+          {errorMessage()[formObjectKey]}
+        </div>
+      )
     }
   }
 
   return (
     <Container>
-      <div className={style.formContainer}>
+      <div className="mb-5">
         <label>件名</label>
         <Input
           placeholder="件名を入力してください"
@@ -47,7 +51,7 @@ const Contact: NextPage = () => {
         />
         {getErrorMessage('subject')}
       </div>
-      <div className={style.formContainer}>
+      <div className="mb-5">
         <label>メールアドレス</label>
         <Input
           placeholder="メールアドレスを入力してください"
@@ -55,7 +59,7 @@ const Contact: NextPage = () => {
         />
         {getErrorMessage('mail')}
       </div>
-      <div className={style.formContainer}>
+      <div className="mb-5">
         <label>名前</label>
         <Input
           placeholder="名前を入力してください"
@@ -63,7 +67,7 @@ const Contact: NextPage = () => {
         />
         {getErrorMessage('name')}
       </div>
-      <div className={style.formContainer}>
+      <div className="mb-5">
         <label>お問い合わせ内容</label>
         <TextArea
           placeholder="お問い合わせ内容を入力してください"
@@ -71,7 +75,7 @@ const Contact: NextPage = () => {
         />
         {getErrorMessage('body')}
       </div>
-      <div className={style.buttonPosition}>
+      <div className="ml-auto">
         <Button
           type="primary"
           shape="round"
