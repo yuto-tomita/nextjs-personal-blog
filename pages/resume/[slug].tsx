@@ -110,7 +110,7 @@ const PostResume = ({
         created_at={created_at}
         slug={slug}
       />
-      <div className={style.downloadButton}>
+      {/* <div className={style.downloadButton}>
         <Button
           type="primary"
           icon={<DownloadOutlined />}
@@ -119,7 +119,7 @@ const PostResume = ({
         >
           職務経歴書をダウンロード
         </Button>
-      </div>
+      </div> */}
     </>
   )
 }

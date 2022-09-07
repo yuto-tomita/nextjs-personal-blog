@@ -37,7 +37,7 @@ const Resume = ({ parseMarkdownContent }: InferGetStaticPropsType<typeof getStat
         {
           parseMarkdownContent.map((val, index) => {
             return (
-              <div key={index} className="mb-8">
+              <div key={index} className="pb-8">
                 <h1 className="font-bold text-xl">
                   {val.slug}
                 </h1>
