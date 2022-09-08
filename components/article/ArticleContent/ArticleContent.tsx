@@ -60,12 +60,12 @@ const ArticleContent: FC<Props> = ({ title, content, tag }) => {
 
   return (
     <Container style={{ background: 'rgb(248, 246, 246)' }}>
-      <div className="md:flex gap-2">
-        <div className="bg-white rounded-xl pb-4 h-full md:w-60 mb-4">
-          <Text variant="title" className="text-center py-5">
+      <div className="flex gap-2 md:flex-col">
+        <div className="bg-white rounded-xl pb-4 h-full px-8 mb-4 mb:w-full">
+          <Text variant="title" className="text-left py-5">
             Tag
           </Text>
-          <div className="flex flex-col whitespace-nowrap mt-2 ml-2">
+          <div className="flex flex-col whitespace-nowrap mt-2">
             {tag.map((val: string, index: string | number) => {
               return (
                 <span key={index}>{val}</span>
@@ -85,8 +85,8 @@ const ArticleContent: FC<Props> = ({ title, content, tag }) => {
         
         {/* stickyを効かせるため、空divを挿入 */}
         <div>
-          <div className="md:sticky md:top-0 mt-4">
-            <div className="bg-white rounded-xl pb-4 md:mt-4">
+          <div className="sticky top-0">
+            <div className="bg-white rounded-xl w-52 pb-4">
               <Text variant="title" className="text-center py-5">
                 目次
               </Text>
