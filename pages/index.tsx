@@ -56,50 +56,6 @@ const Home = () => {
           </a>
         </div>
       </div>
-      {/* <h1>resume</h1> */}
-      {/* カードタイトルが長文の場合もすべて表示するようにする */}
-      {/* カードタイトルの文字の大きさをもう少し大きくする */}
-      {/* <Row gutter={[48, 48]}>
-        {parseMarkdownContent.map((mdContents, index) => (
-          <Col key={index} span={getSpanValue(width)}>
-            <Card
-              hoverable
-              title={articleTitle[index]}
-              style={{ width: 400 }}
-            >
-              <Link href={`/resume/${mdContents.slug}`} key={index} passHref>
-                <div>
-                  {mdContents.image ? (
-                    <Image
-                      src={`/${mdContents.image}`}
-                      alt="blog rogo"
-                      width={500}
-                      height={300}
-                    />
-                  ) : (
-                    <></>
-                  )}
-                  <Meta
-                    title={
-                      <Title
-                        level={5}
-                        ellipsis={false}
-                        className={style.titleWrap}
-                      >
-                        {mdContents.title}
-                      </Title>
-                    }
-                    className={style.cardStyle}
-                    description={mdContents.description}
-                  />
-                </div>
-              </Link>
-            </Card>
-          </Col>
-        ))}
-      </Row>
-      <h1>個人開発物</h1>
-      <p>coming soon...</p> */}
     </>
   )
 }
