@@ -106,12 +106,12 @@ const ArticleContent: FC<Props> = ({ title, content, tag }) => {
 
             <div className="bg-white rounded-lg py-4 mt-4">
               <div className="rounded-full overflow-hidden w-32 h-32 relative mx-auto">
-                <Image
+                {/* <Image
                   src="/MyProfileImage.jpg"
                   alt="my profile image"
                   layout="fill"
                   objectFit="cover"
-                />
+                /> */}
               </div>
               <p className="font-bold mt-4 text-center">
                 冨田優斗

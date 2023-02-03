@@ -19,12 +19,12 @@ const Home = () => {
 
       <div className="w-6/12 m-auto mt-10">
         <div className="rounded-full overflow-hidden w-40 h-40 relative">
-          <Image
+          {/* <Image
             src="/MyProfileImage.jpg"
             alt="my profile image"
             layout="fill"
             objectFit="cover"
-          />
+          /> */}
         </div>
 
         <Text variant="title" className="mt-10">
