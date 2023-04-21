@@ -99,3 +99,21 @@ $ poetry init --no-interaction
 
 
 上記のコマンドを実行すると `pyproject.toml` が作成されているか確認する。
+
+# `poetry` 経由で django をインストール
+
+```
+$ poetry add django
+```
+
+`poetry` 経由で django と依存関係を install する
+
+# django プロジェクトの作成
+
+```
+$ poetry run django-admin startapp app
+```
+
+django のプロジェクト作成コマンド。完了すると初期ファイルがいくつか生成される
+
+# Happy Coding!
