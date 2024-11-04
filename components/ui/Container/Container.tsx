@@ -2,7 +2,7 @@ import { FC, CSSProperties } from "react";
 import styles from "./Container.module.css";
 
 interface ContainerProps {
-  children?: JSX.Element;
+  children?: React.ReactNode;
   style?: CSSProperties;
 }
 
