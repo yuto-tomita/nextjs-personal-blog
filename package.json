@@ -10,7 +10,8 @@
     "start": "pnpm relay && next start",
     "build": "pnpm relay && next build",
     "relay": "pnpm relay-compiler $@",
-    "bundle-analyzer": "ANALYZE=true next build"
+    "bundle-analyzer": "ANALYZE=true next build",
+    "typecheck": "tsc --noEmit"
   },
   "relay": {
     "src": "./",
