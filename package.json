@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "lint": "eslint */**/*.{js,ts,tsx} --fix",
+    "lint:fix": "eslint --fix './{lib,components,pages}/**/*.{ts,tsx}'",
+    "format:fix": "prettier --write './{lib,components,pages}/**/*.{ts,tsx}'",
     "prepare": "husky install",
-    "format": "eslint --fix './{lib,components,pages}/**/*.{ts,tsx}'",
     "start": "pnpm relay && next start",
     "build": "pnpm relay && next build",
     "relay": "pnpm relay-compiler $@",
