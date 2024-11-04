@@ -1,8 +1,8 @@
-import { FC, CSSProperties } from 'react'
-import styles from './Container.module.css'
+import { FC, CSSProperties } from "react";
+import styles from "./Container.module.css";
 
 interface ContainerProps {
-  children?: any;
+  children?: JSX.Element;
   style?: CSSProperties;
 }
 
@@ -11,7 +11,7 @@ const Container: FC<ContainerProps> = ({ children, style }) => {
     <div className={styles.container} style={style}>
       {children}
     </div>
-  )
-}
+  );
+};
 
-export default Container
+export default Container;

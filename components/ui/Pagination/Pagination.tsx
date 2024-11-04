@@ -1,6 +1,6 @@
-import { FC } from 'react'
-import style from './Pagination.module.css'
-import cn from 'classnames'
+import { FC } from "react";
+import style from "./Pagination.module.css";
+import cn from "classnames";
 
 interface PaginationProps {
   currentPage: number;
@@ -13,9 +13,9 @@ const Pagination: FC<PaginationProps> = ({
   currentPage,
   onClick,
   data = [],
-  className = '',
+  className = "",
 }) => {
-  const pageCount = Math.ceil(data.length / 10)
+  const pageCount = Math.ceil(data.length / 10);
 
   return (
     <div className={style.paginationWrapper}>
@@ -24,18 +24,18 @@ const Pagination: FC<PaginationProps> = ({
           <div
             className={cn(
               style.pagination,
-              currentPage === index + 1 ? style.currentPagination : '',
-              className
+              currentPage === index + 1 ? style.currentPagination : "",
+              className,
             )}
             key={index}
             onClick={() => onClick(index + 1)}
           >
             {index + 1}
           </div>
-        )
+        );
       })}
     </div>
-  )
-}
+  );
+};
 
-export default Pagination
+export default Pagination;

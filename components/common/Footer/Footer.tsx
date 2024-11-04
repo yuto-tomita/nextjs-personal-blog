@@ -1,16 +1,16 @@
-import { FC } from 'react'
-import { SocialProfileJsonLd } from 'next-seo'
-import { GithubOutlined, TwitterOutlined } from '@ant-design/icons'
-import style from './Footer.module.css'
+import { FC } from "react";
+import { SocialProfileJsonLd } from "next-seo";
+import { GithubOutlined, TwitterOutlined } from "@ant-design/icons";
+import style from "./Footer.module.css";
 
 const Footer: FC = () => {
   const transitionToGithub = () => {
-    window.open('https://github.com/yuto-tomita', '_blank')
-  }
+    window.open("https://github.com/yuto-tomita", "_blank");
+  };
 
   const transitionToTwitter = () => {
-    window.open('https://twitter.com/qualidea04')
-  }
+    window.open("https://twitter.com/qualidea04");
+  };
 
   return (
     <>
@@ -30,12 +30,12 @@ const Footer: FC = () => {
         name="冨田 優斗"
         url="https://nextjs-personal-blog-elqgxu4dl-tommy-personal-blog.vercel.app/"
         sameAs={[
-          'https://twitter.com/qualidea04',
-          'https://github.com/yuto-tomita',
+          "https://twitter.com/qualidea04",
+          "https://github.com/yuto-tomita",
         ]}
       />
     </>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

@@ -1,1 +1,1 @@
-export { default } from './ContributionsCalendar'
+export { default } from "./ContributionsCalendar";

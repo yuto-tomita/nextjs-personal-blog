@@ -1,8 +1,7 @@
-import { FC, useState, useEffect, useRef } from 'react'
-import { Container, Text } from '@components/ui'
-import { MarkdownPreview } from '@components/article'
-import Image from 'next/image'
-import cn from 'classnames'
+import { FC, useState, useEffect, useRef } from "react";
+import { Container, Text } from "@components/ui";
+import { MarkdownPreview } from "@components/article";
+import cn from "classnames";
 
 interface Props {
   title: string;
@@ -14,52 +13,60 @@ interface Props {
 }
 
 const ArticleContent: FC<Props> = ({ title, content, tag }) => {
-  const markdownRef = useRef<HTMLDivElement>(null)
-  const ulElement = useRef<HTMLUListElement>(null)
-  const [onlyHeadingsText, setOnlyHeadingsText] = useState<HTMLHeadingElement[]>([])
+  const markdownRef = useRef<HTMLDivElement>(null);
+  const ulElement = useRef<HTMLUListElement>(null);
+  const [onlyHeadingsText, setOnlyHeadingsText] = useState<
+    HTMLHeadingElement[]
+  >([]);
 
   /** スクロール量に応じて、目次の色を変える処理 */
   const onIntersect = (
     entries: IntersectionObserverEntry[],
-    currentViewHeadingIndex: number
+    currentViewHeadingIndex: number,
   ) => {
     if (entries[0].isIntersecting) {
-      const currentViewContent = ulElement.current?.getElementsByClassName('text-red-700')
+      const currentViewContent =
+        ulElement.current?.getElementsByClassName("text-red-700");
       if (currentViewContent && currentViewContent.length) {
-        currentViewContent[0].classList.remove('text-red-700')
+        currentViewContent[0].classList.remove("text-red-700");
       }
 
-      const newActiveIndex = ulElement.current?.getElementsByClassName(`title_${currentViewHeadingIndex}`)
+      const newActiveIndex = ulElement.current?.getElementsByClassName(
+        `title_${currentViewHeadingIndex}`,
+      );
       if (newActiveIndex) {
-        newActiveIndex[0].classList.add('text-red-700')
+        newActiveIndex[0].classList.add("text-red-700");
       }
     }
-  }
+  };
 
   useEffect(() => {
-    const headingElements = markdownRef.current?.querySelectorAll('h1')
-    
+    const headingElements = markdownRef.current?.querySelectorAll("h1");
+
     if (headingElements) {
-      setOnlyHeadingsText(Array.from(headingElements))
+      setOnlyHeadingsText(Array.from(headingElements));
       const options = {
         root: null,
-        rootMargin: '10% 0px -60% 0px',
-        threshold: 0
-      }
+        rootMargin: "10% 0px -60% 0px",
+        threshold: 0,
+      };
 
       headingElements.forEach((val, index) => {
-        const observer = new IntersectionObserver((entries) => onIntersect(entries, index), options)
-        observer.observe(val)
-      })
+        const observer = new IntersectionObserver(
+          (entries) => onIntersect(entries, index),
+          options,
+        );
+        observer.observe(val);
+      });
     }
-  }, [])
+  }, []);
 
   const getOneHeadingTexts = () => {
-    return onlyHeadingsText.map((val) => val.innerText)
-  }
+    return onlyHeadingsText.map((val) => val.innerText);
+  };
 
   return (
-    <Container style={{ background: 'rgb(248, 246, 246)' }}>
+    <Container style={{ background: "rgb(248, 246, 246)" }}>
       <div className="flex gap-2 md:flex-col">
         <div className="bg-white rounded-xl pb-4 h-full px-8 mb-4 mb:w-full">
           <Text variant="title" className="text-left py-5">
@@ -67,9 +74,7 @@ const ArticleContent: FC<Props> = ({ title, content, tag }) => {
           </Text>
           <div className="flex flex-col whitespace-nowrap mt-2">
             {tag.map((val: string, index: string | number) => {
-              return (
-                <span key={index}>{val}</span>
-              )
+              return <span key={index}>{val}</span>;
             })}
           </div>
         </div>
@@ -82,7 +87,7 @@ const ArticleContent: FC<Props> = ({ title, content, tag }) => {
             <MarkdownPreview markdownContent={content} />
           </div>
         </div>
-        
+
         {/* stickyを効かせるため、空divを挿入 */}
         <div>
           <div className="sticky top-0">
@@ -95,11 +100,11 @@ const ArticleContent: FC<Props> = ({ title, content, tag }) => {
                   return (
                     <li
                       key={index}
-                      className={cn(`title_${index}`, 'list-none mt-2 ml-5')}
+                      className={cn(`title_${index}`, "list-none mt-2 ml-5")}
                     >
                       {text}
                     </li>
-                  )
+                  );
                 })}
               </ul>
             </div>
@@ -113,9 +118,7 @@ const ArticleContent: FC<Props> = ({ title, content, tag }) => {
                   objectFit="cover"
                 /> */}
               </div>
-              <p className="font-bold mt-4 text-center">
-                冨田優斗
-              </p>
+              <p className="font-bold mt-4 text-center">冨田優斗</p>
               <p className="text-xs mx-5">
                 受託とSESをやっている会社でフロントエンドエンジニアとして働いています。
                 <br />
@@ -135,7 +138,7 @@ const ArticleContent: FC<Props> = ({ title, content, tag }) => {
         </div>
       </div>
     </Container>
-  )
-}
+  );
+};
 
-export default ArticleContent
+export default ArticleContent;

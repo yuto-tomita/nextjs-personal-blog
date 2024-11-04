@@ -1,5 +1,5 @@
-import { FC } from 'react'
-import NextHead from 'next/head'
+import { FC } from "react";
+import NextHead from "next/head";
 
 const Head: FC = () => {
   return (
@@ -13,7 +13,7 @@ const Head: FC = () => {
         />
       </NextHead>
     </>
-  )
-}
+  );
+};
 
-export default Head
+export default Head;

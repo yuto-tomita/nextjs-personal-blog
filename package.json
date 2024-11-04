@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "lint:fix": "eslint --fix './{lib,components,pages}/**/*.{ts,tsx}'",
+    "lint:fix": "eslint --fix './{lib,components,pages}/**/*.{ts,tsx}' --max-warnings 0",
     "format:fix": "prettier --write './{lib,components,pages}/**/*.{ts,tsx}'",
+    "lint": "pnpm run lint:fix && pnpm run format:fix",
     "prepare": "husky install",
     "start": "pnpm relay && next start",
     "build": "pnpm relay && next build",

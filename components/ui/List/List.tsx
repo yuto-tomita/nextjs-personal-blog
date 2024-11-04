@@ -1,6 +1,6 @@
-import { FC } from 'react'
-import style from './List.module.css'
-import Link from 'next/link'
+import { FC } from "react";
+import style from "./List.module.css";
+import Link from "next/link";
 
 interface ArticleInfo {
   title: string;
@@ -25,11 +25,11 @@ const List: FC<ListProps> = ({ articleInfo = [] }) => {
                 <div className={style.listDescription}>{val.description}</div>
               </li>
             </Link>
-          )
+          );
         })}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default List
+export default List;

@@ -1,35 +1,34 @@
-/* eslint-disable react/no-children-prop */
 import {
   getMdFileFromDir,
   readFileFromFileName,
   parseMdFile,
-} from '@lib/MdFileOperation'
-import type { InferGetStaticPropsType } from 'next'
-import { NextSeo, BlogJsonLd } from 'next-seo'
-import dayjs from 'dayjs'
-import { ArticleContent } from '@components/article'
+} from "@lib/MdFileOperation";
+import type { GetStaticPropsContext, InferGetStaticPropsType } from "next";
+import { NextSeo, BlogJsonLd } from "next-seo";
+import dayjs from "dayjs";
+import { ArticleContent } from "@components/article";
 
 export async function getStaticPaths() {
-  const mdFileNames = getMdFileFromDir('teck-blog')
+  const mdFileNames = getMdFileFromDir("teck-blog");
   const mdFile = mdFileNames.map((fileName) =>
-    readFileFromFileName(fileName, 'teck-blog')
-  )
+    readFileFromFileName(fileName, "teck-blog"),
+  );
   const paths = mdFile.map((markdown) => {
-    const parseMdContent = parseMdFile(markdown)
+    const parseMdContent = parseMdFile(markdown);
 
-    return `/blog/${parseMdContent.data.slug}`
-  })
+    return `/blog/${parseMdContent.data.slug}`;
+  });
 
   return {
     paths,
     fallback: false,
-  }
+  };
 }
 
-export async function getStaticProps(context: any) {
-  const { slug } = context.params
-  const mdFileContent = readFileFromFileName(`${slug}.md`, 'teck-blog')
-  const parseMdContent = parseMdFile(mdFileContent)
+export async function getStaticProps(context: GetStaticPropsContext) {
+  const slug = context.params!.slug as string;
+  const mdFileContent = readFileFromFileName(`${slug}.md`, "teck-blog");
+  const parseMdContent = parseMdFile(mdFileContent);
 
   return {
     props: {
@@ -40,7 +39,7 @@ export async function getStaticProps(context: any) {
       created_at: Date.parse(parseMdContent.data.created_at),
       slug,
     },
-  }
+  };
 }
 
 const Post = ({
@@ -51,14 +50,14 @@ const Post = ({
   created_at,
   slug,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const formatDate = dayjs(created_at).format('YYYY-MM-DD HH:mm:ss')
+  const formatDate = dayjs(created_at).format("YYYY-MM-DD HH:mm:ss");
 
-  const blogUrl = `https://nextjs-personal-blog-five.vercel.app/blog/${slug}`
+  const blogUrl = `https://nextjs-personal-blog-five.vercel.app/blog/${slug}`;
 
   return (
     <>
       <BlogJsonLd
-        images={['./public/next.jpeg']}
+        images={["./public/next.jpeg"]}
         url={blogUrl}
         title={title}
         datePublished={formatDate}
@@ -71,15 +70,15 @@ const Post = ({
         description={content}
         openGraph={{
           url: blogUrl,
-          type: 'article',
+          type: "article",
           title: title,
           description: `${content}`,
           images: [
             {
-              url: '/next.jpeg',
+              url: "/next.jpeg",
               width: 800,
               height: 600,
-              alt: 'プレビュー画像',
+              alt: "プレビュー画像",
             },
           ],
           article: {
@@ -97,7 +96,7 @@ const Post = ({
         slug={slug}
       />
     </>
-  )
-}
+  );
+};
 
-export default Post
+export default Post;

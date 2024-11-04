@@ -2,36 +2,33 @@ import {
   getMdFileFromDir,
   readFileFromFileName,
   parseMdFile,
-} from '@lib/MdFileOperation'
-import type { InferGetStaticPropsType } from 'next'
-import { NextSeo, BlogJsonLd } from 'next-seo'
-import { ArticleContent } from '@components/article'
-import { Button } from 'antd'
-import { DownloadOutlined } from '@ant-design/icons'
-import dayjs from 'dayjs'
-import style from '@styles/Article.module.css'
+} from "@lib/MdFileOperation";
+import type { InferGetStaticPropsType, GetStaticPropsContext } from "next";
+import { NextSeo, BlogJsonLd } from "next-seo";
+import { ArticleContent } from "@components/article";
+import dayjs from "dayjs";
 
 export async function getStaticPaths() {
-  const mdFileNames = getMdFileFromDir('resume')
+  const mdFileNames = getMdFileFromDir("resume");
   const mdFile = mdFileNames.map((fileName) =>
-    readFileFromFileName(fileName, 'resume')
-  )
+    readFileFromFileName(fileName, "resume"),
+  );
   const paths = mdFile.map((markdown) => {
-    const parseMdContent = parseMdFile(markdown)
+    const parseMdContent = parseMdFile(markdown);
 
-    return `/resume/${parseMdContent.data.slug}`
-  })
+    return `/resume/${parseMdContent.data.slug}`;
+  });
 
   return {
     paths,
     fallback: false,
-  }
+  };
 }
 
-export async function getStaticProps(context: any) {
-  const { slug } = context.params
-  const mdFileContent = readFileFromFileName(`${slug}.md`, 'resume')
-  const parseMdContent = parseMdFile(mdFileContent)
+export async function getStaticProps(context: GetStaticPropsContext) {
+  const slug = context.params!.slug as string;
+  const mdFileContent = readFileFromFileName(`${slug}.md`, "resume");
+  const parseMdContent = parseMdFile(mdFileContent);
 
   return {
     props: {
@@ -42,7 +39,7 @@ export async function getStaticProps(context: any) {
       created_at: Date.parse(parseMdContent.data.created_at),
       slug,
     },
-  }
+  };
 }
 const PostResume = ({
   title,
@@ -52,28 +49,12 @@ const PostResume = ({
   created_at,
   slug,
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const formatDate = dayjs(created_at).format('YYYY-MM-DD HH:mm:ss')
-
-  const downloadResume = async () => {
-    const res = await fetch('/api/resume-download', {
-      method: 'GET',
-    })
-
-    const texts: { resume: string } = await res.json()
-    const a = document.createElement('a')
-    a.download = 'tomita_resume.md'
-
-    const blob = new Blob([texts.resume], { type: 'text/plain' })
-
-    a.href = URL.createObjectURL(blob)
-    a.click()
-    URL.revokeObjectURL(a.href)
-  }
+  const formatDate = dayjs(created_at).format("YYYY-MM-DD HH:mm:ss");
 
   return (
     <>
       <BlogJsonLd
-        images={['./public/next.jpeg']}
+        images={["./public/next.jpeg"]}
         url={`https://nextjs-personal-blog-five.vercel.app/resume/${slug}`}
         title={title}
         datePublished={formatDate}
@@ -85,15 +66,15 @@ const PostResume = ({
         title={title}
         description={content}
         openGraph={{
-          type: 'article',
+          type: "article",
           title: title,
           description: `${content}`,
           images: [
             {
-              url: './public/next.jpeg',
+              url: "./public/next.jpeg",
               width: 800,
               height: 600,
-              alt: 'プレビュー画像',
+              alt: "プレビュー画像",
             },
           ],
           article: {
@@ -121,7 +102,7 @@ const PostResume = ({
         </Button>
       </div> */}
     </>
-  )
-}
+  );
+};
 
-export default PostResume
+export default PostResume;
